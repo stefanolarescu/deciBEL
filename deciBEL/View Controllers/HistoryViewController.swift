@@ -1,5 +1,5 @@
 //
-//  StartViewController.swift
+//  HistoryViewController.swift
 //  deciBEL
 //
 //  Created by Stefan Olarescu on 08/03/2020.
@@ -8,15 +8,15 @@
 
 import UIKit
 
-class StartViewController: UIViewController {
-    
+class HistoryViewController: UIViewController {
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         tabBarItem = UITabBarItem(
-            title: GeneralStrings.Add,
-            image: UIImage(systemName: "plus.circle.fill"),
-            selectedImage: UIImage(systemName: "plus.circle.fill")
+            title: GeneralStrings.History,
+            image: UIImage(systemName: "clock.fill"),
+            selectedImage: UIImage(systemName: "clock.fill")
         )
     }
     
