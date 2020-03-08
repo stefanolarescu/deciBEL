@@ -10,6 +10,8 @@ import UIKit
 
 class StartViewController: UIViewController {
     
+    @IBOutlet weak var logoLabel: UILabel?
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
@@ -22,6 +24,8 @@ class StartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        logoLabel?.text = GeneralStrings.Decibel
     }
     
 

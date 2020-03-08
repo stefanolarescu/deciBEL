@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8t4-a0-yrg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="8t4-a0-yrg">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -11,21 +10,56 @@
         <scene sceneID="5Gw-WW-QPP">
             <objects>
                 <viewController id="8t4-a0-yrg" customClass="StartViewController" customModule="deciBEL" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cfz-2o-OoQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="3I9-bu-sfW"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="j8U-0M-fJW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="yNd-PD-i8k"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Start Wallpaper" translatesAutoresizingMaskIntoConstraints="NO" id="ccw-0t-MsC" userLabel="Wallpaper">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="25T-aF-ftD" userLabel="Logo Image View">
+                                <rect key="frame" x="150" y="100" width="75" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="fJY-dQ-Tiv"/>
+                                    <constraint firstAttribute="height" constant="52" id="v2z-mF-Dm0"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_deciBEL" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7DK-rV-XQP" userLabel="Logo Label">
+                                <rect key="frame" x="145" y="152" width="85.5" height="24"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="25T-aF-ftD" firstAttribute="top" secondItem="cfz-2o-OoQ" secondAttribute="bottom" constant="100" id="0aR-Pb-N7a"/>
+                            <constraint firstItem="ccw-0t-MsC" firstAttribute="leading" secondItem="j8U-0M-fJW" secondAttribute="leading" id="2sr-vk-MyK"/>
+                            <constraint firstAttribute="bottom" secondItem="ccw-0t-MsC" secondAttribute="bottom" id="U0l-XL-TaW"/>
+                            <constraint firstItem="ccw-0t-MsC" firstAttribute="top" secondItem="j8U-0M-fJW" secondAttribute="top" id="Wag-M9-LgM"/>
+                            <constraint firstItem="25T-aF-ftD" firstAttribute="centerX" secondItem="j8U-0M-fJW" secondAttribute="centerX" id="YdU-NC-DEW"/>
+                            <constraint firstAttribute="trailing" secondItem="ccw-0t-MsC" secondAttribute="trailing" id="sc0-0R-xeN"/>
+                            <constraint firstItem="7DK-rV-XQP" firstAttribute="top" secondItem="25T-aF-ftD" secondAttribute="bottom" id="tyw-7L-9sl"/>
+                            <constraint firstItem="7DK-rV-XQP" firstAttribute="centerX" secondItem="j8U-0M-fJW" secondAttribute="centerX" id="yqI-lW-fI5"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="_Add" image="plus.circle.fill" catalog="system" selectedImage="plus.circle.fill" id="7yx-IA-RHe"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="logoLabel" destination="7DK-rV-XQP" id="RXy-wX-Y2Z"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ujA-0n-yhs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="62"/>
+            <point key="canvasLocation" x="52.173913043478265" y="61.607142857142854"/>
         </scene>
     </scenes>
     <resources>
+        <image name="Logo" width="8334" height="6226"/>
+        <image name="Start Wallpaper" width="3126" height="5559"/>
         <image name="plus.circle.fill" catalog="system" width="64" height="60"/>
     </resources>
 </document>
