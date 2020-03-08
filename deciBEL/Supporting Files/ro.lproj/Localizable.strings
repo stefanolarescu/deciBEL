@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  deciBEL
+
+  Created by Stefan Olarescu on 08/03/2020.
+  Copyright © 2020 Stefan Olarescu. All rights reserved.
+*/
+
+/* Add */
+"Add" = "Adaugă";
+
+/* History */
+"History" = "Istoric";
+
+/* More */
+"More" = "Mai multe";

@@ -1,0 +1,17 @@
+//
+//  GeneralStrings.swift
+//  deciBEL
+//
+//  Created by Stefan Olarescu on 08/03/2020.
+//  Copyright © 2020 Stefan Olarescu. All rights reserved.
+//
+
+import Foundation
+
+struct GeneralStrings {
+    
+    static let Add = NSLocalizedString("Add", comment: "Add")
+    static let History = NSLocalizedString("History", comment: "History")
+    static let More = NSLocalizedString("More", comment: "More")
+    
+}
