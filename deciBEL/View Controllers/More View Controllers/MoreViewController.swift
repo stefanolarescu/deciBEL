@@ -1,5 +1,5 @@
 //
-//  StartViewController.swift
+//  MoreViewController.swift
 //  deciBEL
 //
 //  Created by Stefan Olarescu on 08/03/2020.
@@ -8,12 +8,20 @@
 
 import UIKit
 
-class StartViewController: UIViewController {
-
+class MoreViewController: UIViewController {
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        tabBarItem = UITabBarItem(
+            title: GeneralStrings.More,
+            image: UIImage(systemName: "ellipsis.circle.fill"),
+            selectedImage: UIImage(systemName: "ellipsis.circle.fill")
+        )
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
 
