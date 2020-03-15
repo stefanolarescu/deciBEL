@@ -14,5 +14,7 @@ struct GeneralStrings {
     static let Decibel = NSLocalizedString("Decibel", comment: "Decibel")
     static let History = NSLocalizedString("History", comment: "History")
     static let More = NSLocalizedString("More", comment: "More")
+    static let Okay = NSLocalizedString("Okay", comment: "Okay")
+    static let Settings = NSLocalizedString("Settings", comment: "Settings")
     
 }

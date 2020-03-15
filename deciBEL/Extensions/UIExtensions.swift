@@ -8,7 +8,7 @@
 
 import UIKit
 
-//MARK: - UICOLOR
+// MARK: - UICOLOR
 extension UIColor {
     
     convenience init(red: Int, green: Int, blue: Int) {
@@ -27,12 +27,16 @@ extension UIColor {
         return UIColor(red: 0, green: 124, blue: 232)
     }
     
+    class func maskGray() -> UIColor {
+        return UIColor(red: 56, green: 55, blue: 56)
+    }
+    
 }
 
-//MARK: - UIVIEW
+// MARK: - UIVIEW
 extension UIView {
     
-    //MARK: Corner Radius
+    // MARK: Corner Radius
     @IBInspectable var cornerRadius: CGFloat {
         get {
             return layer.cornerRadius
@@ -42,7 +46,7 @@ extension UIView {
         }
     }
     
-    //MARK: Animations
+    // MARK: Animations
      func highlight(duration: Double, delay: Double) {
         UIView.animate(
             withDuration: duration,

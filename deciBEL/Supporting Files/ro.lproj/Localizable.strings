@@ -15,5 +15,17 @@
 /* History */
 "History" = "Istoric";
 
+/* Location Services disabled */
+"Location Services disabled" = "Servicii de localizare dezactivate";
+
+/* Location Services need to be enabled */
+"Location Services need to be enabled" = "Serviciile de localizare trebuie să fie activate pentru ca deciBEL să afișeze locația curentă. Vă rugăm să le activați în aplicația Setări, folosind Intimitate -> Servicii de localizare -> Da";
+
 /* More */
 "More" = "Mai multe";
+
+/* Okay */
+"Okay" = "Okay";
+
+/* Settings */
+"Settings" = "Setări";

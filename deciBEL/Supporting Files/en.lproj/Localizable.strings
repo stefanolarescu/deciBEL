@@ -15,5 +15,17 @@
 /* History */
 "History" = "History";
 
+/* Location Services disabled */
+"Location Services disabled" = "Location Services disabled";
+
+/* Location Services need to be enabled */
+"Location Services need to be enabled" = "Location Services need to be enabled in order for deciBEL to display your current location. Please enable them in the Settings app using Privacy -> Location Services -> Yes";
+
 /* More */
 "More" = "More";
+
+/* Okay */
+"Okay" = "Okay";
+
+/* Settings */
+"Settings" = "Settings";

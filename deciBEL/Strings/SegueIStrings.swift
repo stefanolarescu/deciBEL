@@ -1,5 +1,5 @@
 //
-//  SegueIdentifiers.swift
+//  SegueStrings.swift
 //  deciBEL
 //
 //  Created by Stefan Olarescu on 14/03/2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct SegueIdentifiers {
+struct SegueStrings {
     
     static let Record = "showRecord"
     

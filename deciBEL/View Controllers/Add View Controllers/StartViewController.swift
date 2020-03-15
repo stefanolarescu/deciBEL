@@ -12,6 +12,7 @@ class StartViewController: UIViewController {
     
     // MARK: - OUTLETS
     @IBOutlet weak var logoLabel: UILabel?
+    @IBOutlet weak var grayMaskView: GrayMaskView?
     @IBOutlet weak var outerCircleView: UIView?
     @IBOutlet weak var innerCircleView: UIView?
     @IBOutlet weak var highlightView: UIView?
@@ -38,6 +39,8 @@ class StartViewController: UIViewController {
         
         logoLabel?.text = GeneralStrings.Decibel
         
+        grayMaskView?.drawShape(dropRadius: 55)
+        
         outerCircleView?.backgroundColor = .outerCircleBlue()
         innerCircleView?.backgroundColor = .innerCircleBlue()
     }
@@ -47,12 +50,22 @@ class StartViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        coordinator.animate(alongsideTransition: { [weak self] (UIViewControllerTransitionCoordinatorContext) -> Void in
+            
+            guard let strongSelf = self else {
+                return
+            }
+            
+            strongSelf.grayMaskView?.drawShape(dropRadius: 55)
+        }, completion: nil)
+    }
+    
     //MARK: - SEGUE HANDLER
     @IBAction func tapGestureViewHandler(_ sender: UITapGestureRecognizer) {
         highlightView?.highlight(duration: 0.2, delay: 0)
-        performSegue(withIdentifier: SegueIdentifiers.Record, sender: self)
+        performSegue(withIdentifier: SegueStrings.Record, sender: self)
     }
-    
-    //MARK: - OTHER METHODS
-    
 }
