@@ -48,6 +48,7 @@ extension UIView {
     
     // MARK: Animations
      func highlight(duration: Double, delay: Double) {
+        self.layer.removeAllAnimations()
         UIView.animate(
             withDuration: duration,
             delay: delay,
@@ -55,6 +56,31 @@ extension UIView {
             animations: {
                 self.backgroundColor = .init(white: 1.0, alpha: 0.8)
                 self.backgroundColor = .clear
+            }
+        )
+    }
+    
+    func animateZoomContainerView(duration: Double, delay: Double) {
+        self.layer.removeAllAnimations()
+        UIView.animate(
+            withDuration: duration,
+            delay: delay,
+            options: [.curveEaseInOut, .allowUserInteraction],
+            animations: {
+                self.backgroundColor = .systemBlue
+                self.backgroundColor = UIColor(named: "Map Controls Background")
+            }
+        )
+    }
+    
+    func animateCenterImageView(duration: Double, delay: Double, enabled: Bool) {
+        self.layer.removeAllAnimations()
+        UIView.animate(
+            withDuration: duration,
+            delay: delay,
+            options: [.curveEaseOut, .allowUserInteraction],
+            animations: {
+                self.backgroundColor = enabled == true ? .systemBlue : UIColor(named: "Map Controls Background")
             }
         )
     }

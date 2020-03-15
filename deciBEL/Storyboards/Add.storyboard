@@ -3,6 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -158,27 +159,155 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ZO9-mH-WbO">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Bb-1g-mwK" userLabel="Map Container View">
                                 <rect key="frame" x="0.0" y="44" width="375" height="233.5"/>
-                                <connections>
-                                    <outlet property="delegate" destination="WBN-YI-MPd" id="TDI-aG-y3z"/>
-                                </connections>
-                            </mapView>
+                                <subviews>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZO9-mH-WbO">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="233.5"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outlet property="delegate" destination="WBN-YI-MPd" id="TDI-aG-y3z"/>
+                                            <outletCollection property="gestureRecognizers" destination="Lsa-Hq-HbE" appends="YES" id="Bhy-SC-LJt"/>
+                                        </connections>
+                                    </mapView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rpN-Jh-3y7" userLabel="Zoom In Container View">
+                                        <rect key="frame" x="335" y="129.5" width="32" height="32"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="HLD-2c-gnw" userLabel="Zoom In Image View">
+                                                <rect key="frame" x="7" y="8" width="18" height="16"/>
+                                                <color key="tintColor" name="Map Controls"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" name="Map Controls Background"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="32" id="2QH-Hg-A3r"/>
+                                            <constraint firstItem="HLD-2c-gnw" firstAttribute="centerX" secondItem="rpN-Jh-3y7" secondAttribute="centerX" id="i7L-iW-czO"/>
+                                            <constraint firstItem="HLD-2c-gnw" firstAttribute="centerY" secondItem="rpN-Jh-3y7" secondAttribute="centerY" id="jjD-n8-rYb"/>
+                                            <constraint firstAttribute="height" constant="32" id="pwb-Fz-gvv"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="xHK-B1-7xk" appends="YES" id="dq3-a2-cpP"/>
+                                        </connections>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ny5-bv-jDf" userLabel="Zoom Out Container View">
+                                        <rect key="frame" x="335" y="169.5" width="32" height="32"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="minus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="djU-F8-L1r" userLabel="Zoom Out Image View">
+                                                <rect key="frame" x="7" y="14.5" width="18" height="3.5"/>
+                                                <color key="tintColor" name="Map Controls"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" name="Map Controls Background"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstItem="djU-F8-L1r" firstAttribute="centerY" secondItem="ny5-bv-jDf" secondAttribute="centerY" id="Kpw-hI-i8I"/>
+                                            <constraint firstAttribute="width" constant="32" id="Thd-dX-h3D"/>
+                                            <constraint firstItem="djU-F8-L1r" firstAttribute="centerX" secondItem="ny5-bv-jDf" secondAttribute="centerX" id="jNk-ig-lqU"/>
+                                            <constraint firstAttribute="height" constant="32" id="pnE-22-egU"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="pKM-79-5hf" appends="YES" id="JtD-5i-Psz"/>
+                                        </connections>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HXF-rH-CcD" userLabel="Center Container View">
+                                        <rect key="frame" x="335" y="89.5" width="32" height="32"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="PkB-Ee-YGD" userLabel="Center Image View">
+                                                <rect key="frame" x="5.5" y="6.5" width="21" height="19"/>
+                                                <color key="tintColor" name="Map Controls"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" name="Map Controls Background"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstItem="PkB-Ee-YGD" firstAttribute="centerX" secondItem="HXF-rH-CcD" secondAttribute="centerX" id="Njx-2p-cOm"/>
+                                            <constraint firstItem="PkB-Ee-YGD" firstAttribute="centerY" secondItem="HXF-rH-CcD" secondAttribute="centerY" id="RTB-Qy-syc"/>
+                                            <constraint firstAttribute="width" constant="32" id="RzO-9c-NzY"/>
+                                            <constraint firstAttribute="height" constant="32" id="obY-dj-wcn"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="Tcr-ar-wHq" appends="YES" id="Faj-gQ-2YV"/>
+                                        </connections>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="ZO9-mH-WbO" firstAttribute="height" secondItem="5Bb-1g-mwK" secondAttribute="height" id="6XO-Ub-GAI"/>
+                                    <constraint firstAttribute="trailing" secondItem="HXF-rH-CcD" secondAttribute="trailing" constant="8" id="82X-4P-fVC"/>
+                                    <constraint firstItem="ZO9-mH-WbO" firstAttribute="centerX" secondItem="5Bb-1g-mwK" secondAttribute="centerX" id="EEq-td-OrF"/>
+                                    <constraint firstAttribute="trailing" secondItem="ny5-bv-jDf" secondAttribute="trailing" constant="8" id="VUc-VJ-cbN"/>
+                                    <constraint firstItem="ZO9-mH-WbO" firstAttribute="width" secondItem="5Bb-1g-mwK" secondAttribute="width" id="WsA-QY-nVb"/>
+                                    <constraint firstAttribute="trailing" secondItem="rpN-Jh-3y7" secondAttribute="trailing" constant="8" id="dd1-JX-6H5"/>
+                                    <constraint firstItem="ZO9-mH-WbO" firstAttribute="centerY" secondItem="5Bb-1g-mwK" secondAttribute="centerY" id="eaH-Y5-gia"/>
+                                    <constraint firstItem="rpN-Jh-3y7" firstAttribute="top" secondItem="HXF-rH-CcD" secondAttribute="bottom" constant="8" id="lHR-9C-Qup"/>
+                                    <constraint firstAttribute="bottom" secondItem="ny5-bv-jDf" secondAttribute="bottom" constant="32" id="lkG-KF-BwE"/>
+                                    <constraint firstItem="ny5-bv-jDf" firstAttribute="top" secondItem="rpN-Jh-3y7" secondAttribute="bottom" constant="8" id="tLV-us-GpO"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wWn-Mk-lYw">
+                                <rect key="frame" x="0.0" y="277.5" width="375" height="16"/>
+                                <color key="backgroundColor" name="Gold"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="Dze-UX-Qmh"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="ZO9-mH-WbO" firstAttribute="leading" secondItem="qwe-5e-fjk" secondAttribute="leading" id="387-8K-u6c"/>
-                            <constraint firstItem="ZO9-mH-WbO" firstAttribute="top" secondItem="KpE-Rf-iMT" secondAttribute="bottom" id="7Nw-6z-Wuj"/>
-                            <constraint firstItem="ZO9-mH-WbO" firstAttribute="height" secondItem="qwe-5e-fjk" secondAttribute="height" multiplier="0.35" id="ReI-at-gb6"/>
-                            <constraint firstAttribute="trailing" secondItem="ZO9-mH-WbO" secondAttribute="trailing" id="tXl-1E-O1e"/>
+                            <constraint firstItem="5Bb-1g-mwK" firstAttribute="leading" secondItem="qwe-5e-fjk" secondAttribute="leading" id="9GX-S1-AAS"/>
+                            <constraint firstAttribute="trailing" secondItem="5Bb-1g-mwK" secondAttribute="trailing" id="ZVA-ic-ZB4"/>
+                            <constraint firstItem="wWn-Mk-lYw" firstAttribute="leading" secondItem="qwe-5e-fjk" secondAttribute="leading" id="ihl-gm-As4"/>
+                            <constraint firstItem="5Bb-1g-mwK" firstAttribute="height" secondItem="qwe-5e-fjk" secondAttribute="height" multiplier="0.35" id="jL8-Rk-wMn"/>
+                            <constraint firstItem="5Bb-1g-mwK" firstAttribute="top" secondItem="KpE-Rf-iMT" secondAttribute="bottom" id="r5g-4V-XkI"/>
+                            <constraint firstAttribute="trailing" secondItem="wWn-Mk-lYw" secondAttribute="trailing" id="vGr-rN-D2B"/>
+                            <constraint firstItem="wWn-Mk-lYw" firstAttribute="top" secondItem="5Bb-1g-mwK" secondAttribute="bottom" id="yv3-ne-leb"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wUb-r9-Zoi"/>
                     <connections>
+                        <outlet property="centerContainerView" destination="HXF-rH-CcD" id="u7Y-lK-yXD"/>
                         <outlet property="mapView" destination="ZO9-mH-WbO" id="AfH-ty-q3t"/>
+                        <outlet property="zoomInContainerView" destination="rpN-Jh-3y7" id="I1n-K3-RBc"/>
+                        <outlet property="zoomOutContainerView" destination="ny5-bv-jDf" id="M4H-F6-sdt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hcL-cE-E5e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Tcr-ar-wHq">
+                    <connections>
+                        <action selector="centerRegionAction:" destination="WBN-YI-MPd" id="ug1-uY-qo0"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="xHK-B1-7xk">
+                    <connections>
+                        <action selector="zoomInAction:" destination="WBN-YI-MPd" id="GIU-ao-7di"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="pKM-79-5hf">
+                    <connections>
+                        <action selector="zoomOutAction:" destination="WBN-YI-MPd" id="Q6C-IF-t5t"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="Lsa-Hq-HbE">
+                    <connections>
+                        <action selector="mapDragAction:" destination="WBN-YI-MPd" id="dAB-7y-A0u"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1926" y="61"/>
         </scene>
@@ -205,6 +334,18 @@
         <image name="DB Logo" width="202" height="151.5"/>
         <image name="Play" width="63" height="63"/>
         <image name="Start Wallpaper" width="3126" height="5559"/>
+        <image name="location.fill" catalog="system" width="64" height="56"/>
+        <image name="minus" catalog="system" width="64" height="12"/>
+        <image name="plus" catalog="system" width="64" height="56"/>
         <image name="plus.circle.fill" catalog="system" width="64" height="60"/>
+        <namedColor name="Gold">
+            <color red="0.9882352941176471" green="0.73725490196078436" blue="0.11372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Map Controls">
+            <color red="0.7803921568627451" green="0.78431372549019607" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Map Controls Background">
+            <color red="0.2196078431372549" green="0.21568627450980393" blue="0.2196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

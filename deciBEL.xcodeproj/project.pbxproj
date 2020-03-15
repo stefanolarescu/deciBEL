@@ -17,6 +17,7 @@
 		660DD96E241E743600BCC81B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 660DD970241E743600BCC81B /* InfoPlist.strings */; };
 		660DD97E241E8AE000BCC81B /* SegueIStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660DD97D241E8AE000BCC81B /* SegueIStrings.swift */; };
 		660DD980241E8B7A00BCC81B /* APIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660DD97F241E8B7A00BCC81B /* APIExtensions.swift */; };
+		660DD983241EB7F400BCC81B /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660DD982241EB7F400BCC81B /* Enums.swift */; };
 		6642574E241458340093834B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6642574D241458340093834B /* AppDelegate.swift */; };
 		66425750241458340093834B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6642574F241458340093834B /* SceneDelegate.swift */; };
 		66425755241458340093834B /* TabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66425753241458340093834B /* TabBar.storyboard */; };
@@ -46,6 +47,7 @@
 		660DD975241E74FC00BCC81B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		660DD97D241E8AE000BCC81B /* SegueIStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueIStrings.swift; sourceTree = "<group>"; };
 		660DD97F241E8B7A00BCC81B /* APIExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIExtensions.swift; sourceTree = "<group>"; };
+		660DD982241EB7F400BCC81B /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		6642574A241458340093834B /* deciBEL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = deciBEL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6642574D241458340093834B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6642574F241458340093834B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -133,6 +135,14 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		660DD981241EB7E400BCC81B /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				660DD982241EB7F400BCC81B /* Enums.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		66425741241458330093834B = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +164,7 @@
 			children = (
 				664257642414585C0093834B /* Core Data */,
 				664257672414FA510093834B /* Delegates */,
+				660DD981241EB7E400BCC81B /* Enums */,
 				660DD926241D545200BCC81B /* Extensions */,
 				664257652414F9C60093834B /* Storyboards */,
 				66425774241502D60093834B /* Strings */,
@@ -319,6 +330,7 @@
 				660DD942241E636B00BCC81B /* LocationStrings.swift in Sources */,
 				660DD97E241E8AE000BCC81B /* SegueIStrings.swift in Sources */,
 				66425784241576090093834B /* HistoryViewController.swift in Sources */,
+				660DD983241EB7F400BCC81B /* Enums.swift in Sources */,
 				660DD939241E29D300BCC81B /* GrayMaskView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
