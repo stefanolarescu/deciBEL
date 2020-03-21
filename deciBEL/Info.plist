@@ -6,6 +6,8 @@
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>deciBEL needs to use Location Services to display your current location.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>deciBEL needs to use the microphone to record noise.</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIcons</key>

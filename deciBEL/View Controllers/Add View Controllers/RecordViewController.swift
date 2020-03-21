@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import CoreLocation
+import AVFoundation
 
 class RecordViewController: UIViewController {
 
@@ -18,16 +19,21 @@ class RecordViewController: UIViewController {
     @IBOutlet weak var zoomInContainerView: UIView?
     @IBOutlet weak var zoomOutContainerView: UIView?
     
+    @IBOutlet weak var decibels: UILabel?
+    
     // MARK: - PROPERTIES
     let locationManager = CLLocationManager()
-    
+    var lastCenteredLocation = CLLocationCoordinate2D()
     var regionMeters: Double = 1000
-    
     var mapViewIsCentered: Bool = false {
         didSet {
             centerContainerView?.animateCenterImageView(duration: 0.3, delay: 0, enabled: mapViewIsCentered)
         }
     }
+    
+    let audioSession = AVAudioSession.sharedInstance()
+    var audioRecorder: AVAudioRecorder?
+    var timer = Timer()
     
     // MARK: - LIFE CYCLE METHODS
     override func viewWillAppear(_ animated: Bool) {
@@ -35,12 +41,19 @@ class RecordViewController: UIViewController {
         
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(checkLocationServices),
+            selector: #selector(checkPermissions),
             name: .ApplicationDidBecomeActive,
             object: nil
         )
         
-        checkLocationServices()
+        checkPermissions()
+        
+        timer = .scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateDecibels), userInfo: nil, repeats: true)
+    }
+    
+    @objc private func updateDecibels() {
+        audioRecorder!.updateMeters()
+        decibels?.text = "\(audioRecorder!.averagePower(forChannel: 0))"
     }
     
     override func viewDidLoad() {
@@ -68,8 +81,14 @@ class RecordViewController: UIViewController {
     
     // MARK: - OTHER METHODS
     
+    // MARK: Notification Center Methods
+    @objc private func checkPermissions() {
+        checkLocationServices()
+        checkMicrophoneAuthorization()
+    }
+    
     // MARK: Location Methods
-    @objc private func checkLocationServices() {
+    private func checkLocationServices() {
         if locationServicesAreEnabled {
             setupLocationManager()
             checkLocationAuthorization()
@@ -92,35 +111,27 @@ class RecordViewController: UIViewController {
     
     private func checkLocationAuthorization() {
         switch CLLocationManager.authorizationStatus() {
-        case .authorizedAlways:
-            break
-        case .authorizedWhenInUse:
+        case .authorizedAlways, .authorizedWhenInUse:
             mapView?.showsUserLocation = true
-            mapView?.showsCompass = true
-            mapView?.showsScale = true
             if let currentLocation = locationManager.location?.coordinate {
                 centerMapViewOnLocation(currentLocation)
             }
             locationManager.startUpdatingLocation()
-        case .denied:
-            break
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
-        case .restricted:
-            break
         default:
             break
         }
     }
     
     private func centerMapViewOnLocation(_ location: CLLocationCoordinate2D) {
+        lastCenteredLocation = location
         let region = MKCoordinateRegion(
             center: location,
             latitudinalMeters: regionMeters,
             longitudinalMeters: regionMeters
         )
         mapView?.setRegion(region, animated: true)
-        
         mapViewIsCentered = true
     }
     
@@ -129,6 +140,7 @@ class RecordViewController: UIViewController {
         mapViewIsCentered = !mapViewIsCentered
         if mapViewIsCentered {
             regionMeters = 1000
+            centerMapViewOnLocation(lastCenteredLocation)
         }
     }
     
@@ -142,7 +154,7 @@ class RecordViewController: UIViewController {
         zoomAction(type: .zoomOut)
     }
     
-    func zoomAction(type: Zoom) {
+    private func zoomAction(type: Zoom) {
         if mapView != nil {
             var region = mapView!.region
             var span = MKCoordinateSpan()
@@ -159,6 +171,59 @@ class RecordViewController: UIViewController {
         if sender.state == .began {
             mapViewIsCentered = false
         }
+    }
+    
+    // MARK: Microphone Methods
+    private func checkMicrophoneAuthorization() {
+        switch audioSession.recordPermission {
+        case .granted:
+            setupAudioRecorder()
+        case .undetermined:
+            audioSession.requestRecordPermission { granted in
+                if granted {
+                    self.setupAudioRecorder()
+                }
+            }
+        default:
+            break
+        }
+    }
+    
+    private func setupAudioRecorder() {
+        let settings = [
+            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+            AVSampleRateKey: 12000,
+            AVNumberOfChannelsKey: 1,
+            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+        ]
+        
+        do {
+            try audioSession.setCategory(AVAudioSession.Category.record)
+            try audioSession.setActive(true)
+            
+            try audioRecorder = AVAudioRecorder(
+                url: getDocumentsDirectory(),
+                settings: settings
+            )
+            audioRecorder!.delegate = self
+            audioRecorder!.isMeteringEnabled = true
+            if !audioRecorder!.prepareToRecord() {
+                // TODO: IMPLEMENT
+            } else {
+                audioRecorder!.record()
+                audioRecorder!.updateMeters()
+            }
+        } catch {
+            // TODO: IMPLEMENT
+            print("Something went wrong")
+        }
+    }
+    
+    private func getDocumentsDirectory() -> URL {
+        let fileManager = FileManager.default
+        let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentDirectory = urls.first!
+        return documentDirectory.appendingPathComponent("recording.m4a")
     }
 }
 
@@ -189,5 +254,14 @@ extension RecordViewController: CLLocationManagerDelegate {
 extension RecordViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
+    }
+}
+
+// MARK: - AUDIO RECORDER DELEGATE
+extension RecordViewController: AVAudioRecorderDelegate {
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        recorder.stop()
+        recorder.deleteRecording()
+        recorder.prepareToRecord()
     }
 }

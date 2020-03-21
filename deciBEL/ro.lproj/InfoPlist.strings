@@ -7,3 +7,4 @@
 */
 
 "NSLocationWhenInUseUsageDescription" = "deciBEL are nevoie de Serviciile de localizare pentru afișarea locației curente.";
+"NSMicrophoneUsageDescription" = "deciBEL are nevoie de microfon pentru înregistrarea zogomotului.";

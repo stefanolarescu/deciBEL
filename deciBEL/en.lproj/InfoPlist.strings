@@ -7,3 +7,4 @@
 */
 
 "NSLocationWhenInUseUsageDescription" = "deciBEL needs to use Location Services to display your current location.";
+"NSMicrophoneUsageDescription" = "deciBEL needs to use the microphone to record noise.";

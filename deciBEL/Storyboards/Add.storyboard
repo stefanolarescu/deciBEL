@@ -162,7 +162,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Bb-1g-mwK" userLabel="Map Container View">
                                 <rect key="frame" x="0.0" y="44" width="375" height="233.5"/>
                                 <subviews>
-                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZO9-mH-WbO">
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZO9-mH-WbO">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="233.5"/>
                                         <gestureRecognizers/>
                                         <connections>
@@ -260,17 +260,38 @@
                                     <constraint firstItem="ny5-bv-jDf" firstAttribute="top" secondItem="rpN-Jh-3y7" secondAttribute="bottom" constant="8" id="tLV-us-GpO"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wWn-Mk-lYw">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wWn-Mk-lYw" userLabel="Gold Bar View">
                                 <rect key="frame" x="0.0" y="277.5" width="375" height="16"/>
                                 <color key="backgroundColor" name="Gold"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="Dze-UX-Qmh"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dfP-4S-Rnr" userLabel="Record View">
+                                <rect key="frame" x="0.0" y="293.5" width="375" height="373.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8xu-66-RnA">
+                                        <rect key="frame" x="0.0" y="35" width="375" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" name="Cream"/>
+                                <constraints>
+                                    <constraint firstItem="8xu-66-RnA" firstAttribute="top" secondItem="dfP-4S-Rnr" secondAttribute="top" constant="35" id="AJf-tD-TOt"/>
+                                    <constraint firstItem="8xu-66-RnA" firstAttribute="leading" secondItem="dfP-4S-Rnr" secondAttribute="leading" id="LRJ-gu-Vz6"/>
+                                    <constraint firstAttribute="trailing" secondItem="8xu-66-RnA" secondAttribute="trailing" id="Yeh-u8-c74"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="5Bb-1g-mwK" firstAttribute="leading" secondItem="qwe-5e-fjk" secondAttribute="leading" id="9GX-S1-AAS"/>
+                            <constraint firstAttribute="bottom" secondItem="dfP-4S-Rnr" secondAttribute="bottom" id="IP8-EY-drh"/>
+                            <constraint firstAttribute="trailing" secondItem="dfP-4S-Rnr" secondAttribute="trailing" id="PO5-KQ-Dgh"/>
+                            <constraint firstItem="dfP-4S-Rnr" firstAttribute="top" secondItem="wWn-Mk-lYw" secondAttribute="bottom" id="SeQ-eU-bu5"/>
+                            <constraint firstItem="dfP-4S-Rnr" firstAttribute="leading" secondItem="qwe-5e-fjk" secondAttribute="leading" id="YMB-Yl-1p5"/>
                             <constraint firstAttribute="trailing" secondItem="5Bb-1g-mwK" secondAttribute="trailing" id="ZVA-ic-ZB4"/>
                             <constraint firstItem="wWn-Mk-lYw" firstAttribute="leading" secondItem="qwe-5e-fjk" secondAttribute="leading" id="ihl-gm-As4"/>
                             <constraint firstItem="5Bb-1g-mwK" firstAttribute="height" secondItem="qwe-5e-fjk" secondAttribute="height" multiplier="0.35" id="jL8-Rk-wMn"/>
@@ -282,6 +303,7 @@
                     <navigationItem key="navigationItem" id="wUb-r9-Zoi"/>
                     <connections>
                         <outlet property="centerContainerView" destination="HXF-rH-CcD" id="u7Y-lK-yXD"/>
+                        <outlet property="decibels" destination="8xu-66-RnA" id="SG5-8l-3JQ"/>
                         <outlet property="mapView" destination="ZO9-mH-WbO" id="AfH-ty-q3t"/>
                         <outlet property="zoomInContainerView" destination="rpN-Jh-3y7" id="I1n-K3-RBc"/>
                         <outlet property="zoomOutContainerView" destination="ny5-bv-jDf" id="M4H-F6-sdt"/>
@@ -338,14 +360,17 @@
         <image name="minus" catalog="system" width="64" height="12"/>
         <image name="plus" catalog="system" width="64" height="56"/>
         <image name="plus.circle.fill" catalog="system" width="64" height="60"/>
+        <namedColor name="Cream">
+            <color red="1" green="0.97254901960784312" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="Gold">
             <color red="0.9882352941176471" green="0.73725490196078436" blue="0.11372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Map Controls">
-            <color red="0.7803921568627451" green="0.78431372549019607" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.77999997138977051" green="0.7839999794960022" blue="0.77999997138977051" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Map Controls Background">
-            <color red="0.2196078431372549" green="0.21568627450980393" blue="0.2196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.2199999988079071" green="0.21600000560283661" blue="0.2199999988079071" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
