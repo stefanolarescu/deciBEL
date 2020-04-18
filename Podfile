@@ -1,4 +1,4 @@
-platform: ios, '10.0'
+platform :ios, '10.0'
 
 target 'deciBEL' do
 	use_frameworks!
