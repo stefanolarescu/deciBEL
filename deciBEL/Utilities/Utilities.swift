@@ -16,7 +16,12 @@ func deviceIsAnIPad() -> Bool {
 }
 
 // MARK: - ALERTS
-func showAlertForLocationServices(title: String, message: String, style: UIAlertController.Style) -> UIAlertController {
+func showAlertForLocationServices(
+    title: String,
+    message: String,
+    style: UIAlertController.Style
+) -> UIAlertController {
+    
     let alertController = UIAlertController(
         title: title,
         message: message,
@@ -35,6 +40,39 @@ func showAlertForLocationServices(title: String, message: String, style: UIAlert
         title: GeneralStrings.Okay,
         style: .default
     )
+    alertController.addAction(okAction)
+    alertController.addAction(settingsAction)
+    
+    return alertController
+}
+
+func showAlertForMicrophoneAccess(
+    title: String,
+    message: String,
+    style: UIAlertController.Style,
+    navigationController: UINavigationController?
+) -> UIAlertController {
+   
+    let alertController = UIAlertController(
+        title: title,
+        message: message,
+        preferredStyle: style
+    )
+    let settingsAction = UIAlertAction(
+        title: GeneralStrings.Settings,
+        style: .cancel
+    ) { _ in
+            
+        if let url = URL(string: UIApplication.openSettingsURLString) {
+            UIApplication.shared.open(url)
+        }
+    }
+    let okAction = UIAlertAction(
+        title: GeneralStrings.Okay,
+        style: .default
+    ) { _ in
+        navigationController?.popViewController(animated: true)
+    }
     alertController.addAction(okAction)
     alertController.addAction(settingsAction)
     
