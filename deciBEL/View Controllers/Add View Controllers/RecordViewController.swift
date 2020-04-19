@@ -18,7 +18,17 @@ class RecordViewController: UIViewController {
     @IBOutlet weak var centerContainerView: UIView?
     @IBOutlet weak var zoomInContainerView: UIView?
     @IBOutlet weak var zoomOutContainerView: UIView?
-            
+    
+    @IBOutlet weak var numbersScrollView: UIScrollView?
+    @IBOutlet weak var numbersContentViewWidthConstraint: NSLayoutConstraint?
+    
+    @IBOutlet weak var decibelLabel: UILabel?
+    
+    @IBOutlet weak var rulerScrollView: UIScrollView?
+    @IBOutlet weak var rulerContentViewWidthConstraint: NSLayoutConstraint?
+
+    @IBOutlet weak var rulerView: RulerView?
+    
     // MARK: - PROPERTIES
     let locationManager = CLLocationManager()
     var lastCenteredLocation = CLLocationCoordinate2D()
@@ -63,6 +73,16 @@ class RecordViewController: UIViewController {
         )
         mapPanGesture.delegate = self
         mapView?.addGestureRecognizer(mapPanGesture)
+        
+        numbersContentViewWidthConstraint?.constant = 1000 * RULER_SPACING - view.bounds.width
+        
+        decibelLabel?.text = AudioStrings.DecibelsA
+        
+        rulerContentViewWidthConstraint?.constant = 1000 * RULER_SPACING - view.bounds.width
+        
+        let offset = calculateOffset(decibels: 30)
+        numbersScrollView?.setContentOffset(CGPoint(x: offset, y: 0), animated: false)
+        rulerScrollView?.setContentOffset(CGPoint(x: offset, y: 0), animated: false)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -207,13 +227,14 @@ class RecordViewController: UIViewController {
     private func startRecording() {
         audioKitManager.startAudioKit()
         
-        timer = .scheduledTimer(
-            timeInterval: 0.25,
+        timer = Timer(
+            timeInterval: 0.5,
             target: self,
             selector: #selector(updateDecibels),
             userInfo: nil,
             repeats: true
         )
+        RunLoop.main.add(timer, forMode: .common)
     }
     
     @objc private func stopRecording() {
@@ -225,8 +246,19 @@ class RecordViewController: UIViewController {
         
     @objc private func updateDecibels() {
         if let amplitude = audioKitManager.tracker?.amplitude {
-            print(round(20 * log10(amplitude) + 94, toNearest: 0.2, decimals: 1))
+            let decibels = round(20 * log10(amplitude) + 94, toNearest: 0.2, decimals: 1)
+            let offset = calculateOffset(decibels: decibels)
+            numbersScrollView?.setContentOffset(CGPoint(x: offset, y: 0), animated: true)
+            rulerScrollView?.setContentOffset(CGPoint(x: offset, y: 0), animated: true)
+            print(decibels)
         }
+    }
+    
+    private func calculateOffset(decibels: Double) -> CGFloat {
+        let leftOffset = CGFloat(5 * Int(decibels)) * RULER_SPACING
+        let rightOffset = CGFloat(Int(decibels * 10) % 10) / 2 * RULER_SPACING
+        return leftOffset + rightOffset - view.bounds.width / 2
+        
     }
 }
 

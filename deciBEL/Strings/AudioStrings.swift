@@ -12,5 +12,6 @@ struct AudioStrings {
     
     static let MicrophoneAccessDisabled = NSLocalizedString("Access to microphone is disabled", comment: "Access to microphone is disabled")
     static let MicrophoneAccessAlertMessage = NSLocalizedString("You must enable microphone access", comment: "You must enable microphone access")
+    static let DecibelsA = NSLocalizedString("dB(A)", comment: "dB(A)")
     
 }
