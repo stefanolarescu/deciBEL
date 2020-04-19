@@ -13,11 +13,7 @@ class RulerView: UIView {
     private func createBezierPath() -> UIBezierPath {
         let path = UIBezierPath()
         
-        guard let superview = self.superview else {
-            return path
-        }
-        
-        let height = superview.bounds.height
+        let height = self.bounds.height
         var x: CGFloat
         var y: CGFloat
         

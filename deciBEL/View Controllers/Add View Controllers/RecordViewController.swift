@@ -19,9 +19,6 @@ class RecordViewController: UIViewController {
     @IBOutlet weak var zoomInContainerView: UIView?
     @IBOutlet weak var zoomOutContainerView: UIView?
     
-    @IBOutlet weak var numbersScrollView: UIScrollView?
-    @IBOutlet weak var numbersContentViewWidthConstraint: NSLayoutConstraint?
-    
     @IBOutlet weak var decibelLabel: UILabel?
     
     @IBOutlet weak var rulerScrollView: UIScrollView?
@@ -73,16 +70,12 @@ class RecordViewController: UIViewController {
         )
         mapPanGesture.delegate = self
         mapView?.addGestureRecognizer(mapPanGesture)
-        
-        numbersContentViewWidthConstraint?.constant = 1000 * RULER_SPACING - view.bounds.width
+                
+        rulerContentViewWidthConstraint?.constant = 1000 * RULER_SPACING - view.bounds.width
+        let offset = calculateOffset(decibels: 30)
+        rulerScrollView?.setContentOffset(CGPoint(x: offset, y: 0), animated: false)
         
         decibelLabel?.text = AudioStrings.DecibelsA
-        
-        rulerContentViewWidthConstraint?.constant = 1000 * RULER_SPACING - view.bounds.width
-        
-        let offset = calculateOffset(decibels: 30)
-        numbersScrollView?.setContentOffset(CGPoint(x: offset, y: 0), animated: false)
-        rulerScrollView?.setContentOffset(CGPoint(x: offset, y: 0), animated: false)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -248,9 +241,7 @@ class RecordViewController: UIViewController {
         if let amplitude = audioKitManager.tracker?.amplitude {
             let decibels = round(20 * log10(amplitude) + 94, toNearest: 0.2, decimals: 1)
             let offset = calculateOffset(decibels: decibels)
-            numbersScrollView?.setContentOffset(CGPoint(x: offset, y: 0), animated: true)
             rulerScrollView?.setContentOffset(CGPoint(x: offset, y: 0), animated: true)
-            print(decibels)
         }
     }
     
