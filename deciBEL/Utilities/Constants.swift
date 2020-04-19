@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+let MAX_DECIBELS = 130
+
 let RULER_SPACING: CGFloat = 12
 let RULER_BAR_WIDTH: CGFloat = 4
 let RULER_CORRECTION: CGFloat = 4

@@ -13,11 +13,12 @@ class RulerView: UIView {
     private func createBezierPath() -> UIBezierPath {
         let path = UIBezierPath()
         
+        let width = self.bounds.width
         let height = self.bounds.height
         var x: CGFloat
         var y: CGFloat
         
-        for (index, bar) in stride(from: 0, through: 200, by: 0.2).enumerated() {
+        for (index, bar) in stride(from: 0, through: Double(MAX_DECIBELS), by: 0.2).enumerated() {
             x = CGFloat(index) * RULER_SPACING
             if bar == floor(bar) {
                 y = height - 25.0
@@ -28,7 +29,7 @@ class RulerView: UIView {
             path.move(to: CGPoint(x: x, y: height - RULER_BAR_WIDTH / 2))
             path.addLine(to: CGPoint(x: x, y: y))
         }
-        path.move(to: CGPoint(x: 0, y: 0))
+        path.move(to: CGPoint(x: width, y: height - RULER_BAR_WIDTH / 2))
         path.close()
         
         return path

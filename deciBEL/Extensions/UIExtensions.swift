@@ -47,7 +47,7 @@ extension UIView {
     }
     
     // MARK: Animations
-     func highlight(duration: Double, delay: Double) {
+    func highlight(duration: Double, delay: Double) {
         self.layer.removeAllAnimations()
         UIView.animate(
             withDuration: duration,

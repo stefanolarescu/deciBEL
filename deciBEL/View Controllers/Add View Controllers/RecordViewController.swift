@@ -21,6 +21,7 @@ class RecordViewController: UIViewController {
     
     @IBOutlet weak var decibelLabel: UILabel?
     
+    @IBOutlet weak var rulerScrollContainerView: UIView?
     @IBOutlet weak var rulerScrollView: UIScrollView?
     @IBOutlet weak var rulerContentViewWidthConstraint: NSLayoutConstraint?
 
@@ -70,8 +71,22 @@ class RecordViewController: UIViewController {
         )
         mapPanGesture.delegate = self
         mapView?.addGestureRecognizer(mapPanGesture)
-                
-        rulerContentViewWidthConstraint?.constant = 1000 * RULER_SPACING - view.bounds.width
+        
+        if let unwrappedRulerScrollContainerView = rulerScrollContainerView {
+            
+            let rulerGradientMask = CAGradientLayer()
+            rulerGradientMask.frame = unwrappedRulerScrollContainerView.bounds
+            rulerGradientMask.colors = [
+                UIColor.clear.cgColor,
+                UIColor.black.cgColor,
+                UIColor.clear.cgColor
+            ]
+            rulerGradientMask.startPoint = CGPoint(x: 0.0, y: 0.5)
+            rulerGradientMask.endPoint = CGPoint(x: 1.0, y: 0.5)
+            unwrappedRulerScrollContainerView.layer.mask = rulerGradientMask
+        }
+        
+        rulerContentViewWidthConstraint?.constant = CGFloat(MAX_DECIBELS * 5) * RULER_SPACING - view.bounds.width
         let offset = calculateOffset(decibels: 30)
         rulerScrollView?.setContentOffset(CGPoint(x: offset, y: 0), animated: false)
         
@@ -275,14 +290,5 @@ extension RecordViewController: CLLocationManagerDelegate {
 extension RecordViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
-    }
-}
-
-// MARK: - AUDIO RECORDER DELEGATE
-extension RecordViewController: AVAudioRecorderDelegate {
-    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-        recorder.stop()
-        recorder.deleteRecording()
-        recorder.prepareToRecord()
     }
 }
