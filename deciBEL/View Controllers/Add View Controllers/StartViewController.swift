@@ -67,7 +67,7 @@ class StartViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             let position = touch.location(in: view)
-            if let tapGestureView = highlåightView?.superview {
+            if let tapGestureView = highlightView?.superview {
                 if tapGestureView.frame.contains(position) {
                     highlightView?.highlight(duration: 0.4, delay: 0)
                 }

@@ -83,3 +83,10 @@ func showAlertForMicrophoneAccess(
 var locationServicesAreEnabled: Bool {
     return CLLocationManager.locationServicesEnabled()
 }
+
+// MARK: - MATHS
+func round(_ value: Double, toNearest: Double, decimals: Int) -> Double {
+    let factor = pow(10, Double(decimals))
+    let rounded = round(value / toNearest) * toNearest
+    return Double(Int(rounded * factor)) / factor
+}

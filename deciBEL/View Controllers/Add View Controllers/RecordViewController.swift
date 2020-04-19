@@ -225,7 +225,7 @@ class RecordViewController: UIViewController {
         
     @objc private func updateDecibels() {
         if let amplitude = audioKitManager.tracker?.amplitude {
-            print(20 * log10(amplitude) + 94)
+            print(round(20 * log10(amplitude) + 94, toNearest: 0.2, decimals: 1))
         }
     }
 }
