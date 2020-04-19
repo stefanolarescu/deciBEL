@@ -6,6 +6,9 @@
   Copyright © 2020 Stefan Olarescu. All rights reserved.
 */
 
+/* Access to microphone is disabled */
+"Access to microphone is disabled" = "Access to microphone is disabled";
+
 /* Add */
 "Add" = "Add";
 
@@ -29,3 +32,6 @@
 
 /* Settings */
 "Settings" = "Settings";
+
+/* You must enable microphone access */
+"You must enable microphone access" = "You must enable microphone access in order to use deciBEL.";

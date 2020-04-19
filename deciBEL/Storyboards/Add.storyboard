@@ -269,20 +269,7 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dfP-4S-Rnr" userLabel="Record View">
                                 <rect key="frame" x="0.0" y="293.5" width="375" height="373.5"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8xu-66-RnA">
-                                        <rect key="frame" x="0.0" y="35" width="375" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
                                 <color key="backgroundColor" name="Cream"/>
-                                <constraints>
-                                    <constraint firstItem="8xu-66-RnA" firstAttribute="top" secondItem="dfP-4S-Rnr" secondAttribute="top" constant="35" id="AJf-tD-TOt"/>
-                                    <constraint firstItem="8xu-66-RnA" firstAttribute="leading" secondItem="dfP-4S-Rnr" secondAttribute="leading" id="LRJ-gu-Vz6"/>
-                                    <constraint firstAttribute="trailing" secondItem="8xu-66-RnA" secondAttribute="trailing" id="Yeh-u8-c74"/>
-                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -303,7 +290,6 @@
                     <navigationItem key="navigationItem" id="wUb-r9-Zoi"/>
                     <connections>
                         <outlet property="centerContainerView" destination="HXF-rH-CcD" id="u7Y-lK-yXD"/>
-                        <outlet property="decibels" destination="8xu-66-RnA" id="SG5-8l-3JQ"/>
                         <outlet property="mapView" destination="ZO9-mH-WbO" id="AfH-ty-q3t"/>
                         <outlet property="zoomInContainerView" destination="rpN-Jh-3y7" id="I1n-K3-RBc"/>
                         <outlet property="zoomOutContainerView" destination="ny5-bv-jDf" id="M4H-F6-sdt"/>
@@ -331,7 +317,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1926" y="61"/>
+            <point key="canvasLocation" x="1925.5999999999999" y="60.719640179910051"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xFh-X0-Dcm">

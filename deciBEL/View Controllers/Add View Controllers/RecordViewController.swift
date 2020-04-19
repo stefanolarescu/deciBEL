@@ -18,22 +18,21 @@ class RecordViewController: UIViewController {
     @IBOutlet weak var centerContainerView: UIView?
     @IBOutlet weak var zoomInContainerView: UIView?
     @IBOutlet weak var zoomOutContainerView: UIView?
-    
-    @IBOutlet weak var decibels: UILabel?
-    
+            
     // MARK: - PROPERTIES
     let locationManager = CLLocationManager()
     var lastCenteredLocation = CLLocationCoordinate2D()
     var regionMeters: Double = 1000
-    var mapViewIsCentered: Bool = false {
+    var mapViewIsCentered = false {
         didSet {
             centerContainerView?.animateCenterImageView(duration: 0.3, delay: 0, enabled: mapViewIsCentered)
         }
     }
     
-    let audioSession = AVAudioSession.sharedInstance()
-    var audioRecorder: AVAudioRecorder?
     var timer = Timer()
+    
+    let audioSession = AVAudioSession.sharedInstance()
+    let audioKitManager = AudioKitManager.shared
     
     // MARK: - LIFE CYCLE METHODS
     override func viewWillAppear(_ animated: Bool) {
@@ -42,22 +41,21 @@ class RecordViewController: UIViewController {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(checkPermissions),
-            name: .ApplicationDidBecomeActive,
+            name: UIApplication.didBecomeActiveNotification,
             object: nil
         )
-        
-        checkPermissions()
-        
-        timer = .scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateDecibels), userInfo: nil, repeats: true)
-    }
-    
-    @objc private func updateDecibels() {
-        audioRecorder!.updateMeters()
-        decibels?.text = "\(audioRecorder!.averagePower(forChannel: 0))"
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(stopRecording),
+            name: UIApplication.willResignActiveNotification,
+            object: nil
+        )
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        checkPermissions()
         
         let mapPanGesture = UIPanGestureRecognizer(
             target: self,
@@ -72,11 +70,13 @@ class RecordViewController: UIViewController {
         
         NotificationCenter.default.removeObserver(
             self,
-            name: .ApplicationDidBecomeActive,
+            name: UIApplication.didBecomeActiveNotification,
             object: nil
         )
         
         regionMeters = 1000
+        
+        stopRecording()
     }
     
     // MARK: - OTHER METHODS
@@ -177,59 +177,57 @@ class RecordViewController: UIViewController {
     private func checkMicrophoneAuthorization() {
         switch audioSession.recordPermission {
         case .granted:
-            setupAudioRecorder()
+            startRecording()
         case .undetermined:
             audioSession.requestRecordPermission { granted in
                 if granted {
-                    self.setupAudioRecorder()
+                    self.startRecording()
+                } else {
+                    self.stopRecording()
+                    DispatchQueue.main.async {
+                        self.navigationController?.popViewController(animated: true)
+                    }
                 }
             }
         default:
-            break
-        }
-    }
-    
-    private func setupAudioRecorder() {
-        let settings = [
-            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-            AVSampleRateKey: 12000,
-            AVNumberOfChannelsKey: 1,
-            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
-        ]
-        
-        do {
-            try audioSession.setCategory(AVAudioSession.Category.record)
-            try audioSession.setActive(true)
-            
-            try audioRecorder = AVAudioRecorder(
-                url: getDocumentsDirectory(),
-                settings: settings
-            )
-            audioRecorder!.delegate = self
-            audioRecorder!.isMeteringEnabled = true
-            if !audioRecorder!.prepareToRecord() {
-                // TODO: IMPLEMENT
-            } else {
-                audioRecorder!.record()
-                audioRecorder!.updateMeters()
+            if let unwrappedNavigationController = navigationController {
+                present(
+                    showAlertForMicrophoneAccess(
+                        title: AudioStrings.MicrophoneAccessDisabled,
+                        message: AudioStrings.MicrophoneAccessAlertMessage,
+                        style: .alert,
+                        navigationController: unwrappedNavigationController
+                    ),
+                    animated: true
+                )
             }
-        } catch {
-            // TODO: IMPLEMENT
-            print("Something went wrong")
         }
     }
     
-    private func getDocumentsDirectory() -> URL {
-        let fileManager = FileManager.default
-        let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
-        let documentDirectory = urls.first!
-        return documentDirectory.appendingPathComponent("recording.m4a")
+    private func startRecording() {
+        audioKitManager.startAudioKit()
+        
+        timer = .scheduledTimer(
+            timeInterval: 0.25,
+            target: self,
+            selector: #selector(updateDecibels),
+            userInfo: nil,
+            repeats: true
+        )
     }
-}
-
-// MARK: - MAP VIEW DELEGATE
-extension RecordViewController: MKMapViewDelegate {
-
+    
+    @objc private func stopRecording() {
+        timer.invalidate()
+        timer = Timer()
+        
+        audioKitManager.stopAudioKit()
+    }
+        
+    @objc private func updateDecibels() {
+        if let amplitude = audioKitManager.tracker?.amplitude {
+            print(20 * log10(amplitude) + 94)
+        }
+    }
 }
 
 // MARK: - LOCATION MANAGER DELEGATE
