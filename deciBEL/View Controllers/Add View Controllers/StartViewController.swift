@@ -28,7 +28,7 @@ class StartViewController: UIViewController {
         )
     }
     
-    //MARK: - LIFE CYCLE METHODS
+    // MARK: - LIFE CYCLE METHODS
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
@@ -63,9 +63,20 @@ class StartViewController: UIViewController {
         }, completion: nil)
     }
     
-    //MARK: - SEGUE HANDLER
+    // MARK: - TOUCH EVENTS
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first {
+            let position = touch.location(in: view)
+            if let tapGestureView = highlåightView?.superview {
+                if tapGestureView.frame.contains(position) {
+                    highlightView?.highlight(duration: 0.4, delay: 0)
+                }
+            }
+        }
+    }
+    
+    // MARK: - SEGUE HANDLER
     @IBAction func tapGestureViewHandler(_ sender: UITapGestureRecognizer) {
-        highlightView?.highlight(duration: 0.2, delay: 0)
         performSegue(withIdentifier: SegueStrings.Record, sender: self)
     }
 }
