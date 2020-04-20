@@ -86,8 +86,10 @@ class RecordViewController: UIViewController {
             unwrappedRulerScrollContainerView.layer.mask = rulerGradientMask
         }
         
+        let horizontalInset = view.bounds.width / 2
+        rulerScrollView?.contentInset = UIEdgeInsets(top: 0, left: horizontalInset, bottom: 0, right: horizontalInset)
         rulerContentViewWidthConstraint?.constant = CGFloat(MAX_DECIBELS * 5) * RULER_SPACING - view.bounds.width
-        let offset = calculateOffset(decibels: 30)
+        let offset = calculateOffset(decibels: 0)
         rulerScrollView?.setContentOffset(CGPoint(x: offset, y: 0), animated: false)
         
         decibelLabel?.text = AudioStrings.DecibelsA
@@ -255,8 +257,11 @@ class RecordViewController: UIViewController {
     @objc private func updateDecibels() {
         if let amplitude = audioKitManager.tracker?.amplitude {
             let decibels = round(20 * log10(amplitude) + 94, toNearest: 0.2, decimals: 1)
-            let offset = calculateOffset(decibels: decibels)
-            rulerScrollView?.setContentOffset(CGPoint(x: offset, y: 0), animated: true)
+            
+            if decibels >= 0, decibels <= Double(MAX_DECIBELS) {
+                let offset = calculateOffset(decibels: decibels)
+                rulerScrollView?.setContentOffset(CGPoint(x: offset, y: 0), animated: true)
+            }
         }
     }
     
@@ -264,7 +269,6 @@ class RecordViewController: UIViewController {
         let leftOffset = CGFloat(5 * Int(decibels)) * RULER_SPACING
         let rightOffset = CGFloat(Int(decibels * 10) % 10) / 2 * RULER_SPACING
         return leftOffset + rightOffset - view.bounds.width / 2
-        
     }
 }
 
