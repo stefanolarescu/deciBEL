@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="usc-2z-xg2">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -269,7 +269,91 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dfP-4S-Rnr" userLabel="Record View">
                                 <rect key="frame" x="0.0" y="293.5" width="375" height="373.5"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Kt-bI-aeT" userLabel="Ruler Scroll Container View">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="123"/>
+                                        <subviews>
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjR-g3-5B2" userLabel="Ruler Scroll View">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="123"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wdh-th-WnI" userLabel="Content View">
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="123"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hpY-T9-s7T" userLabel="Numbers View" customClass="NumbersView" customModule="deciBEL" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="48" id="Ctb-sp-YY1"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZzZ-PQ-fDL" userLabel="Ruler View" customClass="RulerView" customModule="deciBEL" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="78" width="375" height="45"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="45" id="h3B-XX-jGx"/>
+                                                                </constraints>
+                                                            </view>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="hpY-T9-s7T" firstAttribute="leading" secondItem="Wdh-th-WnI" secondAttribute="leading" id="2bk-Hk-k38"/>
+                                                            <constraint firstItem="ZzZ-PQ-fDL" firstAttribute="leading" secondItem="Wdh-th-WnI" secondAttribute="leading" id="F4S-CZ-Wtl"/>
+                                                            <constraint firstAttribute="trailing" secondItem="hpY-T9-s7T" secondAttribute="trailing" id="JeJ-Le-z0L"/>
+                                                            <constraint firstAttribute="trailing" secondItem="ZzZ-PQ-fDL" secondAttribute="trailing" id="Qow-qq-YG2"/>
+                                                            <constraint firstItem="hpY-T9-s7T" firstAttribute="top" secondItem="Wdh-th-WnI" secondAttribute="top" id="qwT-df-Bbp"/>
+                                                            <constraint firstAttribute="bottom" secondItem="ZzZ-PQ-fDL" secondAttribute="bottom" id="u5G-MA-qvP"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" name="Cream"/>
+                                                <constraints>
+                                                    <constraint firstItem="Wdh-th-WnI" firstAttribute="leading" secondItem="gjR-g3-5B2" secondAttribute="leading" id="Mwe-n4-ILT"/>
+                                                    <constraint firstItem="Wdh-th-WnI" firstAttribute="width" secondItem="gjR-g3-5B2" secondAttribute="width" id="NK4-4u-Tfd"/>
+                                                    <constraint firstItem="Wdh-th-WnI" firstAttribute="top" secondItem="gjR-g3-5B2" secondAttribute="top" id="TzH-2r-OCe"/>
+                                                    <constraint firstItem="Wdh-th-WnI" firstAttribute="height" secondItem="gjR-g3-5B2" secondAttribute="height" id="nJ1-Pd-H3g"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Wdh-th-WnI" secondAttribute="trailing" id="xGC-xG-KIX"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Wdh-th-WnI" secondAttribute="bottom" id="zY7-cs-Wlf"/>
+                                                </constraints>
+                                            </scrollView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_dB(A)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNe-xt-BD6">
+                                                <rect key="frame" x="0.0" y="49.5" width="375" height="24"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                <color key="textColor" name="Red"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OHf-Hb-WRM" userLabel="Red Bar">
+                                                <rect key="frame" x="185" y="78" width="5" height="45"/>
+                                                <color key="backgroundColor" name="Red"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="5" id="myj-lH-2Zg"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="2.5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="dNe-xt-BD6" firstAttribute="centerY" secondItem="2Kt-bI-aeT" secondAttribute="centerY" id="CED-Us-N0A"/>
+                                            <constraint firstAttribute="height" constant="123" id="Kve-Sp-T7e"/>
+                                            <constraint firstItem="gjR-g3-5B2" firstAttribute="top" secondItem="2Kt-bI-aeT" secondAttribute="top" id="OHH-rZ-5bD"/>
+                                            <constraint firstItem="dNe-xt-BD6" firstAttribute="leading" secondItem="2Kt-bI-aeT" secondAttribute="leading" id="UQb-iI-uMF"/>
+                                            <constraint firstItem="OHf-Hb-WRM" firstAttribute="bottom" secondItem="gjR-g3-5B2" secondAttribute="bottom" id="Wpf-eQ-1l0"/>
+                                            <constraint firstItem="gjR-g3-5B2" firstAttribute="leading" secondItem="2Kt-bI-aeT" secondAttribute="leading" id="aYW-BW-1w7"/>
+                                            <constraint firstAttribute="trailing" secondItem="dNe-xt-BD6" secondAttribute="trailing" id="kKu-LW-IRl"/>
+                                            <constraint firstItem="gjR-g3-5B2" firstAttribute="height" secondItem="2Kt-bI-aeT" secondAttribute="height" id="mqX-KS-z4b"/>
+                                            <constraint firstItem="OHf-Hb-WRM" firstAttribute="centerX" secondItem="2Kt-bI-aeT" secondAttribute="centerX" id="oaJ-Xr-RDm"/>
+                                            <constraint firstItem="OHf-Hb-WRM" firstAttribute="height" secondItem="ZzZ-PQ-fDL" secondAttribute="height" id="thO-bs-Jfq"/>
+                                            <constraint firstAttribute="trailing" secondItem="gjR-g3-5B2" secondAttribute="trailing" id="wvc-5W-35P"/>
+                                            <constraint firstItem="dNe-xt-BD6" firstAttribute="centerX" secondItem="2Kt-bI-aeT" secondAttribute="centerX" id="zz8-VQ-DaC"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" name="Cream"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="2Kt-bI-aeT" secondAttribute="trailing" id="AgU-mW-hM4"/>
+                                    <constraint firstItem="2Kt-bI-aeT" firstAttribute="leading" secondItem="dfP-4S-Rnr" secondAttribute="leading" id="Ezv-4q-iuU"/>
+                                    <constraint firstItem="2Kt-bI-aeT" firstAttribute="top" secondItem="dfP-4S-Rnr" secondAttribute="top" id="tIJ-wm-fyr"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -290,7 +374,12 @@
                     <navigationItem key="navigationItem" id="wUb-r9-Zoi"/>
                     <connections>
                         <outlet property="centerContainerView" destination="HXF-rH-CcD" id="u7Y-lK-yXD"/>
+                        <outlet property="decibelLabel" destination="dNe-xt-BD6" id="FBw-bG-hCu"/>
                         <outlet property="mapView" destination="ZO9-mH-WbO" id="AfH-ty-q3t"/>
+                        <outlet property="rulerContentViewWidthConstraint" destination="NK4-4u-Tfd" id="hSs-oX-Gtj"/>
+                        <outlet property="rulerScrollContainerView" destination="2Kt-bI-aeT" id="Z0C-th-mmT"/>
+                        <outlet property="rulerScrollView" destination="gjR-g3-5B2" id="Y52-G2-HIz"/>
+                        <outlet property="rulerView" destination="ZzZ-PQ-fDL" id="IE2-rM-LSA"/>
                         <outlet property="zoomInContainerView" destination="rpN-Jh-3y7" id="I1n-K3-RBc"/>
                         <outlet property="zoomOutContainerView" destination="ny5-bv-jDf" id="M4H-F6-sdt"/>
                     </connections>
@@ -356,7 +445,10 @@
             <color red="0.77999997138977051" green="0.7839999794960022" blue="0.77999997138977051" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Map Controls Background">
-            <color red="0.2199999988079071" green="0.21600000560283661" blue="0.2199999988079071" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.2196078431372549" green="0.21568627450980393" blue="0.2196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Red">
+            <color red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

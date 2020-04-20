@@ -15,6 +15,9 @@
 /* Decibel */
 "Decibel" = "deciBEL";
 
+/* dB(A) */
+"dB(A)" = "dB(A)";
+
 /* History */
 "History" = "History";
 
