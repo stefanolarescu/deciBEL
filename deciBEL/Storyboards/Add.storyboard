@@ -350,7 +350,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MhK-BJ-iyr" userLabel="Levels Scroll Container View">
                                         <rect key="frame" x="48" y="131" width="327" height="185.5"/>
                                         <subviews>
-                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kK1-Vm-PbR" userLabel="Levels Scroll View">
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kK1-Vm-PbR" userLabel="Levels Scroll View">
                                                 <rect key="frame" x="0.0" y="0.0" width="327" height="185.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ak4-Ty-XsM" userLabel="Content View">
@@ -444,6 +444,7 @@
                         <outlet property="levelsScrollView" destination="kK1-Vm-PbR" id="mH3-7Q-z4f"/>
                         <outlet property="levelsView" destination="lzB-Fd-WNt" id="6Z7-NU-F89"/>
                         <outlet property="mapView" destination="ZO9-mH-WbO" id="AfH-ty-q3t"/>
+                        <outlet property="numbersView" destination="hpY-T9-s7T" id="dK4-Od-MNl"/>
                         <outlet property="rulerContentViewWidthConstraint" destination="NK4-4u-Tfd" id="hSs-oX-Gtj"/>
                         <outlet property="rulerScrollContainerView" destination="2Kt-bI-aeT" id="Z0C-th-mmT"/>
                         <outlet property="rulerScrollView" destination="gjR-g3-5B2" id="Y52-G2-HIz"/>

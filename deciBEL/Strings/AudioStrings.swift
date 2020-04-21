@@ -10,6 +10,7 @@ import Foundation
 
 struct AudioStrings {
     
+    static let DecibelsA = NSLocalizedString("dB(A)", comment: "dB(A)")
     static let Level1 = NSLocalizedString("Level1", comment: "Level1")
     static let Level2 = NSLocalizedString("Level2", comment: "Level2")
     static let Level3 = NSLocalizedString("Level3", comment: "Level3")
@@ -24,6 +25,6 @@ struct AudioStrings {
     static let Level12 = NSLocalizedString("Level12", comment: "Level12")
     static let MicrophoneAccessDisabled = NSLocalizedString("Access to microphone is disabled", comment: "Access to microphone is disabled")
     static let MicrophoneAccessAlertMessage = NSLocalizedString("You must enable microphone access", comment: "You must enable microphone access")
-    static let DecibelsA = NSLocalizedString("dB(A)", comment: "dB(A)")
+    static let Record = NSLocalizedString("Record", comment: "Record")
     
 }

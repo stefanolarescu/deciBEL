@@ -19,11 +19,13 @@ class RecordViewController: UIViewController {
     @IBOutlet weak var zoomInContainerView: UIView?
     @IBOutlet weak var zoomOutContainerView: UIView?
     
-    @IBOutlet weak var decibelLabel: UILabel?
     
     @IBOutlet weak var rulerScrollContainerView: UIView?
     @IBOutlet weak var rulerScrollView: UIScrollView?
     @IBOutlet weak var rulerContentViewWidthConstraint: NSLayoutConstraint?
+    @IBOutlet weak var numbersView: NumbersView?
+    
+    @IBOutlet weak var decibelLabel: UILabel?
 
     @IBOutlet weak var levelsScrollContainerView: UIView?
     @IBOutlet weak var levelsScrollView: UIScrollView?
@@ -46,6 +48,7 @@ class RecordViewController: UIViewController {
     let audioSession = AVAudioSession.sharedInstance()
     let audioKitManager = AudioKitManager.shared
     
+    var lastDecibelIndex = 0
     var lastLevelIndex = 0
     
     // MARK: - LIFE CYCLE METHODS
@@ -68,18 +71,20 @@ class RecordViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+                
+        title = AudioStrings.Record
         
         checkPermissions()
         
         addPanGesture()
         
         decibelLabel?.text = AudioStrings.DecibelsA
+        
+        configureRulerScrollView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        configureRulerScrollView()
         configureLevelsScrollView()
     }
     
@@ -258,10 +263,11 @@ class RecordViewController: UIViewController {
             if decibels >= 0, decibels <= Double(MAX_DECIBELS) {
                 let rulerOffset = calculateRulerOffset(decibels: decibels)
                 rulerScrollView?.setContentOffset(CGPoint(x: rulerOffset, y: 0), animated: true)
+                animateRulerChange(decibels: decibels)
                 
                 let levelsOffset = calculateLevelsOffset(decibels: decibels)
                 levelsScrollView?.setContentOffset(CGPoint(x: 0, y: levelsOffset), animated: true)
-                animateSlide(decibels: decibels)
+                animateLevelChange(decibels: decibels)
             }
         }
     }
@@ -290,6 +296,62 @@ class RecordViewController: UIViewController {
         return offset - unwrappedLevelsScrollView.bounds.height / 2
     }
     
+    private func animateRulerChange(decibels: Double) {
+        if let numberLabels = numbersView?.subviews as? [UILabel] {
+            let indexOfDecibels = Int(round(decibels))
+            
+            if self.lastDecibelIndex != indexOfDecibels {
+                UIView.animate(
+                    withDuration: 0.2,
+                    animations: {
+                        numberLabels[self.lastDecibelIndex].transform = CGAffineTransform(
+                            scaleX: 1,
+                            y: 1
+                        )
+                        if self.lastDecibelIndex - 1 >= 0 {
+                            numberLabels[self.lastDecibelIndex - 1].transform = CGAffineTransform(
+                                scaleX: 1,
+                                y: 1
+                            )
+                        }
+                        if self.lastDecibelIndex + 1 <= MAX_DECIBELS + 1 {
+                            numberLabels[self.lastDecibelIndex + 1].transform = CGAffineTransform(
+                                scaleX: 1,
+                                y: 1
+                            )
+                        }
+                    }
+                ) { completed in
+                    if completed {
+                        UIView.animate(
+                            withDuration: 0.2,
+                            animations: {
+                                numberLabels[indexOfDecibels].transform = CGAffineTransform(
+                                    scaleX: 1.6,
+                                    y: 1.6
+                                )
+                                if indexOfDecibels - 1 >= 0 {
+                                    numberLabels[indexOfDecibels - 1].transform = CGAffineTransform(
+                                        scaleX: 1.2,
+                                        y: 1.2
+                                    )
+                                }
+                                if indexOfDecibels + 1 <= MAX_DECIBELS + 1 {
+                                    numberLabels[indexOfDecibels + 1].transform = CGAffineTransform(
+                                        scaleX: 1.2,
+                                        y: 1.2
+                                    )
+                                }
+                            }
+                        )
+                    }
+                }
+                
+                lastDecibelIndex = indexOfDecibels
+            }
+        }
+    }
+    
     private func getIndexOfCurrentLevel(decibels: Double) -> Int {
         var level = Int(round(decibels, toNearest: 10, decimals: 1)) / 10
         if level == 0 {
@@ -300,7 +362,7 @@ class RecordViewController: UIViewController {
         return noiseLevels.count - level
     }
     
-    private func animateSlide(decibels: Double) {
+    private func animateLevelChange(decibels: Double) {
         if let levelLabels = levelsView?.subviews as? [UILabel],
             let iconViews = iconsView?.subviews as? [UIImageView] {
             
@@ -365,11 +427,10 @@ class RecordViewController: UIViewController {
     }
     
     private func configureLevelsScrollView() {
-        if let unwrappedLevelsScrollContainerView = levelsScrollContainerView,
-            let unwrappedLevelsScrollView = levelsScrollView {
+        if let unwrappedLevelsScrollContainerView = levelsScrollContainerView {
             
             let levelsGradientMask = CAGradientLayer()
-            levelsGradientMask.frame = unwrappedLevelsScrollView.bounds
+            levelsGradientMask.frame = unwrappedLevelsScrollContainerView.bounds
             levelsGradientMask.colors = [
                 UIColor.clear.cgColor,
                 UIColor.black.cgColor,
