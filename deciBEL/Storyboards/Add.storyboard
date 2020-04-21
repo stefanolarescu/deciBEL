@@ -347,11 +347,83 @@
                                             <constraint firstItem="dNe-xt-BD6" firstAttribute="centerX" secondItem="2Kt-bI-aeT" secondAttribute="centerX" id="zz8-VQ-DaC"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MhK-BJ-iyr" userLabel="Levels Scroll Container View">
+                                        <rect key="frame" x="48" y="131" width="327" height="185.5"/>
+                                        <subviews>
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kK1-Vm-PbR" userLabel="Levels Scroll View">
+                                                <rect key="frame" x="0.0" y="0.0" width="327" height="185.5"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ak4-Ty-XsM" userLabel="Content View">
+                                                        <rect key="frame" x="0.0" y="0.0" width="327" height="185.5"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vzq-QA-ZK6" userLabel="Icons View" customClass="IconsView" customModule="deciBEL" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="24" height="185.5"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="24" id="gt3-wK-Z89"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lzB-Fd-WNt" userLabel="Levels View Container" customClass="LevelsView" customModule="deciBEL" customModuleProvider="target">
+                                                                <rect key="frame" x="36" y="0.0" width="291" height="185.5"/>
+                                                            </view>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="lzB-Fd-WNt" secondAttribute="trailing" id="7A8-HF-tPS"/>
+                                                            <constraint firstAttribute="bottom" secondItem="lzB-Fd-WNt" secondAttribute="bottom" id="HYP-PH-kU2"/>
+                                                            <constraint firstItem="vzq-QA-ZK6" firstAttribute="top" secondItem="ak4-Ty-XsM" secondAttribute="top" id="LUP-YE-LY1"/>
+                                                            <constraint firstItem="lzB-Fd-WNt" firstAttribute="top" secondItem="ak4-Ty-XsM" secondAttribute="top" id="Usu-EK-p80"/>
+                                                            <constraint firstItem="lzB-Fd-WNt" firstAttribute="leading" secondItem="vzq-QA-ZK6" secondAttribute="trailing" constant="12" id="ZVq-Wr-pKR"/>
+                                                            <constraint firstItem="vzq-QA-ZK6" firstAttribute="leading" secondItem="ak4-Ty-XsM" secondAttribute="leading" id="upd-yz-wVA"/>
+                                                            <constraint firstAttribute="bottom" secondItem="vzq-QA-ZK6" secondAttribute="bottom" id="wGJ-Fl-YT9"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" name="Cream"/>
+                                                <constraints>
+                                                    <constraint firstItem="ak4-Ty-XsM" firstAttribute="top" secondItem="kK1-Vm-PbR" secondAttribute="top" id="HKM-pa-PLM"/>
+                                                    <constraint firstItem="ak4-Ty-XsM" firstAttribute="height" secondItem="kK1-Vm-PbR" secondAttribute="height" id="Il9-U3-zT4"/>
+                                                    <constraint firstItem="ak4-Ty-XsM" firstAttribute="width" secondItem="kK1-Vm-PbR" secondAttribute="width" id="XFY-Ct-Q6w"/>
+                                                    <constraint firstAttribute="bottom" secondItem="ak4-Ty-XsM" secondAttribute="bottom" id="pFk-82-RAJ"/>
+                                                    <constraint firstItem="ak4-Ty-XsM" firstAttribute="leading" secondItem="kK1-Vm-PbR" secondAttribute="leading" id="s56-eL-dR5"/>
+                                                    <constraint firstAttribute="trailing" secondItem="ak4-Ty-XsM" secondAttribute="trailing" id="xIo-ey-1MX"/>
+                                                </constraints>
+                                            </scrollView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HnH-jg-IHj" userLabel="Red Background View">
+                                                <rect key="frame" x="0.0" y="80.5" width="327" height="24"/>
+                                                <color key="backgroundColor" name="Red"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="24" id="YT6-bl-2yj"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="HnH-jg-IHj" firstAttribute="centerY" secondItem="kK1-Vm-PbR" secondAttribute="centerY" id="4om-Ol-TLd"/>
+                                            <constraint firstAttribute="trailing" secondItem="kK1-Vm-PbR" secondAttribute="trailing" id="67a-rt-mmh"/>
+                                            <constraint firstItem="kK1-Vm-PbR" firstAttribute="top" secondItem="MhK-BJ-iyr" secondAttribute="top" id="6O6-eb-xMF"/>
+                                            <constraint firstItem="HnH-jg-IHj" firstAttribute="trailing" secondItem="kK1-Vm-PbR" secondAttribute="trailing" id="9uK-Yb-V6d"/>
+                                            <constraint firstAttribute="bottom" secondItem="kK1-Vm-PbR" secondAttribute="bottom" id="NJX-yI-c9D"/>
+                                            <constraint firstItem="HnH-jg-IHj" firstAttribute="leading" secondItem="kK1-Vm-PbR" secondAttribute="leading" id="l4D-rZ-Fne"/>
+                                            <constraint firstItem="kK1-Vm-PbR" firstAttribute="leading" secondItem="MhK-BJ-iyr" secondAttribute="leading" id="lVk-IZ-vBL"/>
+                                        </constraints>
+                                    </view>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="zYN-mu-lhA" userLabel="Arrow Image View">
+                                        <rect key="frame" x="12" y="213" width="24" height="20.5"/>
+                                        <color key="tintColor" name="Red"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="5IB-du-KRZ"/>
+                                            <constraint firstAttribute="height" constant="24" id="eSb-bZ-pyb"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" name="Cream"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="MhK-BJ-iyr" secondAttribute="trailing" id="7Vk-ly-3Xl"/>
+                                    <constraint firstItem="MhK-BJ-iyr" firstAttribute="leading" secondItem="dfP-4S-Rnr" secondAttribute="leading" constant="48" id="8Ol-cc-jp0"/>
                                     <constraint firstAttribute="trailing" secondItem="2Kt-bI-aeT" secondAttribute="trailing" id="AgU-mW-hM4"/>
                                     <constraint firstItem="2Kt-bI-aeT" firstAttribute="leading" secondItem="dfP-4S-Rnr" secondAttribute="leading" id="Ezv-4q-iuU"/>
+                                    <constraint firstItem="zYN-mu-lhA" firstAttribute="leading" secondItem="dfP-4S-Rnr" secondAttribute="leading" constant="12" id="k6A-vD-cxa"/>
+                                    <constraint firstItem="zYN-mu-lhA" firstAttribute="centerY" secondItem="MhK-BJ-iyr" secondAttribute="centerY" id="qCb-An-KZP"/>
+                                    <constraint firstItem="MhK-BJ-iyr" firstAttribute="top" secondItem="2Kt-bI-aeT" secondAttribute="bottom" constant="8" id="qTO-bu-CLZ"/>
                                     <constraint firstItem="2Kt-bI-aeT" firstAttribute="top" secondItem="dfP-4S-Rnr" secondAttribute="top" id="tIJ-wm-fyr"/>
                                 </constraints>
                             </view>
@@ -359,6 +431,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="5Bb-1g-mwK" firstAttribute="leading" secondItem="qwe-5e-fjk" secondAttribute="leading" id="9GX-S1-AAS"/>
+                            <constraint firstItem="e0g-kF-3Ng" firstAttribute="top" secondItem="MhK-BJ-iyr" secondAttribute="bottom" constant="8" id="Bqs-e1-kd3"/>
                             <constraint firstAttribute="bottom" secondItem="dfP-4S-Rnr" secondAttribute="bottom" id="IP8-EY-drh"/>
                             <constraint firstAttribute="trailing" secondItem="dfP-4S-Rnr" secondAttribute="trailing" id="PO5-KQ-Dgh"/>
                             <constraint firstItem="dfP-4S-Rnr" firstAttribute="top" secondItem="wWn-Mk-lYw" secondAttribute="bottom" id="SeQ-eU-bu5"/>
@@ -375,11 +448,14 @@
                     <connections>
                         <outlet property="centerContainerView" destination="HXF-rH-CcD" id="u7Y-lK-yXD"/>
                         <outlet property="decibelLabel" destination="dNe-xt-BD6" id="FBw-bG-hCu"/>
+                        <outlet property="levelsContentViewHeightConstraint" destination="Il9-U3-zT4" id="1bD-Fn-n2q"/>
+                        <outlet property="levelsRedBackground" destination="HnH-jg-IHj" id="0YY-8M-3RV"/>
+                        <outlet property="levelsScrollContainerView" destination="MhK-BJ-iyr" id="5x8-0T-5SY"/>
+                        <outlet property="levelsScrollView" destination="kK1-Vm-PbR" id="mH3-7Q-z4f"/>
                         <outlet property="mapView" destination="ZO9-mH-WbO" id="AfH-ty-q3t"/>
                         <outlet property="rulerContentViewWidthConstraint" destination="NK4-4u-Tfd" id="hSs-oX-Gtj"/>
                         <outlet property="rulerScrollContainerView" destination="2Kt-bI-aeT" id="Z0C-th-mmT"/>
                         <outlet property="rulerScrollView" destination="gjR-g3-5B2" id="Y52-G2-HIz"/>
-                        <outlet property="rulerView" destination="ZzZ-PQ-fDL" id="IE2-rM-LSA"/>
                         <outlet property="zoomInContainerView" destination="rpN-Jh-3y7" id="I1n-K3-RBc"/>
                         <outlet property="zoomOutContainerView" destination="ny5-bv-jDf" id="M4H-F6-sdt"/>
                     </connections>
@@ -433,6 +509,7 @@
         <image name="Start Wallpaper" width="3126" height="5559"/>
         <image name="location.fill" catalog="system" width="128" height="115"/>
         <image name="minus" catalog="system" width="128" height="24"/>
+        <image name="play.fill" catalog="system" width="116" height="128"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
         <namedColor name="Cream">
