@@ -362,18 +362,18 @@
                                                                     <constraint firstAttribute="width" constant="24" id="gt3-wK-Z89"/>
                                                                 </constraints>
                                                             </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lzB-Fd-WNt" userLabel="Levels View Container" customClass="LevelsView" customModule="deciBEL" customModuleProvider="target">
-                                                                <rect key="frame" x="36" y="0.0" width="291" height="185.5"/>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lzB-Fd-WNt" customClass="LevelsView" customModule="deciBEL" customModuleProvider="target">
+                                                                <rect key="frame" x="32" y="0.0" width="295" height="185.5"/>
                                                             </view>
                                                         </subviews>
                                                         <constraints>
-                                                            <constraint firstAttribute="trailing" secondItem="lzB-Fd-WNt" secondAttribute="trailing" id="7A8-HF-tPS"/>
-                                                            <constraint firstAttribute="bottom" secondItem="lzB-Fd-WNt" secondAttribute="bottom" id="HYP-PH-kU2"/>
-                                                            <constraint firstItem="vzq-QA-ZK6" firstAttribute="top" secondItem="ak4-Ty-XsM" secondAttribute="top" id="LUP-YE-LY1"/>
-                                                            <constraint firstItem="lzB-Fd-WNt" firstAttribute="top" secondItem="ak4-Ty-XsM" secondAttribute="top" id="Usu-EK-p80"/>
-                                                            <constraint firstItem="lzB-Fd-WNt" firstAttribute="leading" secondItem="vzq-QA-ZK6" secondAttribute="trailing" constant="12" id="ZVq-Wr-pKR"/>
-                                                            <constraint firstItem="vzq-QA-ZK6" firstAttribute="leading" secondItem="ak4-Ty-XsM" secondAttribute="leading" id="upd-yz-wVA"/>
-                                                            <constraint firstAttribute="bottom" secondItem="vzq-QA-ZK6" secondAttribute="bottom" id="wGJ-Fl-YT9"/>
+                                                            <constraint firstItem="lzB-Fd-WNt" firstAttribute="top" secondItem="ak4-Ty-XsM" secondAttribute="top" id="58K-H9-vwM"/>
+                                                            <constraint firstItem="vzq-QA-ZK6" firstAttribute="leading" secondItem="ak4-Ty-XsM" secondAttribute="leading" id="Ccj-5l-cl2"/>
+                                                            <constraint firstItem="lzB-Fd-WNt" firstAttribute="leading" secondItem="vzq-QA-ZK6" secondAttribute="trailing" constant="8" id="JBw-g0-TWq"/>
+                                                            <constraint firstAttribute="bottom" secondItem="lzB-Fd-WNt" secondAttribute="bottom" id="K4v-fM-yXI"/>
+                                                            <constraint firstItem="vzq-QA-ZK6" firstAttribute="top" secondItem="ak4-Ty-XsM" secondAttribute="top" id="hbV-YU-BWA"/>
+                                                            <constraint firstAttribute="trailing" secondItem="lzB-Fd-WNt" secondAttribute="trailing" id="lFz-wk-cVH"/>
+                                                            <constraint firstAttribute="bottom" secondItem="vzq-QA-ZK6" secondAttribute="bottom" id="rwJ-aL-bwJ"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
@@ -387,22 +387,12 @@
                                                     <constraint firstAttribute="trailing" secondItem="ak4-Ty-XsM" secondAttribute="trailing" id="xIo-ey-1MX"/>
                                                 </constraints>
                                             </scrollView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HnH-jg-IHj" userLabel="Red Background View">
-                                                <rect key="frame" x="0.0" y="80.5" width="327" height="24"/>
-                                                <color key="backgroundColor" name="Red"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="24" id="YT6-bl-2yj"/>
-                                                </constraints>
-                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
-                                            <constraint firstItem="HnH-jg-IHj" firstAttribute="centerY" secondItem="kK1-Vm-PbR" secondAttribute="centerY" id="4om-Ol-TLd"/>
                                             <constraint firstAttribute="trailing" secondItem="kK1-Vm-PbR" secondAttribute="trailing" id="67a-rt-mmh"/>
                                             <constraint firstItem="kK1-Vm-PbR" firstAttribute="top" secondItem="MhK-BJ-iyr" secondAttribute="top" id="6O6-eb-xMF"/>
-                                            <constraint firstItem="HnH-jg-IHj" firstAttribute="trailing" secondItem="kK1-Vm-PbR" secondAttribute="trailing" id="9uK-Yb-V6d"/>
                                             <constraint firstAttribute="bottom" secondItem="kK1-Vm-PbR" secondAttribute="bottom" id="NJX-yI-c9D"/>
-                                            <constraint firstItem="HnH-jg-IHj" firstAttribute="leading" secondItem="kK1-Vm-PbR" secondAttribute="leading" id="l4D-rZ-Fne"/>
                                             <constraint firstItem="kK1-Vm-PbR" firstAttribute="leading" secondItem="MhK-BJ-iyr" secondAttribute="leading" id="lVk-IZ-vBL"/>
                                         </constraints>
                                     </view>
@@ -448,10 +438,11 @@
                     <connections>
                         <outlet property="centerContainerView" destination="HXF-rH-CcD" id="u7Y-lK-yXD"/>
                         <outlet property="decibelLabel" destination="dNe-xt-BD6" id="FBw-bG-hCu"/>
+                        <outlet property="iconsView" destination="vzq-QA-ZK6" id="Uv0-Ys-kkE"/>
                         <outlet property="levelsContentViewHeightConstraint" destination="Il9-U3-zT4" id="1bD-Fn-n2q"/>
-                        <outlet property="levelsRedBackground" destination="HnH-jg-IHj" id="0YY-8M-3RV"/>
                         <outlet property="levelsScrollContainerView" destination="MhK-BJ-iyr" id="5x8-0T-5SY"/>
                         <outlet property="levelsScrollView" destination="kK1-Vm-PbR" id="mH3-7Q-z4f"/>
+                        <outlet property="levelsView" destination="lzB-Fd-WNt" id="6Z7-NU-F89"/>
                         <outlet property="mapView" destination="ZO9-mH-WbO" id="AfH-ty-q3t"/>
                         <outlet property="rulerContentViewWidthConstraint" destination="NK4-4u-Tfd" id="hSs-oX-Gtj"/>
                         <outlet property="rulerScrollContainerView" destination="2Kt-bI-aeT" id="Z0C-th-mmT"/>

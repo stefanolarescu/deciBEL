@@ -28,7 +28,8 @@ class RecordViewController: UIViewController {
     @IBOutlet weak var levelsScrollContainerView: UIView?
     @IBOutlet weak var levelsScrollView: UIScrollView?
     @IBOutlet weak var levelsContentViewHeightConstraint: NSLayoutConstraint?
-    @IBOutlet weak var levelsRedBackground: UIView?
+    @IBOutlet weak var iconsView: IconsView?
+    @IBOutlet weak var levelsView: LevelsView?
     
     // MARK: - PROPERTIES
     let locationManager = CLLocationManager()
@@ -44,6 +45,8 @@ class RecordViewController: UIViewController {
     
     let audioSession = AVAudioSession.sharedInstance()
     let audioKitManager = AudioKitManager.shared
+    
+    var lastLevelIndex = 0
     
     // MARK: - LIFE CYCLE METHODS
     override func viewWillAppear(_ animated: Bool) {
@@ -232,7 +235,7 @@ class RecordViewController: UIViewController {
         audioKitManager.startAudioKit()
         
         timer = Timer(
-            timeInterval: 1,
+            timeInterval: 0.5,
             target: self,
             selector: #selector(updateDecibels),
             userInfo: nil,
@@ -258,6 +261,7 @@ class RecordViewController: UIViewController {
                 
                 let levelsOffset = calculateLevelsOffset(decibels: decibels)
                 levelsScrollView?.setContentOffset(CGPoint(x: 0, y: levelsOffset), animated: true)
+                animateSlide(decibels: decibels)
             }
         }
     }
@@ -277,11 +281,57 @@ class RecordViewController: UIViewController {
         var level = Int(round(decibels, toNearest: 10, decimals: 1)) / 10
         if level == 0 {
             level += 1
+        } else if level == 13 {
+            level -= 1
         }
         
         let offset = CGFloat(noiseLevels.count - level) * (ICON_SIZE + ICONS_SPACING)
         
         return offset - unwrappedLevelsScrollView.bounds.height / 2
+    }
+    
+    private func getIndexOfCurrentLevel(decibels: Double) -> Int {
+        var level = Int(round(decibels, toNearest: 10, decimals: 1)) / 10
+        if level == 0 {
+            level += 1
+        } else if level == 13 {
+            level -= 1
+        }
+        return noiseLevels.count - level
+    }
+    
+    private func animateSlide(decibels: Double) {
+        if let levelLabels = levelsView?.subviews as? [UILabel],
+            let iconViews = iconsView?.subviews as? [UIImageView] {
+            
+            let currentLevelIndex = getIndexOfCurrentLevel(decibels: decibels)
+            
+            if lastLevelIndex != currentLevelIndex {
+                UIView.transition(
+                    with: levelLabels[self.lastLevelIndex],
+                    duration: 0.2,
+                    options: .transitionCrossDissolve,
+                    animations: {
+                        levelLabels[self.lastLevelIndex].textColor = .black
+                        iconViews[self.lastLevelIndex].tintColor = .black
+                    }
+                ) { completed in
+                    if completed {
+                        UIView.transition(
+                            with: levelLabels[currentLevelIndex],
+                            duration: 0.2,
+                            options: .transitionCrossDissolve,
+                            animations: {
+                                levelLabels[currentLevelIndex].textColor = UIColor(named: "Red")
+                                iconViews[currentLevelIndex].tintColor = UIColor(named: "Red")
+                            }
+                        )
+                    }
+                }
+                
+                lastLevelIndex = currentLevelIndex
+            }
+        }
     }
     
     private func configureRulerScrollView() {
@@ -315,12 +365,6 @@ class RecordViewController: UIViewController {
     }
     
     private func configureLevelsScrollView() {
-        if let unwrappedLevelsRedBackground = levelsRedBackground,
-            let levelsViewContainer = unwrappedLevelsRedBackground.superview {
-            
-            levelsViewContainer.addSubview(LevelsView(frame: levelsViewContainer.bounds))
-        }
-        
         if let unwrappedLevelsScrollContainerView = levelsScrollContainerView,
             let unwrappedLevelsScrollView = levelsScrollView {
             

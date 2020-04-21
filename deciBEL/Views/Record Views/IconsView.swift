@@ -48,6 +48,7 @@ class IconsView: UIView {
             iconImageView.center.x = 12
             iconImageView.center.y = CGFloat(index) * (ICON_SIZE + ICONS_SPACING)
             iconImageView.image = UIImage(named: icon)
+            iconImageView.tintColor = .black
             addSubview(iconImageView)
         }
     }
