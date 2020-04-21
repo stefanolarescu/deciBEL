@@ -21,6 +21,42 @@
 /* History */
 "History" = "History";
 
+/* Level1 */
+"Level1" = "Almost quiet, breathing";
+
+/* Level2 */
+"Level2" = "Rustling leaves, ticking watch";
+
+/* Level3 */
+"Level3" = "Whisper, quiet rural area";
+
+/* Level4 */
+"Level4" = "Quiet library, bird calls";
+
+/* Level5 */
+"Level5" = "Quiet office, moderate rainfall";
+
+/* Level6 */
+"Level6" = "Normal conversation at 1 meter";
+
+/* Level7 */
+"Level7" = "Busy traffic, vacuum cleaner";
+
+/* Level8 */
+"Level8" = "Loud music, alarm clocks";
+
+/* Level9 */
+"Level9" = "Diesel truck, power mower";
+
+/* Level10 */
+"Level10" = "Motorcycle, blow dryer";
+
+/* Level11 */
+"Level11" = "Concerts, screaming child";
+
+/* Level12 */
+"Level12" = "Threshold of pain, thunder";
+
 /* Location Services disabled */
 "Location Services disabled" = "Location Services disabled";
 
@@ -32,6 +68,9 @@
 
 /* Okay */
 "Okay" = "Okay";
+
+/* Record */
+"Record" = "Record";
 
 /* Settings */
 "Settings" = "Settings";

@@ -22,7 +22,14 @@ class NumbersView: UIView {
     
     private func setupView() {
         for number in 0...MAX_DECIBELS {
-            let numberLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
+            let numberLabel = UILabel(frame:
+                CGRect(
+                    x: 0,
+                    y: 0,
+                    width: 60,
+                    height: 40
+                )
+            )
             numberLabel.text = "\(number)"
             numberLabel.font = UIFont.systemFont(ofSize: 24)
             numberLabel.textColor = .black

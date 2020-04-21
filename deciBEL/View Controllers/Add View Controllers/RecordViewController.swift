@@ -19,13 +19,19 @@ class RecordViewController: UIViewController {
     @IBOutlet weak var zoomInContainerView: UIView?
     @IBOutlet weak var zoomOutContainerView: UIView?
     
-    @IBOutlet weak var decibelLabel: UILabel?
     
     @IBOutlet weak var rulerScrollContainerView: UIView?
     @IBOutlet weak var rulerScrollView: UIScrollView?
     @IBOutlet weak var rulerContentViewWidthConstraint: NSLayoutConstraint?
+    @IBOutlet weak var numbersView: NumbersView?
+    
+    @IBOutlet weak var decibelLabel: UILabel?
 
-    @IBOutlet weak var rulerView: RulerView?
+    @IBOutlet weak var levelsScrollContainerView: UIView?
+    @IBOutlet weak var levelsScrollView: UIScrollView?
+    @IBOutlet weak var levelsContentViewHeightConstraint: NSLayoutConstraint?
+    @IBOutlet weak var iconsView: IconsView?
+    @IBOutlet weak var levelsView: LevelsView?
     
     // MARK: - PROPERTIES
     let locationManager = CLLocationManager()
@@ -41,6 +47,9 @@ class RecordViewController: UIViewController {
     
     let audioSession = AVAudioSession.sharedInstance()
     let audioKitManager = AudioKitManager.shared
+    
+    var lastDecibelIndex = 0
+    var lastLevelIndex = 0
     
     // MARK: - LIFE CYCLE METHODS
     override func viewWillAppear(_ animated: Bool) {
@@ -62,37 +71,21 @@ class RecordViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+                
+        title = AudioStrings.Record
         
         checkPermissions()
         
-        let mapPanGesture = UIPanGestureRecognizer(
-            target: self,
-            action: #selector(mapDragAction(_:))
-        )
-        mapPanGesture.delegate = self
-        mapView?.addGestureRecognizer(mapPanGesture)
-        
-        if let unwrappedRulerScrollContainerView = rulerScrollContainerView {
-            
-            let rulerGradientMask = CAGradientLayer()
-            rulerGradientMask.frame = unwrappedRulerScrollContainerView.bounds
-            rulerGradientMask.colors = [
-                UIColor.clear.cgColor,
-                UIColor.black.cgColor,
-                UIColor.clear.cgColor
-            ]
-            rulerGradientMask.startPoint = CGPoint(x: 0.0, y: 0.5)
-            rulerGradientMask.endPoint = CGPoint(x: 1.0, y: 0.5)
-            unwrappedRulerScrollContainerView.layer.mask = rulerGradientMask
-        }
-        
-        let horizontalInset = view.bounds.width / 2
-        rulerScrollView?.contentInset = UIEdgeInsets(top: 0, left: horizontalInset, bottom: 0, right: horizontalInset)
-        rulerContentViewWidthConstraint?.constant = CGFloat(MAX_DECIBELS * 5) * RULER_SPACING - view.bounds.width
-        let offset = calculateOffset(decibels: 0)
-        rulerScrollView?.setContentOffset(CGPoint(x: offset, y: 0), animated: false)
+        addPanGesture()
         
         decibelLabel?.text = AudioStrings.DecibelsA
+        
+        configureRulerScrollView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        configureLevelsScrollView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -203,6 +196,15 @@ class RecordViewController: UIViewController {
         }
     }
     
+    private func addPanGesture() {
+        let mapPanGesture = UIPanGestureRecognizer(
+            target: self,
+            action: #selector(mapDragAction(_:))
+        )
+        mapPanGesture.delegate = self
+        mapView?.addGestureRecognizer(mapPanGesture)
+    }
+    
     // MARK: Microphone Methods
     private func checkMicrophoneAuthorization() {
         switch audioSession.recordPermission {
@@ -259,16 +261,199 @@ class RecordViewController: UIViewController {
             let decibels = round(20 * log10(amplitude) + 94, toNearest: 0.2, decimals: 1)
             
             if decibels >= 0, decibels <= Double(MAX_DECIBELS) {
-                let offset = calculateOffset(decibels: decibels)
-                rulerScrollView?.setContentOffset(CGPoint(x: offset, y: 0), animated: true)
+                let rulerOffset = calculateRulerOffset(decibels: decibels)
+                rulerScrollView?.setContentOffset(CGPoint(x: rulerOffset, y: 0), animated: true)
+                animateRulerChange(decibels: decibels)
+                
+                let levelsOffset = calculateLevelsOffset(decibels: decibels)
+                levelsScrollView?.setContentOffset(CGPoint(x: 0, y: levelsOffset), animated: true)
+                animateLevelChange(decibels: decibels)
             }
         }
     }
     
-    private func calculateOffset(decibels: Double) -> CGFloat {
+    // MARK: Scroll View Methods
+    private func calculateRulerOffset(decibels: Double) -> CGFloat {
         let leftOffset = CGFloat(5 * Int(decibels)) * RULER_SPACING
         let rightOffset = CGFloat(Int(decibels * 10) % 10) / 2 * RULER_SPACING
         return leftOffset + rightOffset - view.bounds.width / 2
+    }
+    
+    private func calculateLevelsOffset(decibels: Double) -> CGFloat {
+        guard let unwrappedLevelsScrollView = levelsScrollView else {
+            return 0
+        }
+        
+        var level = Int(round(decibels, toNearest: 10, decimals: 1)) / 10
+        if level == 0 {
+            level += 1
+        } else if level == 13 {
+            level -= 1
+        }
+        
+        let offset = CGFloat(noiseLevels.count - level) * (ICON_SIZE + ICONS_SPACING)
+        
+        return offset - unwrappedLevelsScrollView.bounds.height / 2
+    }
+    
+    private func animateRulerChange(decibels: Double) {
+        if let numberLabels = numbersView?.subviews as? [UILabel] {
+            let indexOfDecibels = Int(round(decibels))
+            
+            if self.lastDecibelIndex != indexOfDecibels {
+                UIView.animate(
+                    withDuration: 0.2,
+                    animations: {
+                        numberLabels[self.lastDecibelIndex].transform = CGAffineTransform(
+                            scaleX: 1,
+                            y: 1
+                        )
+                        if self.lastDecibelIndex - 1 >= 0 {
+                            numberLabels[self.lastDecibelIndex - 1].transform = CGAffineTransform(
+                                scaleX: 1,
+                                y: 1
+                            )
+                        }
+                        if self.lastDecibelIndex + 1 <= MAX_DECIBELS + 1 {
+                            numberLabels[self.lastDecibelIndex + 1].transform = CGAffineTransform(
+                                scaleX: 1,
+                                y: 1
+                            )
+                        }
+                    }
+                ) { completed in
+                    if completed {
+                        UIView.animate(
+                            withDuration: 0.2,
+                            animations: {
+                                numberLabels[indexOfDecibels].transform = CGAffineTransform(
+                                    scaleX: 1.6,
+                                    y: 1.6
+                                )
+                                if indexOfDecibels - 1 >= 0 {
+                                    numberLabels[indexOfDecibels - 1].transform = CGAffineTransform(
+                                        scaleX: 1.2,
+                                        y: 1.2
+                                    )
+                                }
+                                if indexOfDecibels + 1 <= MAX_DECIBELS + 1 {
+                                    numberLabels[indexOfDecibels + 1].transform = CGAffineTransform(
+                                        scaleX: 1.2,
+                                        y: 1.2
+                                    )
+                                }
+                            }
+                        )
+                    }
+                }
+                
+                lastDecibelIndex = indexOfDecibels
+            }
+        }
+    }
+    
+    private func getIndexOfCurrentLevel(decibels: Double) -> Int {
+        var level = Int(round(decibels, toNearest: 10, decimals: 1)) / 10
+        if level == 0 {
+            level += 1
+        } else if level == 13 {
+            level -= 1
+        }
+        return noiseLevels.count - level
+    }
+    
+    private func animateLevelChange(decibels: Double) {
+        if let levelLabels = levelsView?.subviews as? [UILabel],
+            let iconViews = iconsView?.subviews as? [UIImageView] {
+            
+            let currentLevelIndex = getIndexOfCurrentLevel(decibels: decibels)
+            
+            if lastLevelIndex != currentLevelIndex {
+                UIView.transition(
+                    with: levelLabels[self.lastLevelIndex],
+                    duration: 0.2,
+                    options: .transitionCrossDissolve,
+                    animations: {
+                        levelLabels[self.lastLevelIndex].textColor = .black
+                        iconViews[self.lastLevelIndex].tintColor = .black
+                    }
+                ) { completed in
+                    if completed {
+                        UIView.transition(
+                            with: levelLabels[currentLevelIndex],
+                            duration: 0.2,
+                            options: .transitionCrossDissolve,
+                            animations: {
+                                levelLabels[currentLevelIndex].textColor = UIColor(named: "Red")
+                                iconViews[currentLevelIndex].tintColor = UIColor(named: "Red")
+                            }
+                        )
+                    }
+                }
+                
+                lastLevelIndex = currentLevelIndex
+            }
+        }
+    }
+    
+    private func configureRulerScrollView() {
+        if let unwrappedRulerScrollContainerView = rulerScrollContainerView {
+            
+            let rulerGradientMask = CAGradientLayer()
+            rulerGradientMask.frame = unwrappedRulerScrollContainerView.bounds
+            rulerGradientMask.colors = [
+                UIColor.clear.cgColor,
+                UIColor.black.cgColor,
+                UIColor.clear.cgColor
+            ]
+            rulerGradientMask.startPoint = CGPoint(x: 0.0, y: 0.5)
+            rulerGradientMask.endPoint = CGPoint(x: 1.0, y: 0.5)
+            unwrappedRulerScrollContainerView.layer.mask = rulerGradientMask
+        }
+        
+        let horizontalInset = view.bounds.width / 2
+        rulerScrollView?.contentInset = UIEdgeInsets(
+            top: 0,
+            left: horizontalInset,
+            bottom: 0,
+            right: horizontalInset
+        )
+        rulerContentViewWidthConstraint?.constant = CGFloat(MAX_DECIBELS * 5) * RULER_SPACING - view.bounds.width
+        let offset = calculateRulerOffset(decibels: 30)
+        rulerScrollView?.setContentOffset(
+            CGPoint(x: offset, y: 0),
+            animated: false
+        )
+    }
+    
+    private func configureLevelsScrollView() {
+        if let unwrappedLevelsScrollContainerView = levelsScrollContainerView {
+            
+            let levelsGradientMask = CAGradientLayer()
+            levelsGradientMask.frame = unwrappedLevelsScrollContainerView.bounds
+            levelsGradientMask.colors = [
+                UIColor.clear.cgColor,
+                UIColor.black.cgColor,
+                UIColor.clear.cgColor
+            ]
+            unwrappedLevelsScrollContainerView.layer.mask = levelsGradientMask
+        }
+        
+        if let unwrappedLevelsScrollView = levelsScrollView {
+            let verticalInset = unwrappedLevelsScrollView.frame.height / 2
+            levelsScrollView?.contentInset = UIEdgeInsets(
+                top: verticalInset,
+                left: 0,
+                bottom: verticalInset,
+                right: 0
+            )
+            levelsContentViewHeightConstraint?.constant = CGFloat(noiseLevels.count - 1) * (ICON_SIZE + ICONS_SPACING) - unwrappedLevelsScrollView.bounds.height
+            let offset = calculateLevelsOffset(decibels: 30)
+            levelsScrollView?.setContentOffset(
+                CGPoint(x: 0, y: offset),
+                animated: false
+            )
+        }
     }
 }
 

@@ -10,6 +10,22 @@ import UIKit
 import CoreLocation
 import Foundation
 
+// MARK: - GLOBAL VARIABLES
+let noiseLevels = [
+    AudioStrings.Level12,
+    AudioStrings.Level11,
+    AudioStrings.Level10,
+    AudioStrings.Level9,
+    AudioStrings.Level8,
+    AudioStrings.Level7,
+    AudioStrings.Level6,
+    AudioStrings.Level5,
+    AudioStrings.Level4,
+    AudioStrings.Level3,
+    AudioStrings.Level2,
+    AudioStrings.Level1
+]
+
 // MARK: - DEVICE
 func deviceIsAnIPad() -> Bool {
     return UIDevice.current.userInterfaceIdiom == .pad
