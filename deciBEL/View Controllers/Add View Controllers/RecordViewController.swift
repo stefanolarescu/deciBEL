@@ -19,6 +19,8 @@ class RecordViewController: UIViewController {
     @IBOutlet weak var zoomInContainerView: UIView?
     @IBOutlet weak var zoomOutContainerView: UIView?
     
+    @IBOutlet weak var measuringLabel: UILabel?
+    @IBOutlet weak var timeLeftLabel: UILabel?
     
     @IBOutlet weak var rulerScrollContainerView: UIView?
     @IBOutlet weak var rulerScrollView: UIScrollView?
@@ -33,6 +35,9 @@ class RecordViewController: UIViewController {
     @IBOutlet weak var iconsView: IconsView?
     @IBOutlet weak var levelsView: LevelsView?
     
+    @IBOutlet weak var reloadView: UIView?
+    @IBOutlet weak var reloadHighlightView: UIView?
+    
     // MARK: - PROPERTIES
     let locationManager = CLLocationManager()
     var lastCenteredLocation = CLLocationCoordinate2D()
@@ -43,13 +48,47 @@ class RecordViewController: UIViewController {
         }
     }
     
-    var timer = Timer()
+    var timeLeft = MEASUREMENT_TIME {
+        didSet {
+            timeLeftLabel?.text = "\(timeLeft)s"
+            if timeLeft == 0 {
+                stopRecording()
+                
+                DispatchQueue.main.async {
+                    if let unwrappedMeasuringLabel = self.measuringLabel {
+                        UIView.transition(
+                            with: unwrappedMeasuringLabel,
+                            duration: 0.4,
+                            options: .transitionCrossDissolve,
+                            animations: {
+                                self.measuringLabel?.text = String.localizedStringWithFormat(TimeStrings.MeasurementDone, "↺")
+                            }
+                        ) { completed in
+                            if completed, let goldBar = self.measuringLabel?.superview {
+                                UIView.animate(withDuration: 0.4) {
+                                    self.measuringLabel?.center.x = goldBar.bounds.midX
+                                }
+                            }
+                        }
+                    }
+                    UIView.animate(withDuration: 0.4) {
+                        self.timeLeftLabel?.alpha = 0
+                    }
+                }
+            }
+        }
+    }
+    
+    var countdownTimer = Timer()
+    var measureTimer = Timer()
     
     let audioSession = AVAudioSession.sharedInstance()
     let audioKitManager = AudioKitManager.shared
     
     var lastDecibelIndex = 0
     var lastLevelIndex = 0
+    
+    var measuringLabelXCenter: CGFloat = 0
     
     // MARK: - LIFE CYCLE METHODS
     override func viewWillAppear(_ animated: Bool) {
@@ -73,6 +112,8 @@ class RecordViewController: UIViewController {
         super.viewDidLoad()
                 
         title = AudioStrings.Record
+        measuringLabel?.text = TimeStrings.Measuring
+        timeLeftLabel?.text = "\(timeLeft)s"
         
         checkPermissions()
         
@@ -205,6 +246,37 @@ class RecordViewController: UIViewController {
         mapView?.addGestureRecognizer(mapPanGesture)
     }
     
+    // MARK: Measuring Methods
+    @IBAction func reloadAction(_ sender: UITapGestureRecognizer) {
+        reloadHighlightView?.highlight(duration: 0.4, delay: 0)
+        reloadView?.rotate360(duration: 0.4, delay: 0) {
+            self.resetCountdownTimer()
+        }
+    }
+    
+    private func resetCountdownTimer() {
+        stopRecording()
+        
+        UIView.animate(withDuration: 0.4) {
+            self.timeLeftLabel?.alpha = 1
+        }
+        if let unwrappedMeasuringLabel = measuringLabel {
+            
+            UIView.transition(
+                with: unwrappedMeasuringLabel,
+                duration: 0.4,
+                options: .transitionCrossDissolve,
+                animations: {
+                    self.measuringLabel?.text = TimeStrings.Measuring
+                }
+            )
+        }
+        timeLeft = MEASUREMENT_TIME
+        
+        startRecording()
+    }
+    
+    
     // MARK: Microphone Methods
     private func checkMicrophoneAuthorization() {
         switch audioSession.recordPermission {
@@ -239,19 +311,30 @@ class RecordViewController: UIViewController {
     private func startRecording() {
         audioKitManager.startAudioKit()
         
-        timer = Timer(
+        measureTimer = Timer(
             timeInterval: 0.5,
             target: self,
             selector: #selector(updateDecibels),
             userInfo: nil,
             repeats: true
         )
-        RunLoop.main.add(timer, forMode: .common)
+        RunLoop.main.add(measureTimer, forMode: .common)
+                
+        countdownTimer = Timer(
+            timeInterval: 1,
+            target: self,
+            selector: #selector(updateTimeLeft),
+            userInfo: nil,
+            repeats: true
+        )
+        RunLoop.main.add(countdownTimer, forMode: .common)
     }
     
     @objc private func stopRecording() {
-        timer.invalidate()
-        timer = Timer()
+        measureTimer.invalidate()
+        measureTimer = Timer()
+        countdownTimer.invalidate()
+        countdownTimer = Timer()
         
         audioKitManager.stopAudioKit()
     }
@@ -270,6 +353,10 @@ class RecordViewController: UIViewController {
                 animateLevelChange(decibels: decibels)
             }
         }
+    }
+    
+    @objc private func updateTimeLeft() {
+        timeLeft -= 1
     }
     
     // MARK: Scroll View Methods
@@ -305,19 +392,19 @@ class RecordViewController: UIViewController {
                     withDuration: 0.2,
                     animations: {
                         numberLabels[self.lastDecibelIndex].transform = CGAffineTransform(
-                            scaleX: 1,
-                            y: 1
+                            scaleX: 0.6,
+                            y: 0.6
                         )
                         if self.lastDecibelIndex - 1 >= 0 {
                             numberLabels[self.lastDecibelIndex - 1].transform = CGAffineTransform(
-                                scaleX: 1,
-                                y: 1
+                                scaleX: 0.6,
+                                y: 0.6
                             )
                         }
                         if self.lastDecibelIndex + 1 <= MAX_DECIBELS + 1 {
                             numberLabels[self.lastDecibelIndex + 1].transform = CGAffineTransform(
-                                scaleX: 1,
-                                y: 1
+                                scaleX: 0.6,
+                                y: 0.6
                             )
                         }
                     }
@@ -327,19 +414,19 @@ class RecordViewController: UIViewController {
                             withDuration: 0.2,
                             animations: {
                                 numberLabels[indexOfDecibels].transform = CGAffineTransform(
-                                    scaleX: 1.6,
-                                    y: 1.6
+                                    scaleX: 1,
+                                    y: 1
                                 )
                                 if indexOfDecibels - 1 >= 0 {
                                     numberLabels[indexOfDecibels - 1].transform = CGAffineTransform(
-                                        scaleX: 1.2,
-                                        y: 1.2
+                                        scaleX: 0.8,
+                                        y: 0.8
                                     )
                                 }
                                 if indexOfDecibels + 1 <= MAX_DECIBELS + 1 {
                                     numberLabels[indexOfDecibels + 1].transform = CGAffineTransform(
-                                        scaleX: 1.2,
-                                        y: 1.2
+                                        scaleX: 0.8,
+                                        y: 0.8
                                     )
                                 }
                             }
@@ -404,6 +491,7 @@ class RecordViewController: UIViewController {
             rulerGradientMask.colors = [
                 UIColor.clear.cgColor,
                 UIColor.black.cgColor,
+                UIColor.black.cgColor,
                 UIColor.clear.cgColor
             ]
             rulerGradientMask.startPoint = CGPoint(x: 0.0, y: 0.5)
@@ -433,6 +521,7 @@ class RecordViewController: UIViewController {
             levelsGradientMask.frame = unwrappedLevelsScrollContainerView.bounds
             levelsGradientMask.colors = [
                 UIColor.clear.cgColor,
+                UIColor.black.cgColor,
                 UIColor.black.cgColor,
                 UIColor.clear.cgColor
             ]
