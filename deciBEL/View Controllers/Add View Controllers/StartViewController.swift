@@ -15,6 +15,8 @@ class StartViewController: UIViewController {
     @IBOutlet weak var grayMaskView: GrayMaskView?
     @IBOutlet weak var outerCircleView: UIView?
     @IBOutlet weak var innerCircleView: UIView?
+    @IBOutlet weak var playImageView: UIImageView?
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView?
     @IBOutlet weak var highlightView: UIView?
     
     // MARK: - INIT METHOD
@@ -43,11 +45,22 @@ class StartViewController: UIViewController {
         
         outerCircleView?.backgroundColor = .outerCircleBlue()
         innerCircleView?.backgroundColor = .innerCircleBlue()
+        
+        activityIndicatorView?.isHidden = true
+        activityIndicatorView?.stopAnimating()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
         navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        playImageView?.isHidden = false
+        activityIndicatorView?.isHidden = true
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -70,6 +83,9 @@ class StartViewController: UIViewController {
             if let tapGestureView = highlightView?.superview {
                 if tapGestureView.frame.contains(position) {
                     highlightView?.highlight(duration: 0.4, delay: 0)
+                    playImageView?.isHidden = true
+                    activityIndicatorView?.isHidden = false
+                    activityIndicatorView?.startAnimating()
                 }
             }
         }

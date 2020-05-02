@@ -11,10 +11,13 @@ import Foundation
 struct GeneralStrings {
     
     static let Add = NSLocalizedString("Add", comment: "Add")
+    static let Continue = NSLocalizedString("Continue", comment: "Continue")
     static let Decibel = NSLocalizedString("Decibel", comment: "Decibel")
     static let History = NSLocalizedString("History", comment: "History")
     static let More = NSLocalizedString("More", comment: "More")
     static let Okay = NSLocalizedString("Okay", comment: "Okay")
+    static let Restart = NSLocalizedString("Restart", comment: "Restart")
+    static let Save = NSLocalizedString("Save", comment: "Save")
     static let Settings = NSLocalizedString("Settings", comment: "Settings")
     
 }

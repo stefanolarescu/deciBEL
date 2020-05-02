@@ -31,12 +31,24 @@ class NumbersView: UIView {
                 )
             )
             numberLabel.text = "\(number)"
-            numberLabel.font = UIFont.systemFont(ofSize: 24)
+            numberLabel.font = UIFont.systemFont(ofSize: 36)
             numberLabel.textColor = .black
             numberLabel.center.x = CGFloat(number) * 5 * RULER_SPACING
             numberLabel.center.y = frame.midY
             numberLabel.textAlignment = .center
             addSubview(numberLabel)
+        }
+        
+        for numberLabel in subviews {
+            UIView.animate(
+                withDuration: 0.01,
+                animations: {
+                    numberLabel.transform = CGAffineTransform(
+                        scaleX: 0.6,
+                        y: 0.6
+                    )
+                }
+            )
         }
     }
 }

@@ -12,11 +12,17 @@
 /* Add */
 "Add" = "Add";
 
-/* Decibel */
-"Decibel" = "deciBEL";
+/* Continue */
+"Continue" = "Continue";
 
 /* dB(A) */
 "dB(A)" = "dB(A)";
+
+/* Decibel */
+"Decibel" = "deciBEL";
+
+/* Do you want to continue the recording */
+"Do you want to continue the recording" = "Do you want to continue the recording from where you left off or restart?";
 
 /* History */
 "History" = "History";
@@ -63,6 +69,12 @@
 /* Location Services need to be enabled */
 "Location Services need to be enabled" = "Location Services need to be enabled in order for deciBEL to display your current location. Please enable them in the Settings app using Privacy -> Location Services -> Yes";
 
+/* Measurement done */
+"Measurement done" = "Measurement done. Tap %@ to restart.";
+
+/* Measuring */
+"Measuring" = "Measuring...";
+
 /* More */
 "More" = "More";
 
@@ -71,6 +83,15 @@
 
 /* Record */
 "Record" = "Record";
+
+/* Restart */
+"Restart" = "Restart";
+
+/* Resume recording */
+"Resume recording" = "Resume recording";
+
+/* Save */
+"Save" = "Save";
 
 /* Settings */
 "Settings" = "Settings";

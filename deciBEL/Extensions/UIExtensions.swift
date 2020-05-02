@@ -84,4 +84,51 @@ extension UIView {
             }
         )
     }
+    
+    func rotate360(duration: Double, delay: Double, callback: (() -> Void)? = nil) {
+        UIView.animate(
+            withDuration: duration / 4,
+            delay: 0,
+            options: .curveEaseIn,
+            animations: {
+                self.transform = CGAffineTransform(rotationAngle: -.pi / 2)
+        }) { completed in
+            if completed {
+                UIView.animate(
+                    withDuration: duration / 4,
+                    delay: 0,
+                    options: .curveLinear,
+                    animations: {
+                        self.transform = CGAffineTransform(rotationAngle: -.pi)
+                    }
+                ) { completed in
+                    if completed {
+                        UIView.animate(
+                            withDuration: duration / 4,
+                            delay: 0,
+                            options: .curveLinear,
+                            animations: {
+                                self.transform = CGAffineTransform(rotationAngle: .pi / 2)
+                            }
+                        ) { completed in
+                            if completed {
+                                UIView.animate(
+                                   withDuration: duration / 4,
+                                   delay: 0,
+                                   options: .curveEaseOut,
+                                   animations: {
+                                       self.transform = CGAffineTransform(rotationAngle: 0)
+                                   }
+                                ) { completed in
+                                    if completed, let unwrappedCallback = callback {
+                                        unwrappedCallback()
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

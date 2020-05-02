@@ -17,3 +17,5 @@ let RULER_CORRECTION: CGFloat = 4
 
 let ICONS_SPACING: CGFloat = 10
 let ICON_SIZE: CGFloat = 24
+
+let MEASUREMENT_TIME = 10

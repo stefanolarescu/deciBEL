@@ -19,6 +19,7 @@ class RecordViewController: UIViewController {
     @IBOutlet weak var zoomInContainerView: UIView?
     @IBOutlet weak var zoomOutContainerView: UIView?
     
+    @IBOutlet weak var timeLeftLabel: UILabel?
     
     @IBOutlet weak var rulerScrollContainerView: UIView?
     @IBOutlet weak var rulerScrollView: UIScrollView?
@@ -33,6 +34,9 @@ class RecordViewController: UIViewController {
     @IBOutlet weak var iconsView: IconsView?
     @IBOutlet weak var levelsView: LevelsView?
     
+    @IBOutlet weak var reloadView: UIView?
+    @IBOutlet weak var reloadHighlightView: UIView?
+    
     // MARK: - PROPERTIES
     let locationManager = CLLocationManager()
     var lastCenteredLocation = CLLocationCoordinate2D()
@@ -43,7 +47,34 @@ class RecordViewController: UIViewController {
         }
     }
     
-    var timer = Timer()
+    var isRecording = false
+    var startRecordingAutomatically = true
+        
+    var timeLeft = MEASUREMENT_TIME {
+        didSet {
+            timeLeftLabel?.text = "\(timeLeft)s"
+            if timeLeft <= 3 {
+                timeLeftLabel?.textColor = UIColor(named: "Red")
+            }
+            
+            if timeLeft == 0 {
+                isRecording = false
+                stopRecording()
+                
+                DispatchQueue.main.async {
+                    self.centerMeasuringLabel()
+                    UIView.animate(withDuration: 0.4) {
+                        self.timeLeftLabel?.alpha = 0
+                    }
+                }
+            }
+        }
+    }
+    
+    var countdownTimer = Timer()
+    var measureTimer = Timer()
+    
+    let saveViewControllerIdentifier = "SaveViewController"
     
     let audioSession = AVAudioSession.sharedInstance()
     let audioKitManager = AudioKitManager.shared
@@ -51,13 +82,15 @@ class RecordViewController: UIViewController {
     var lastDecibelIndex = 0
     var lastLevelIndex = 0
     
+    var decibels = [Double]()
+        
     // MARK: - LIFE CYCLE METHODS
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(checkPermissions),
+            selector: #selector(checkState),
             name: UIApplication.didBecomeActiveNotification,
             object: nil
         )
@@ -67,14 +100,21 @@ class RecordViewController: UIViewController {
             name: UIApplication.willResignActiveNotification,
             object: nil
         )
+        
+        if !startRecordingAutomatically {
+            checkRecording()
+        }
+        startRecordingAutomatically = false
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
                 
         title = AudioStrings.Record
+        addMeasuringLabel()
+        timeLeftLabel?.text = "\(timeLeft)s"
         
-        checkPermissions()
+        checkState()
         
         addPanGesture()
         
@@ -105,7 +145,7 @@ class RecordViewController: UIViewController {
     // MARK: - OTHER METHODS
     
     // MARK: Notification Center Methods
-    @objc private func checkPermissions() {
+    @objc private func checkState() {
         checkLocationServices()
         checkMicrophoneAuthorization()
     }
@@ -205,15 +245,30 @@ class RecordViewController: UIViewController {
         mapView?.addGestureRecognizer(mapPanGesture)
     }
     
+    // MARK: Measuring Methods
+    @IBAction func reloadAction(_ sender: UITapGestureRecognizer) {
+        reloadHighlightView?.highlight(duration: 0.4, delay: 0)
+        reloadView?.rotate360(duration: 0.4, delay: 0) {
+            self.resetCountdownTimer()
+        }
+    }
+    
+    private func resetCountdownTimer() {
+        stopRecording()
+        resetMeasuringLabel()
+        decibels.removeAll()
+    }
+    
+    
     // MARK: Microphone Methods
     private func checkMicrophoneAuthorization() {
         switch audioSession.recordPermission {
         case .granted:
-            startRecording()
+            checkRecording()
         case .undetermined:
             audioSession.requestRecordPermission { granted in
                 if granted {
-                    self.startRecording()
+                    self.checkRecording()
                 } else {
                     self.stopRecording()
                     DispatchQueue.main.async {
@@ -239,20 +294,33 @@ class RecordViewController: UIViewController {
     private func startRecording() {
         audioKitManager.startAudioKit()
         
-        timer = Timer(
+        isRecording = true
+        
+        measureTimer = Timer(
             timeInterval: 0.5,
             target: self,
             selector: #selector(updateDecibels),
             userInfo: nil,
             repeats: true
         )
-        RunLoop.main.add(timer, forMode: .common)
+        RunLoop.main.add(measureTimer, forMode: .common)
+                
+        countdownTimer = Timer(
+            timeInterval: 1,
+            target: self,
+            selector: #selector(updateTimeLeft),
+            userInfo: nil,
+            repeats: true
+        )
+        RunLoop.main.add(countdownTimer, forMode: .common)
     }
     
     @objc private func stopRecording() {
-        timer.invalidate()
-        timer = Timer()
-        
+        measureTimer.invalidate()
+        measureTimer = Timer()
+        countdownTimer.invalidate()
+        countdownTimer = Timer()
+                
         audioKitManager.stopAudioKit()
     }
         
@@ -261,14 +329,43 @@ class RecordViewController: UIViewController {
             let decibels = round(20 * log10(amplitude) + 94, toNearest: 0.2, decimals: 1)
             
             if decibels >= 0, decibels <= Double(MAX_DECIBELS) {
-                let rulerOffset = calculateRulerOffset(decibels: decibels)
-                rulerScrollView?.setContentOffset(CGPoint(x: rulerOffset, y: 0), animated: true)
-                animateRulerChange(decibels: decibels)
-                
-                let levelsOffset = calculateLevelsOffset(decibels: decibels)
-                levelsScrollView?.setContentOffset(CGPoint(x: 0, y: levelsOffset), animated: true)
-                animateLevelChange(decibels: decibels)
+                self.decibels.append(decibels)
+                if timeLeft != 0 {
+                    setOffsets(decibels: decibels)
+                }
             }
+        }
+    }
+    
+    func setOffsets(decibels: Double, animated: Bool = true) {
+        let rulerOffset = calculateRulerOffset(decibels: decibels)
+        rulerScrollView?.setContentOffset(CGPoint(x: rulerOffset, y: 0), animated: animated)
+        animateRulerChange(decibels: decibels)
+        
+        let levelsOffset = calculateLevelsOffset(decibels: decibels)
+        levelsScrollView?.setContentOffset(CGPoint(x: 0, y: levelsOffset), animated: animated)
+        animateLevelChange(decibels: decibels)
+    }
+    
+    @objc private func updateTimeLeft() {
+        timeLeft -= 1
+    }
+    
+    private func checkRecording() {
+        if isRecording {
+            stopRecording()
+            present(
+                showAlertForContinuingRecording { restart in
+                    if restart {
+                        self.resetCountdownTimer()
+                    } else {
+                        self.startRecording()
+                    }
+                },
+                animated: true
+            )
+        } else if startRecordingAutomatically {
+            startRecording()
         }
     }
     
@@ -305,19 +402,19 @@ class RecordViewController: UIViewController {
                     withDuration: 0.2,
                     animations: {
                         numberLabels[self.lastDecibelIndex].transform = CGAffineTransform(
-                            scaleX: 1,
-                            y: 1
+                            scaleX: 0.6,
+                            y: 0.6
                         )
                         if self.lastDecibelIndex - 1 >= 0 {
                             numberLabels[self.lastDecibelIndex - 1].transform = CGAffineTransform(
-                                scaleX: 1,
-                                y: 1
+                                scaleX: 0.6,
+                                y: 0.6
                             )
                         }
                         if self.lastDecibelIndex + 1 <= MAX_DECIBELS + 1 {
                             numberLabels[self.lastDecibelIndex + 1].transform = CGAffineTransform(
-                                scaleX: 1,
-                                y: 1
+                                scaleX: 0.6,
+                                y: 0.6
                             )
                         }
                     }
@@ -327,19 +424,19 @@ class RecordViewController: UIViewController {
                             withDuration: 0.2,
                             animations: {
                                 numberLabels[indexOfDecibels].transform = CGAffineTransform(
-                                    scaleX: 1.6,
-                                    y: 1.6
+                                    scaleX: 1,
+                                    y: 1
                                 )
                                 if indexOfDecibels - 1 >= 0 {
                                     numberLabels[indexOfDecibels - 1].transform = CGAffineTransform(
-                                        scaleX: 1.2,
-                                        y: 1.2
+                                        scaleX: 0.8,
+                                        y: 0.8
                                     )
                                 }
                                 if indexOfDecibels + 1 <= MAX_DECIBELS + 1 {
                                     numberLabels[indexOfDecibels + 1].transform = CGAffineTransform(
-                                        scaleX: 1.2,
-                                        y: 1.2
+                                        scaleX: 0.8,
+                                        y: 0.8
                                     )
                                 }
                             }
@@ -404,6 +501,7 @@ class RecordViewController: UIViewController {
             rulerGradientMask.colors = [
                 UIColor.clear.cgColor,
                 UIColor.black.cgColor,
+                UIColor.black.cgColor,
                 UIColor.clear.cgColor
             ]
             rulerGradientMask.startPoint = CGPoint(x: 0.0, y: 0.5)
@@ -434,6 +532,7 @@ class RecordViewController: UIViewController {
             levelsGradientMask.colors = [
                 UIColor.clear.cgColor,
                 UIColor.black.cgColor,
+                UIColor.black.cgColor,
                 UIColor.clear.cgColor
             ]
             unwrappedLevelsScrollContainerView.layer.mask = levelsGradientMask
@@ -454,6 +553,105 @@ class RecordViewController: UIViewController {
                 animated: false
             )
         }
+    }
+    
+    // MARK: Other UI Methods
+    private func addMeasuringLabel() {
+        if let unwrappedTimeLeftLabel = timeLeftLabel,
+            let goldBar = unwrappedTimeLeftLabel.superview {
+                
+            let measuringLabel = UILabel(frame: goldBar.bounds)
+            measuringLabel.text = TimeStrings.Measuring
+            measuringLabel.sizeToFit()
+            measuringLabel.textColor = .black
+            measuringLabel.font = .systemFont(ofSize: 14)
+            measuringLabel.frame.origin.x = 8
+            measuringLabel.center.y = goldBar.bounds.midY
+            goldBar.addSubview(measuringLabel)
+        }
+    }
+    
+    private func centerMeasuringLabel() {
+        if let goldBar = self.timeLeftLabel?.superview,
+            goldBar.subviews.count == 2 {
+            
+            if let measuringLabel = goldBar.subviews[1] as? UILabel {
+            
+                UIView.transition(
+                    with: measuringLabel,
+                    duration: 0.4,
+                    options: .transitionCrossDissolve,
+                    animations: {
+                        measuringLabel.text = String.localizedStringWithFormat(TimeStrings.MeasurementDone, "↺")
+                        measuringLabel.sizeToFit()
+                        measuringLabel.center.y = goldBar.bounds.midY
+                    }
+                ) { completed in
+                    if completed {
+                        UIView.animate(
+                            withDuration: 0.4,
+                            animations: {
+                                measuringLabel.center.x = goldBar.center.x
+                            }
+                        ) { finished in
+                            if finished {
+                                self.presentResultViewController()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private func resetMeasuringLabel() {
+        if let goldBar = self.timeLeftLabel?.superview,
+            goldBar.subviews.count == 2 {
+            
+            if let measuringLabel = timeLeftLabel?.superview?.subviews[1] as? UILabel {
+            
+                self.timeLeft = MEASUREMENT_TIME
+                self.timeLeftLabel?.textColor = .black
+                
+                UIView.animate(
+                    withDuration: 0.4,
+                    animations: {
+                        measuringLabel.frame.origin.x = 8
+                        measuringLabel.center.y = goldBar.bounds.midY
+                        self.timeLeftLabel?.alpha = 1
+                    }
+                ) { completed in
+                    if completed {
+                        UIView.transition(
+                            with: measuringLabel,
+                            duration: 0.4,
+                            options: .transitionCrossDissolve,
+                            animations: {
+                                measuringLabel.text = TimeStrings.Measuring
+                                measuringLabel.sizeToFit()
+                                measuringLabel.center.y = goldBar.bounds.midY
+                            }
+                        ) { finished in
+                            if finished {
+                                self.startRecording()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private func presentResultViewController() {
+        let saveViewController = storyboard?.instantiateViewController(identifier: saveViewControllerIdentifier) as! SaveViewController
+        saveViewController.modalPresentationStyle = .overCurrentContext
+        saveViewController.delegate = self
+        
+        let count = decibels.count
+        let decibelsAverage = Int(round(decibels.reduce(0.0, +) / Double(count)))
+        saveViewController.averageDecibels = decibelsAverage
+        
+        present(saveViewController, animated: true)
     }
 }
 
@@ -479,5 +677,15 @@ extension RecordViewController: CLLocationManagerDelegate {
 extension RecordViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
+    }
+}
+
+extension RecordViewController: SaveViewControllerDelegate {
+    func setOffsetsDelegate(decibels: Double) {
+        setOffsets(decibels: decibels, animated: false)
+    }
+    
+    func segueToHistory() {
+        tabBarController?.selectedIndex = 1
     }
 }
