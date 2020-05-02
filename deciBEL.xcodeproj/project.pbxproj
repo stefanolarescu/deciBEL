@@ -34,6 +34,7 @@
 		666135B5244EF17E0060C1E1 /* IconsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666135B4244EF17E0060C1E1 /* IconsView.swift */; };
 		666135B9244EF6970060C1E1 /* LevelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666135B8244EF6970060C1E1 /* LevelsView.swift */; };
 		6661361D24523E960060C1E1 /* TimeStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6661361C24523E960060C1E1 /* TimeStrings.swift */; };
+		6681D394245D93E900342B25 /* SaveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6681D393245D93E900342B25 /* SaveViewController.swift */; };
 		66AD45FF244C5B5B00400E57 /* AudioKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AD45FE244C5B5B00400E57 /* AudioKitManager.swift */; };
 		66AD4601244C6C0000400E57 /* AudioStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AD4600244C6C0000400E57 /* AudioStrings.swift */; };
 		66AD4603244C9CAE00400E57 /* RulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AD4602244C9CAE00400E57 /* RulerView.swift */; };
@@ -75,6 +76,7 @@
 		666135B4244EF17E0060C1E1 /* IconsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsView.swift; sourceTree = "<group>"; };
 		666135B8244EF6970060C1E1 /* LevelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsView.swift; sourceTree = "<group>"; };
 		6661361C24523E960060C1E1 /* TimeStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeStrings.swift; sourceTree = "<group>"; };
+		6681D393245D93E900342B25 /* SaveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveViewController.swift; sourceTree = "<group>"; };
 		66AD45FB244C565C00400E57 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "deciBEL/Supporting Files/Info.plist"; sourceTree = SOURCE_ROOT; };
 		66AD45FE244C5B5B00400E57 /* AudioKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioKitManager.swift; sourceTree = "<group>"; };
 		66AD4600244C6C0000400E57 /* AudioStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioStrings.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				660DD932241D5E6700BCC81B /* RecordViewController.swift */,
+				6681D393245D93E900342B25 /* SaveViewController.swift */,
 				660DD931241D5E6700BCC81B /* StartViewController.swift */,
 			);
 			path = "Add View Controllers";
@@ -275,9 +278,9 @@
 			isa = PBXGroup;
 			children = (
 				666135B4244EF17E0060C1E1 /* IconsView.swift */,
+				666135B8244EF6970060C1E1 /* LevelsView.swift */,
 				66FC16E2244CD27B0086100D /* NumbersView.swift */,
 				66AD4602244C9CAE00400E57 /* RulerView.swift */,
-				666135B8244EF6970060C1E1 /* LevelsView.swift */,
 			);
 			path = "Record Views";
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				66425758241458340093834B /* deciBEL.xcdatamodeld in Sources */,
+				6681D394245D93E900342B25 /* SaveViewController.swift in Sources */,
 				66FC16E1244CC3310086100D /* Constants.swift in Sources */,
 				6642574E241458340093834B /* AppDelegate.swift in Sources */,
 				66425750241458340093834B /* SceneDelegate.swift in Sources */,
