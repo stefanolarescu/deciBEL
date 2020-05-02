@@ -12,11 +12,17 @@
 /* Add */
 "Add" = "Add";
 
-/* Decibel */
-"Decibel" = "deciBEL";
+/* Continue */
+"Continue" = "Continue";
 
 /* dB(A) */
 "dB(A)" = "dB(A)";
+
+/* Decibel */
+"Decibel" = "deciBEL";
+
+/* Do you want to continue the recording */
+"Do you want to continue the recording" = "Do you want to continue the recording from where you left off or restart?";
 
 /* History */
 "History" = "History";
@@ -77,6 +83,12 @@
 
 /* Record */
 "Record" = "Record";
+
+/* Restart */
+"Restart" = "Restart";
+
+/* Resume recording */
+"Resume recording" = "Resume recording";
 
 /* Settings */
 "Settings" = "Settings";

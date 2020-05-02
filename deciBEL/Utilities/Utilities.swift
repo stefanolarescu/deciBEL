@@ -95,6 +95,34 @@ func showAlertForMicrophoneAccess(
     return alertController
 }
 
+func showAlertForContinuingRecording(callback: ((Bool) -> Void)?) -> UIAlertController {
+    let alertController = UIAlertController(
+        title: AudioStrings.ResumeRecording,
+        message: AudioStrings.RecordingAlertMessage,
+        preferredStyle: .alert
+    )
+    let continueAction = UIAlertAction(
+        title: GeneralStrings.Continue,
+        style: .default
+    ) { _ in
+        if let unwrappedCallback = callback {
+            unwrappedCallback(false)
+        }
+    }
+    let restartAction = UIAlertAction(
+        title: GeneralStrings.Restart,
+        style: .cancel
+    ) { _ in
+        if let unwrappedCallback = callback {
+            unwrappedCallback(true)
+        }
+    }
+    alertController.addAction(restartAction)
+    alertController.addAction(continueAction)
+    
+    return alertController
+}
+
 // MARK: - LOCATION
 var locationServicesAreEnabled: Bool {
     return CLLocationManager.locationServicesEnabled()

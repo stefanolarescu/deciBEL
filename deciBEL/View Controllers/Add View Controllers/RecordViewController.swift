@@ -48,10 +48,18 @@ class RecordViewController: UIViewController {
         }
     }
     
+    var isRecording = false
+    var startRecordingAutomatically = true
+    
     var timeLeft = MEASUREMENT_TIME {
         didSet {
             timeLeftLabel?.text = "\(timeLeft)s"
+            if timeLeft <= 3 {
+                timeLeftLabel?.textColor = UIColor(named: "Red")
+            }
+            
             if timeLeft == 0 {
+                isRecording = false
                 stopRecording()
                 
                 DispatchQueue.main.async {
@@ -64,9 +72,9 @@ class RecordViewController: UIViewController {
                                 self.measuringLabel?.text = String.localizedStringWithFormat(TimeStrings.MeasurementDone, "↺")
                             }
                         ) { completed in
-                            if completed, let goldBar = self.measuringLabel?.superview {
+                            if completed {
                                 UIView.animate(withDuration: 0.4) {
-                                    self.measuringLabel?.center.x = goldBar.bounds.midX
+                                    self.measuringLabel?.textAlignment = .center
                                 }
                             }
                         }
@@ -87,16 +95,14 @@ class RecordViewController: UIViewController {
     
     var lastDecibelIndex = 0
     var lastLevelIndex = 0
-    
-    var measuringLabelXCenter: CGFloat = 0
-    
+        
     // MARK: - LIFE CYCLE METHODS
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(checkPermissions),
+            selector: #selector(checkState),
             name: UIApplication.didBecomeActiveNotification,
             object: nil
         )
@@ -106,6 +112,8 @@ class RecordViewController: UIViewController {
             name: UIApplication.willResignActiveNotification,
             object: nil
         )
+        
+        startRecordingAutomatically = false
     }
     
     override func viewDidLoad() {
@@ -115,7 +123,7 @@ class RecordViewController: UIViewController {
         measuringLabel?.text = TimeStrings.Measuring
         timeLeftLabel?.text = "\(timeLeft)s"
         
-        checkPermissions()
+        checkState()
         
         addPanGesture()
         
@@ -146,7 +154,7 @@ class RecordViewController: UIViewController {
     // MARK: - OTHER METHODS
     
     // MARK: Notification Center Methods
-    @objc private func checkPermissions() {
+    @objc private func checkState() {
         checkLocationServices()
         checkMicrophoneAuthorization()
     }
@@ -257,9 +265,6 @@ class RecordViewController: UIViewController {
     private func resetCountdownTimer() {
         stopRecording()
         
-        UIView.animate(withDuration: 0.4) {
-            self.timeLeftLabel?.alpha = 1
-        }
         if let unwrappedMeasuringLabel = measuringLabel {
             
             UIView.transition(
@@ -269,7 +274,14 @@ class RecordViewController: UIViewController {
                 animations: {
                     self.measuringLabel?.text = TimeStrings.Measuring
                 }
-            )
+            ) { completed in
+                if completed {
+                    UIView.animate(withDuration: 0.4) {
+                        self.timeLeftLabel?.alpha = 1
+                        self.measuringLabel?.textAlignment = .left
+                    }
+                }
+            }
         }
         timeLeft = MEASUREMENT_TIME
         
@@ -281,11 +293,11 @@ class RecordViewController: UIViewController {
     private func checkMicrophoneAuthorization() {
         switch audioSession.recordPermission {
         case .granted:
-            startRecording()
+            checkRecording()
         case .undetermined:
             audioSession.requestRecordPermission { granted in
                 if granted {
-                    self.startRecording()
+                    self.checkRecording()
                 } else {
                     self.stopRecording()
                     DispatchQueue.main.async {
@@ -311,6 +323,8 @@ class RecordViewController: UIViewController {
     private func startRecording() {
         audioKitManager.startAudioKit()
         
+        isRecording = true
+        
         measureTimer = Timer(
             timeInterval: 0.5,
             target: self,
@@ -335,7 +349,7 @@ class RecordViewController: UIViewController {
         measureTimer = Timer()
         countdownTimer.invalidate()
         countdownTimer = Timer()
-        
+                
         audioKitManager.stopAudioKit()
     }
         
@@ -357,6 +371,24 @@ class RecordViewController: UIViewController {
     
     @objc private func updateTimeLeft() {
         timeLeft -= 1
+    }
+    
+    private func checkRecording() {
+        if isRecording {
+            stopRecording()
+            present(
+                showAlertForContinuingRecording { restart in
+                    if restart {
+                        self.resetCountdownTimer()
+                    } else {
+                        self.startRecording()
+                    }
+                },
+                animated: true
+            )
+        } else if startRecordingAutomatically {
+            startRecording()
+        }
     }
     
     // MARK: Scroll View Methods

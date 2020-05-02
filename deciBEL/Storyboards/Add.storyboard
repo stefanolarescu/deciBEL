@@ -271,7 +271,7 @@
                                 <rect key="frame" x="0.0" y="277.5" width="375" height="24"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_Measuring..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="clz-16-F7T" userLabel="Measuring Label">
-                                        <rect key="frame" x="8" y="3.5" width="86" height="17"/>
+                                        <rect key="frame" x="8" y="3.5" width="359" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -286,6 +286,7 @@
                                 <color key="backgroundColor" name="Gold"/>
                                 <constraints>
                                     <constraint firstItem="fnm-Rp-d3U" firstAttribute="centerY" secondItem="wWn-Mk-lYw" secondAttribute="centerY" id="6cJ-WM-CXN"/>
+                                    <constraint firstAttribute="trailing" secondItem="clz-16-F7T" secondAttribute="trailing" constant="8" id="BQA-fT-q3G"/>
                                     <constraint firstAttribute="trailing" secondItem="fnm-Rp-d3U" secondAttribute="trailing" constant="8" id="DtF-Jq-ix4"/>
                                     <constraint firstAttribute="height" constant="24" id="Dze-UX-Qmh"/>
                                     <constraint firstItem="clz-16-F7T" firstAttribute="centerY" secondItem="wWn-Mk-lYw" secondAttribute="centerY" id="V0Z-8m-o84"/>
