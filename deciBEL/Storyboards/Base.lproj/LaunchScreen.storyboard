@@ -16,14 +16,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DB Logo" translatesAutoresizingMaskIntoConstraints="NO" id="J71-fv-SpC">
-                                <rect key="frame" x="86.5" y="258" width="202" height="151.5"/>
-                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="fMl-IU-dUZ">
+                                <rect key="frame" x="76" y="222" width="223.5" height="223.5"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DB Logo" translatesAutoresizingMaskIntoConstraints="NO" id="J71-fv-SpC">
+                                        <rect key="frame" x="0.0" y="0.0" width="223.5" height="151.5"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="deciBEL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SLP-vh-dzU">
+                                        <rect key="frame" x="0.0" y="151.5" width="223.5" height="72"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="60"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" name="Blue"/>
                         <constraints>
-                            <constraint firstItem="J71-fv-SpC" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="7XT-av-b8Z"/>
-                            <constraint firstItem="J71-fv-SpC" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="nCJ-dL-pft"/>
+                            <constraint firstItem="fMl-IU-dUZ" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="Xgd-xD-ViS"/>
+                            <constraint firstItem="fMl-IU-dUZ" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="sMU-ea-N91"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
