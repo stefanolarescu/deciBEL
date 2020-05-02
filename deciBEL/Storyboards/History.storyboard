@@ -8,28 +8,246 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--History View Controller-->
+        <!--_History-->
         <scene sceneID="o0N-9S-1Yx">
             <objects>
                 <viewController id="EvV-DF-OyS" customClass="HistoryViewController" customModule="deciBEL" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YCx-WX-YV0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="Dark Gray"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wF5-Gr-8sh">
+                                <rect key="frame" x="0.0" y="44" width="375" height="574"/>
+                                <color key="backgroundColor" name="Dark Gray"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RecordingsHeaderCell" rowHeight="38" id="EeE-Qw-Kgo" userLabel="Recordings Header Cell">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="38"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EeE-Qw-Kgo" id="nZU-Ys-Kdz">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="38"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PbM-8b-Gxr" userLabel="Background View">
+                                                    <rect key="frame" x="8" y="5" width="359" height="28"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_May" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efi-Vg-Hv0" userLabel="Month Label">
+                                                            <rect key="frame" x="157.5" y="3.5" width="44.5" height="21.5"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <constraints>
+                                                        <constraint firstItem="efi-Vg-Hv0" firstAttribute="centerX" secondItem="PbM-8b-Gxr" secondAttribute="centerX" id="9P0-7C-j78"/>
+                                                        <constraint firstAttribute="height" constant="28" id="BMg-TL-lev"/>
+                                                        <constraint firstItem="efi-Vg-Hv0" firstAttribute="centerY" secondItem="PbM-8b-Gxr" secondAttribute="centerY" id="KoK-PD-SbP"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="PbM-8b-Gxr" secondAttribute="trailing" constant="8" id="HKR-gZ-Wdv"/>
+                                                <constraint firstItem="PbM-8b-Gxr" firstAttribute="centerY" secondItem="nZU-Ys-Kdz" secondAttribute="centerY" id="Ytx-B7-YnR"/>
+                                                <constraint firstItem="PbM-8b-Gxr" firstAttribute="leading" secondItem="nZU-Ys-Kdz" secondAttribute="leading" constant="8" id="bc2-oB-SnR"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" name="Dark Gray"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RecordingCell" rowHeight="118" id="iOC-sF-CQ5" userLabel="Recording Cell" customClass="RecordingTableViewCell" customModule="deciBEL" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="66" width="375" height="118"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iOC-sF-CQ5" id="XaU-dS-vXF">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="118"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Y0-r1-vnV" userLabel="Background View">
+                                                    <rect key="frame" x="8" y="5" width="359" height="108"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="108" id="evd-qD-dTt"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WsA-O5-RDW" userLabel="Day View">
+                                                    <rect key="frame" x="16" y="9" width="45" height="45"/>
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cLy-YU-QqW">
+                                                            <rect key="frame" x="0.0" y="4.5" width="45" height="36"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_Monday" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y1X-8m-Puc" userLabel="Day Name Label">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="45" height="14.5"/>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                                    <color key="textColor" name="Red"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="_2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5KY-Fe-rfK" userLabel="Day Number Label">
+                                                                    <rect key="frame" x="0.0" y="14.5" width="45" height="21.5"/>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="45" id="CFY-xt-BcV"/>
+                                                        <constraint firstItem="cLy-YU-QqW" firstAttribute="centerY" secondItem="WsA-O5-RDW" secondAttribute="centerY" id="Khg-vR-zeU"/>
+                                                        <constraint firstAttribute="trailing" secondItem="cLy-YU-QqW" secondAttribute="trailing" id="a7f-g1-qDj"/>
+                                                        <constraint firstItem="cLy-YU-QqW" firstAttribute="leading" secondItem="WsA-O5-RDW" secondAttribute="leading" id="frj-XJ-M6o"/>
+                                                        <constraint firstAttribute="height" constant="45" id="whl-aQ-gff"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CnK-2l-8fW" userLabel="Time View">
+                                                    <rect key="frame" x="16" y="64" width="45" height="45"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_23:48" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QDf-GL-y1Q" userLabel="Time Label">
+                                                            <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="45" id="HNL-bP-yIX"/>
+                                                        <constraint firstItem="QDf-GL-y1Q" firstAttribute="leading" secondItem="CnK-2l-8fW" secondAttribute="leading" id="L6L-Wu-Sak"/>
+                                                        <constraint firstAttribute="trailing" secondItem="QDf-GL-y1Q" secondAttribute="trailing" id="O1U-Xk-KAX"/>
+                                                        <constraint firstAttribute="bottom" secondItem="QDf-GL-y1Q" secondAttribute="bottom" id="XCK-7w-O5e"/>
+                                                        <constraint firstItem="QDf-GL-y1Q" firstAttribute="top" secondItem="CnK-2l-8fW" secondAttribute="top" id="tzF-hQ-fff"/>
+                                                        <constraint firstAttribute="width" constant="45" id="xCu-vg-grW"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CGG-lR-ndI" userLabel="Decibels View">
+                                                    <rect key="frame" x="69" y="9" width="100" height="100"/>
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Xfz-gR-MgJ">
+                                                            <rect key="frame" x="0.0" y="28" width="100" height="44.5"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qpm-6F-o7d" userLabel="Average Decibels Label">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="20.5"/>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="250" text="_dB(A)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XaK-ZD-xov" userLabel="Decibels Label">
+                                                                    <rect key="frame" x="0.0" y="20.5" width="100" height="24"/>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                                    <color key="textColor" name="Red"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="100" id="4Iv-Or-tzP"/>
+                                                        <constraint firstAttribute="width" constant="100" id="OWg-cC-E9D"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Xfz-gR-MgJ" secondAttribute="trailing" id="XfU-Ew-FTW"/>
+                                                        <constraint firstItem="Xfz-gR-MgJ" firstAttribute="leading" secondItem="CGG-lR-ndI" secondAttribute="leading" id="faZ-zP-OmX"/>
+                                                        <constraint firstItem="Xfz-gR-MgJ" firstAttribute="centerY" secondItem="CGG-lR-ndI" secondAttribute="centerY" id="pp1-mp-Zcq"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MhL-FX-RTB">
+                                                    <rect key="frame" x="177" y="9" width="182" height="100"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </mapView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="bGE-7i-V8b">
+                                                    <rect key="frame" x="262" y="53.5" width="12" height="11"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="12" id="1xe-IQ-ytq"/>
+                                                        <constraint firstAttribute="height" constant="12" id="vL7-eF-k62"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="0Y0-r1-vnV" firstAttribute="leading" secondItem="XaU-dS-vXF" secondAttribute="leading" constant="8" id="E2k-Zy-hlm"/>
+                                                <constraint firstItem="MhL-FX-RTB" firstAttribute="leading" secondItem="CGG-lR-ndI" secondAttribute="trailing" constant="8" id="HsT-wo-CJa"/>
+                                                <constraint firstItem="MhL-FX-RTB" firstAttribute="bottom" secondItem="0Y0-r1-vnV" secondAttribute="bottom" constant="-4" id="Ht2-or-4s6"/>
+                                                <constraint firstItem="MhL-FX-RTB" firstAttribute="trailing" secondItem="0Y0-r1-vnV" secondAttribute="trailing" constant="-8" id="IXP-Ru-fxi"/>
+                                                <constraint firstItem="WsA-O5-RDW" firstAttribute="leading" secondItem="0Y0-r1-vnV" secondAttribute="leading" constant="8" id="LmD-RF-Y21"/>
+                                                <constraint firstAttribute="trailing" secondItem="0Y0-r1-vnV" secondAttribute="trailing" constant="8" id="Rb7-cr-ejO"/>
+                                                <constraint firstItem="CGG-lR-ndI" firstAttribute="leading" secondItem="WsA-O5-RDW" secondAttribute="trailing" constant="8" id="Sg3-Bm-iKv"/>
+                                                <constraint firstItem="CnK-2l-8fW" firstAttribute="bottom" secondItem="0Y0-r1-vnV" secondAttribute="bottom" constant="-4" id="Snq-lv-Hoa"/>
+                                                <constraint firstItem="WsA-O5-RDW" firstAttribute="top" secondItem="0Y0-r1-vnV" secondAttribute="top" constant="4" id="YvT-lu-Vf9"/>
+                                                <constraint firstItem="bGE-7i-V8b" firstAttribute="centerY" secondItem="MhL-FX-RTB" secondAttribute="centerY" id="cCI-c7-iol"/>
+                                                <constraint firstItem="bGE-7i-V8b" firstAttribute="centerX" secondItem="MhL-FX-RTB" secondAttribute="centerX" id="eLK-K9-dLl"/>
+                                                <constraint firstItem="CnK-2l-8fW" firstAttribute="leading" secondItem="0Y0-r1-vnV" secondAttribute="leading" constant="8" id="itz-HP-Vbd"/>
+                                                <constraint firstItem="CGG-lR-ndI" firstAttribute="centerY" secondItem="XaU-dS-vXF" secondAttribute="centerY" id="o9a-L0-c1p"/>
+                                                <constraint firstItem="MhL-FX-RTB" firstAttribute="top" secondItem="0Y0-r1-vnV" secondAttribute="top" constant="4" id="qKW-iE-SR5"/>
+                                                <constraint firstItem="0Y0-r1-vnV" firstAttribute="centerY" secondItem="XaU-dS-vXF" secondAttribute="centerY" id="s97-VB-cb8"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" name="Dark Gray"/>
+                                        <connections>
+                                            <outlet property="averageDecibelsLabel" destination="Qpm-6F-o7d" id="KNJ-2o-wji"/>
+                                            <outlet property="dayNameLabel" destination="Y1X-8m-Puc" id="Pfl-yY-jDH"/>
+                                            <outlet property="dayNumberLabel" destination="5KY-Fe-rfK" id="FfT-fV-HRP"/>
+                                            <outlet property="decibelsLabel" destination="XaK-ZD-xov" id="pEN-Uv-2NC"/>
+                                            <outlet property="mapView" destination="MhL-FX-RTB" id="z29-v7-lWv"/>
+                                            <outlet property="timeLabel" destination="QDf-GL-y1Q" id="8ah-Fm-aet"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="mXP-Rf-xSn">
+                                <rect key="frame" x="169" y="312.5" width="37" height="37"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Ccs-cP-2sq" firstAttribute="trailing" secondItem="wF5-Gr-8sh" secondAttribute="trailing" id="Asz-m6-ZGU"/>
+                            <constraint firstItem="mXP-Rf-xSn" firstAttribute="centerX" secondItem="Ccs-cP-2sq" secondAttribute="centerX" id="FQx-my-bCf"/>
+                            <constraint firstItem="mXP-Rf-xSn" firstAttribute="centerY" secondItem="Ccs-cP-2sq" secondAttribute="centerY" id="bLz-HI-PPO"/>
+                            <constraint firstItem="Ccs-cP-2sq" firstAttribute="bottom" secondItem="wF5-Gr-8sh" secondAttribute="bottom" id="eQM-XH-XyF"/>
+                            <constraint firstItem="wF5-Gr-8sh" firstAttribute="leading" secondItem="Ccs-cP-2sq" secondAttribute="leading" id="hZV-wg-eVs"/>
+                            <constraint firstItem="wF5-Gr-8sh" firstAttribute="top" secondItem="Ccs-cP-2sq" secondAttribute="top" id="mtD-Zw-xkz"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Ccs-cP-2sq"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="_History" image="clock.fill" catalog="system" selectedImage="clock.fill" id="l9C-b8-Te4"/>
                     <navigationItem key="navigationItem" id="eaS-rP-B2q"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="mXP-Rf-xSn" id="kFb-wg-OMm"/>
+                        <outlet property="tableView" destination="wF5-Gr-8sh" id="igv-oF-lW0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VOO-PD-Qub" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1008.8" y="47.226386806596707"/>
         </scene>
-        <!--_History-->
+        <!--Navigation Controller-->
         <scene sceneID="rIT-ln-d38">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="w6c-PV-AW5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="_History" image="clock.fill" catalog="system" selectedImage="clock.fill" id="l9C-b8-Te4"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iWS-Yi-S6d">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -46,9 +264,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="circle.fill" catalog="system" width="128" height="121"/>
         <image name="clock.fill" catalog="system" width="128" height="121"/>
         <namedColor name="Dark Gray">
             <color red="0.2196078431372549" green="0.21568627450980393" blue="0.2196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Red">
+            <color red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

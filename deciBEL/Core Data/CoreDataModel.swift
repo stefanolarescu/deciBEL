@@ -35,4 +35,18 @@ class CoreDataModel {
             }
         }
     }
+    
+    func getRecordings(callback: ([Recording]?) -> Void) {
+        let request = Recording.createFetchRequest()
+        let sort = NSSortDescriptor(key: "date", ascending: false)
+        request.sortDescriptors = [sort]
+        
+        do {
+            let recordings = try container.viewContext.fetch(request)
+            callback(recordings)
+        } catch {
+            print("Get recordings failed")
+            callback(nil)
+        }
+    }
 }
