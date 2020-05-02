@@ -626,6 +626,10 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="N4p-Up-9Z0">
+                                                        <rect key="frame" x="50" y="4.5" width="20" height="20"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    </activityIndicatorView>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
@@ -715,12 +719,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="N4p-Up-9Z0" id="mvj-U1-hDW"/>
                         <outlet property="blurContainer" destination="4Iq-hf-bfV" id="4xK-mI-lM2"/>
                         <outlet property="decibelsAverageLabel" destination="GDo-YJ-6Af" id="SGY-Mb-nUW"/>
                         <outlet property="decibelsLabel" destination="Imq-1p-mei" id="1Hl-hN-j2y"/>
                         <outlet property="saveHighlightView" destination="imi-Dg-kEW" id="HRU-fO-XQy"/>
                         <outlet property="saveLabel" destination="yBc-uw-deG" id="M5P-mz-mk6"/>
-                        <outlet property="tapGestureView" destination="Kb4-ZP-aQV" id="zJy-zG-Ude"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xby-ob-3LK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

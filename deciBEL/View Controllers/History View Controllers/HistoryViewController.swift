@@ -10,6 +10,10 @@ import UIKit
 
 class HistoryViewController: UIViewController {
 
+    // MARK: - OUTLETS
+    
+    
+    // MARK: - INIT METHOD
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
@@ -20,7 +24,15 @@ class HistoryViewController: UIViewController {
         )
     }
     
+    // MARK: - LIFE CYCLE METHODS
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = GeneralStrings.History
     }
 }

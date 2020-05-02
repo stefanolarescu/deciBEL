@@ -22,13 +22,18 @@ class SaveViewController: UIViewController {
     @IBOutlet weak var decibelsAverageLabel: UILabel?
     @IBOutlet weak var decibelsLabel: UILabel?
     @IBOutlet weak var saveLabel: UILabel?
-    @IBOutlet weak var tapGestureView: UIView?
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var saveHighlightView: UIView?
     
     // MARK: - PROPERTIES
     var averageDecibels = 30
+    var date = Date()
+    var latitude = 0.0
+    var longitude = 0.0
     
     var delegate: SaveViewControllerDelegate?
+    
+    var coreDataModel = CoreDataModel.shared
         
     // MARK: LIFE CYCLE METHODS
     
@@ -40,6 +45,9 @@ class SaveViewController: UIViewController {
         decibelsAverageLabel?.text = "\(averageDecibels)"
         decibelsLabel?.text = AudioStrings.DecibelsA
         saveLabel?.text = GeneralStrings.Save
+        
+        saveLabel?.isHidden = false
+        activityIndicator?.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -48,6 +56,7 @@ class SaveViewController: UIViewController {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        activityIndicator?.stopAnimating()
         dismiss(animated: false)
     }
     
@@ -58,9 +67,39 @@ class SaveViewController: UIViewController {
         dismiss(animated: true)
     }
     
+    // MARK: Core Data Methods
     @IBAction func saveAction(_ sender: Any) {
         saveHighlightView?.highlight(duration: 0.4, delay: 0)
-        delegate?.segueToHistory()
+        saveLabel?.isHidden = true
+        activityIndicator?.isHidden = false
+        activityIndicator?.startAnimating()
+        
+        let recording = Recording(context: coreDataModel.container.viewContext)
+        configureRecording(recording)
+        coreDataModel.saveContext() { error in
+            activityIndicator?.stopAnimating()
+            activityIndicator?.isHidden = true
+            saveLabel?.isHidden = false
+            
+            if error != nil {
+                saveLabel?.text = GeneralStrings.Failed
+                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+                    self.dismiss(animated: true)
+                }
+            } else {
+                saveLabel?.text = GeneralStrings.Success
+                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+                    self.delegate?.segueToHistory()
+                }
+            }
+        }
+    }
+    
+    private func configureRecording(_ recording: Recording) {
+        recording.date = date
+        recording.decibels = Int16(averageDecibels)
+        recording.latitude = latitude
+        recording.longitude = longitude
     }
     
     // MARK: UI Methods

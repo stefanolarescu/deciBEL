@@ -1,31 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EvV-DF-OyS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="w6c-PV-AW5">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--_History-->
+        <!--History View Controller-->
         <scene sceneID="o0N-9S-1Yx">
             <objects>
                 <viewController id="EvV-DF-OyS" customClass="HistoryViewController" customModule="deciBEL" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YCx-WX-YV0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="Dark Gray"/>
                         <viewLayoutGuide key="safeArea" id="Ccs-cP-2sq"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="_History" image="clock.fill" catalog="system" selectedImage="clock.fill" id="l9C-b8-Te4"/>
+                    <navigationItem key="navigationItem" id="eaS-rP-B2q"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VOO-PD-Qub" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="71" y="48"/>
+            <point key="canvasLocation" x="1008.8" y="47.226386806596707"/>
+        </scene>
+        <!--_History-->
+        <scene sceneID="rIT-ln-d38">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="w6c-PV-AW5" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="_History" image="clock.fill" catalog="system" selectedImage="clock.fill" id="l9C-b8-Te4"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iWS-Yi-S6d">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="EvV-DF-OyS" kind="relationship" relationship="rootViewController" id="gU9-uR-KBM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IZT-hY-Qz9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="69.599999999999994" y="47.226386806596707"/>
         </scene>
     </scenes>
     <resources>
-        <image name="clock.fill" catalog="system" width="64" height="60"/>
+        <image name="clock.fill" catalog="system" width="128" height="121"/>
+        <namedColor name="Dark Gray">
+            <color red="0.2196078431372549" green="0.21568627450980393" blue="0.2196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

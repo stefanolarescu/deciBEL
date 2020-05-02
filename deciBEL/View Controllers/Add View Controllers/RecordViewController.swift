@@ -650,6 +650,9 @@ class RecordViewController: UIViewController {
         let count = decibels.count
         let decibelsAverage = Int(round(decibels.reduce(0.0, +) / Double(count)))
         saveViewController.averageDecibels = decibelsAverage
+        saveViewController.date = Date()
+        saveViewController.latitude = lastCenteredLocation.latitude
+        saveViewController.longitude = lastCenteredLocation.longitude
         
         present(saveViewController, animated: true)
     }
