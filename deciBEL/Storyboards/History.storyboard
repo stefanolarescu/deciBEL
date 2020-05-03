@@ -16,6 +16,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="mXP-Rf-xSn">
+                                <rect key="frame" x="0.0" y="44" width="375" height="574"/>
+                                <color key="backgroundColor" name="Bar"/>
+                            </activityIndicatorView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lfK-RN-m58" userLabel="Empty View">
+                                <rect key="frame" x="0.0" y="44" width="375" height="574"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_No Recordings Yet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zep-86-1mn" userLabel="Empty Label">
+                                        <rect key="frame" x="113" y="277" width="149" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" name="Dark Gray"/>
+                                <constraints>
+                                    <constraint firstItem="zep-86-1mn" firstAttribute="centerY" secondItem="lfK-RN-m58" secondAttribute="centerY" id="1ZJ-8t-5tj"/>
+                                    <constraint firstItem="zep-86-1mn" firstAttribute="centerX" secondItem="lfK-RN-m58" secondAttribute="centerX" id="bKd-AT-1Is"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wF5-Gr-8sh">
                                 <rect key="frame" x="0.0" y="44" width="375" height="574"/>
                                 <color key="backgroundColor" name="Dark Gray"/>
@@ -114,7 +134,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CnK-2l-8fW" userLabel="Time View">
                                                     <rect key="frame" x="16" y="64" width="45" height="45"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_23:48" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QDf-GL-y1Q" userLabel="Time Label">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_23:48" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QDf-GL-y1Q" userLabel="Time Label">
                                                             <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                             <nil key="textColor"/>
@@ -140,16 +160,16 @@
                                                     <rect key="frame" x="69" y="9" width="100" height="100"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Xfz-gR-MgJ">
-                                                            <rect key="frame" x="0.0" y="28" width="100" height="44.5"/>
+                                                            <rect key="frame" x="0.0" y="19" width="100" height="62.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qpm-6F-o7d" userLabel="Average Decibels Label">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="20.5"/>
-                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="38.5"/>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="250" text="_dB(A)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XaK-ZD-xov" userLabel="Decibels Label">
-                                                                    <rect key="frame" x="0.0" y="20.5" width="100" height="24"/>
+                                                                    <rect key="frame" x="0.0" y="38.5" width="100" height="24"/>
                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                                     <color key="textColor" name="Red"/>
                                                                     <nil key="highlightedColor"/>
@@ -217,18 +237,21 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="mXP-Rf-xSn">
-                                <rect key="frame" x="169" y="312.5" width="37" height="37"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="Ccs-cP-2sq" firstAttribute="trailing" secondItem="lfK-RN-m58" secondAttribute="trailing" id="Am4-qq-Ppu"/>
                             <constraint firstItem="Ccs-cP-2sq" firstAttribute="trailing" secondItem="wF5-Gr-8sh" secondAttribute="trailing" id="Asz-m6-ZGU"/>
-                            <constraint firstItem="mXP-Rf-xSn" firstAttribute="centerX" secondItem="Ccs-cP-2sq" secondAttribute="centerX" id="FQx-my-bCf"/>
-                            <constraint firstItem="mXP-Rf-xSn" firstAttribute="centerY" secondItem="Ccs-cP-2sq" secondAttribute="centerY" id="bLz-HI-PPO"/>
+                            <constraint firstItem="mXP-Rf-xSn" firstAttribute="top" secondItem="Ccs-cP-2sq" secondAttribute="top" id="Ej1-IW-KKc"/>
+                            <constraint firstItem="Ccs-cP-2sq" firstAttribute="trailing" secondItem="mXP-Rf-xSn" secondAttribute="trailing" id="OAq-Jq-0Iq"/>
+                            <constraint firstItem="mXP-Rf-xSn" firstAttribute="leading" secondItem="Ccs-cP-2sq" secondAttribute="leading" id="Sod-ie-sRW"/>
+                            <constraint firstItem="lfK-RN-m58" firstAttribute="top" secondItem="Ccs-cP-2sq" secondAttribute="top" id="UrS-tt-GwH"/>
                             <constraint firstItem="Ccs-cP-2sq" firstAttribute="bottom" secondItem="wF5-Gr-8sh" secondAttribute="bottom" id="eQM-XH-XyF"/>
                             <constraint firstItem="wF5-Gr-8sh" firstAttribute="leading" secondItem="Ccs-cP-2sq" secondAttribute="leading" id="hZV-wg-eVs"/>
                             <constraint firstItem="wF5-Gr-8sh" firstAttribute="top" secondItem="Ccs-cP-2sq" secondAttribute="top" id="mtD-Zw-xkz"/>
+                            <constraint firstItem="Ccs-cP-2sq" firstAttribute="bottom" secondItem="mXP-Rf-xSn" secondAttribute="bottom" id="oDJ-Bo-fOo"/>
+                            <constraint firstItem="Ccs-cP-2sq" firstAttribute="bottom" secondItem="lfK-RN-m58" secondAttribute="bottom" id="rss-Lo-kUB"/>
+                            <constraint firstItem="lfK-RN-m58" firstAttribute="leading" secondItem="Ccs-cP-2sq" secondAttribute="leading" id="vdN-o7-vTi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ccs-cP-2sq"/>
                     </view>
@@ -237,6 +260,8 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="activityIndicator" destination="mXP-Rf-xSn" id="kFb-wg-OMm"/>
+                        <outlet property="emptyLabel" destination="zep-86-1mn" id="Jsb-K3-OKq"/>
+                        <outlet property="emptyView" destination="lfK-RN-m58" id="iYl-fR-D2S"/>
                         <outlet property="tableView" destination="wF5-Gr-8sh" id="igv-oF-lW0"/>
                     </connections>
                 </viewController>
@@ -266,6 +291,9 @@
     <resources>
         <image name="circle.fill" catalog="system" width="128" height="121"/>
         <image name="clock.fill" catalog="system" width="128" height="121"/>
+        <namedColor name="Bar">
+            <color red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="Dark Gray">
             <color red="0.2196078431372549" green="0.21568627450980393" blue="0.2196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

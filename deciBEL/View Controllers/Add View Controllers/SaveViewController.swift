@@ -57,6 +57,7 @@ class SaveViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         activityIndicator?.stopAnimating()
+        view.isUserInteractionEnabled = true
         dismiss(animated: false)
     }
     
@@ -80,16 +81,19 @@ class SaveViewController: UIViewController {
             activityIndicator?.stopAnimating()
             activityIndicator?.isHidden = true
             saveLabel?.isHidden = false
+            view.isUserInteractionEnabled = false
             
             if error != nil {
-                saveLabel?.text = GeneralStrings.Failed
+                saveLabel?.text = GeneralStrings.Fail
                 DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
                     self.dismiss(animated: true)
                 }
             } else {
                 saveLabel?.text = GeneralStrings.Success
                 DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
-                    self.delegate?.segueToHistory()
+                    self.dismiss(animated: true) {
+                        self.delegate?.segueToHistory()
+                    }
                 }
             }
         }

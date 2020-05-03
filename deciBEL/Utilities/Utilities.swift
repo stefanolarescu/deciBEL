@@ -134,3 +134,9 @@ func round(_ value: Double, toNearest: Double, decimals: Int) -> Double {
     let rounded = round(value / toNearest) * toNearest
     return Double(Int(rounded * factor)) / factor
 }
+
+// MARK: - DATE
+func systemUses24HourFormat() -> Bool {
+    let dateFormat = DateFormatter.dateFormat(fromTemplate: "j", options: 0, locale: Locale.current)!
+    return dateFormat.firstIndex(of: "a") == nil
+}

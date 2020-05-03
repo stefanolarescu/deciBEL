@@ -54,7 +54,17 @@ class RecordingTableViewCell: UITableViewCell {
         
         dateFormatter.dateFormat = "H:mm"
         let time = dateFormatter.string(from: date)
-        timeLabel?.text = time
+        if systemUses24HourFormat() {
+            timeLabel?.text = time
+        } else {
+            if let indexOfSpace = time.firstIndex(of: " ") {
+                let hour = time.prefix(upTo: indexOfSpace)
+                let period = String(time.suffix(from: indexOfSpace).dropFirst())
+                timeLabel?.text = hour + "\n" + period
+            } else {
+                timeLabel?.text = time
+            }
+        }
         
         averageDecibelsLabel?.text = "\(decibels)"
         

@@ -11,9 +11,13 @@ import UIKit
 class HistoryViewController: UIViewController {
 
     // MARK: - OUTLETS
-    @IBOutlet weak var tableView: UITableView?
-    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView?
+    @IBOutlet weak var emptyLabel: UILabel?
+    
+    @IBOutlet weak var emptyView: UIView?
+    
+    @IBOutlet weak var tableView: UITableView?
+
     
     // MARK: - PROPERTIES
     var groupedRecordings = [String: [Recording]]()
@@ -39,6 +43,7 @@ class HistoryViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: false)
         
+        emptyView?.isHidden = true
         tableView?.isHidden = true
         activityIndicator?.isHidden = false
         activityIndicator?.startAnimating()
@@ -50,10 +55,21 @@ class HistoryViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.activityIndicator?.isHidden = true
                     self.activityIndicator?.stopAnimating()
-                    self.tableView?.isHidden = false
                     
-                    self.tableView?.reloadData()
+                    if self.groupedRecordings.isEmpty {
+                        self.emptyView?.isHidden = false
+                        self.tableView?.isHidden = true
+                        self.emptyLabel?.text = AudioStrings.NoRecordingsYet
+                    } else {
+                        self.emptyView?.isHidden = true
+                        self.tableView?.isHidden = false
+                        self.tableView?.reloadData()
+                    }
                 }
+            } else {
+                self.emptyView?.isHidden = false
+                self.tableView?.isHidden = true
+                self.emptyLabel?.text = GeneralStrings.Fail
             }
         }
     }
