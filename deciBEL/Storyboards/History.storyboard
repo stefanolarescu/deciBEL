@@ -191,47 +191,70 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MhL-FX-RTB">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XGj-lo-k1w" userLabel="Tap Gesture View">
                                                     <rect key="frame" x="177" y="9" width="182" height="100"/>
+                                                    <subviews>
+                                                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MhL-FX-RTB">
+                                                            <rect key="frame" x="0.0" y="0.0" width="182" height="100"/>
+                                                            <gestureRecognizers/>
+                                                        </mapView>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="bGE-7i-V8b">
+                                                            <rect key="frame" x="85" y="44.5" width="12" height="11"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="12" id="1xe-IQ-ytq"/>
+                                                                <constraint firstAttribute="height" constant="12" id="vL7-eF-k62"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uyC-j5-WoO" userLabel="Highlight View">
+                                                            <rect key="frame" x="0.0" y="0.0" width="182" height="100"/>
+                                                        </view>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <constraints>
+                                                        <constraint firstItem="MhL-FX-RTB" firstAttribute="centerX" secondItem="XGj-lo-k1w" secondAttribute="centerX" id="0pt-er-Pdn"/>
+                                                        <constraint firstItem="MhL-FX-RTB" firstAttribute="centerY" secondItem="XGj-lo-k1w" secondAttribute="centerY" id="CgB-px-Zm4"/>
+                                                        <constraint firstItem="uyC-j5-WoO" firstAttribute="centerY" secondItem="XGj-lo-k1w" secondAttribute="centerY" id="TXB-s4-Abr"/>
+                                                        <constraint firstItem="MhL-FX-RTB" firstAttribute="height" secondItem="XGj-lo-k1w" secondAttribute="height" id="deF-Fe-BNL"/>
+                                                        <constraint firstItem="MhL-FX-RTB" firstAttribute="width" secondItem="XGj-lo-k1w" secondAttribute="width" id="hqL-op-VqA"/>
+                                                        <constraint firstItem="uyC-j5-WoO" firstAttribute="height" secondItem="XGj-lo-k1w" secondAttribute="height" id="ku1-LI-rrG"/>
+                                                        <constraint firstItem="bGE-7i-V8b" firstAttribute="centerX" secondItem="XGj-lo-k1w" secondAttribute="centerX" id="lOi-v2-EJd"/>
+                                                        <constraint firstItem="bGE-7i-V8b" firstAttribute="centerY" secondItem="XGj-lo-k1w" secondAttribute="centerY" id="o4w-ag-12x"/>
+                                                        <constraint firstItem="uyC-j5-WoO" firstAttribute="centerX" secondItem="XGj-lo-k1w" secondAttribute="centerX" id="sC7-NQ-OMz"/>
+                                                        <constraint firstItem="uyC-j5-WoO" firstAttribute="width" secondItem="XGj-lo-k1w" secondAttribute="width" id="yTQ-WS-fFx"/>
+                                                    </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                             <real key="value" value="10"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
-                                                </mapView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="bGE-7i-V8b">
-                                                    <rect key="frame" x="262" y="53.5" width="12" height="11"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="12" id="1xe-IQ-ytq"/>
-                                                        <constraint firstAttribute="height" constant="12" id="vL7-eF-k62"/>
-                                                    </constraints>
-                                                </imageView>
+                                                </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="XGj-lo-k1w" firstAttribute="leading" secondItem="CGG-lR-ndI" secondAttribute="trailing" constant="8" id="5np-TC-syr"/>
                                                 <constraint firstItem="0Y0-r1-vnV" firstAttribute="leading" secondItem="XaU-dS-vXF" secondAttribute="leading" constant="8" id="E2k-Zy-hlm"/>
-                                                <constraint firstItem="MhL-FX-RTB" firstAttribute="leading" secondItem="CGG-lR-ndI" secondAttribute="trailing" constant="8" id="HsT-wo-CJa"/>
-                                                <constraint firstItem="MhL-FX-RTB" firstAttribute="bottom" secondItem="0Y0-r1-vnV" secondAttribute="bottom" constant="-4" id="Ht2-or-4s6"/>
-                                                <constraint firstItem="MhL-FX-RTB" firstAttribute="trailing" secondItem="0Y0-r1-vnV" secondAttribute="trailing" constant="-8" id="IXP-Ru-fxi"/>
+                                                <constraint firstItem="XGj-lo-k1w" firstAttribute="trailing" secondItem="0Y0-r1-vnV" secondAttribute="trailing" constant="-8" id="IsA-Hm-1mi"/>
                                                 <constraint firstItem="WsA-O5-RDW" firstAttribute="leading" secondItem="0Y0-r1-vnV" secondAttribute="leading" constant="8" id="LmD-RF-Y21"/>
                                                 <constraint firstAttribute="trailing" secondItem="0Y0-r1-vnV" secondAttribute="trailing" constant="8" id="Rb7-cr-ejO"/>
                                                 <constraint firstItem="CGG-lR-ndI" firstAttribute="leading" secondItem="WsA-O5-RDW" secondAttribute="trailing" constant="8" id="Sg3-Bm-iKv"/>
                                                 <constraint firstItem="CnK-2l-8fW" firstAttribute="bottom" secondItem="0Y0-r1-vnV" secondAttribute="bottom" constant="-4" id="Snq-lv-Hoa"/>
                                                 <constraint firstItem="WsA-O5-RDW" firstAttribute="top" secondItem="0Y0-r1-vnV" secondAttribute="top" constant="4" id="YvT-lu-Vf9"/>
-                                                <constraint firstItem="bGE-7i-V8b" firstAttribute="centerY" secondItem="MhL-FX-RTB" secondAttribute="centerY" id="cCI-c7-iol"/>
-                                                <constraint firstItem="bGE-7i-V8b" firstAttribute="centerX" secondItem="MhL-FX-RTB" secondAttribute="centerX" id="eLK-K9-dLl"/>
                                                 <constraint firstItem="CnK-2l-8fW" firstAttribute="leading" secondItem="0Y0-r1-vnV" secondAttribute="leading" constant="8" id="itz-HP-Vbd"/>
                                                 <constraint firstItem="CGG-lR-ndI" firstAttribute="centerY" secondItem="XaU-dS-vXF" secondAttribute="centerY" id="o9a-L0-c1p"/>
-                                                <constraint firstItem="MhL-FX-RTB" firstAttribute="top" secondItem="0Y0-r1-vnV" secondAttribute="top" constant="4" id="qKW-iE-SR5"/>
                                                 <constraint firstItem="0Y0-r1-vnV" firstAttribute="centerY" secondItem="XaU-dS-vXF" secondAttribute="centerY" id="s97-VB-cb8"/>
+                                                <constraint firstItem="XGj-lo-k1w" firstAttribute="bottom" secondItem="0Y0-r1-vnV" secondAttribute="bottom" constant="-4" id="teQ-MK-RDC"/>
+                                                <constraint firstItem="XGj-lo-k1w" firstAttribute="top" secondItem="0Y0-r1-vnV" secondAttribute="top" constant="4" id="zKB-Ls-nzw"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="Dark Gray"/>
+                                        <gestureRecognizers/>
                                         <connections>
                                             <outlet property="averageDecibelsLabel" destination="Qpm-6F-o7d" id="KNJ-2o-wji"/>
                                             <outlet property="dayNameLabel" destination="Y1X-8m-Puc" id="Pfl-yY-jDH"/>
                                             <outlet property="dayNumberLabel" destination="5KY-Fe-rfK" id="FfT-fV-HRP"/>
                                             <outlet property="decibelsLabel" destination="XaK-ZD-xov" id="pEN-Uv-2NC"/>
+                                            <outlet property="highlightView" destination="uyC-j5-WoO" id="oAq-iw-629"/>
                                             <outlet property="mapView" destination="MhL-FX-RTB" id="z29-v7-lWv"/>
+                                            <outlet property="tapGestureView" destination="XGj-lo-k1w" id="H2Y-hh-n4h"/>
                                             <outlet property="timeLabel" destination="QDf-GL-y1Q" id="8ah-Fm-aet"/>
                                         </connections>
                                     </tableViewCell>

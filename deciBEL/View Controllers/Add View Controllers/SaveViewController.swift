@@ -58,7 +58,7 @@ class SaveViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         activityIndicator?.stopAnimating()
         view.isUserInteractionEnabled = true
-        dismiss(animated: false)
+//        dismiss(animated: false)
     }
     
     // MARK: - OTHER METHODS

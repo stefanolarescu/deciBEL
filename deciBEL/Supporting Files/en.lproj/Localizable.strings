@@ -12,6 +12,12 @@
 /* Add */
 "Add" = "Add";
 
+/* Cancel */
+"Cancel" = "Cancel";
+
+/* Choose Maps App */
+"Choose Maps App" = "Choose Maps App";
+
 /* Continue */
 "Continue" = "Continue";
 
@@ -26,6 +32,9 @@
 
 /* Fail */
 "Fail" = "Fail";
+
+/* Google Maps */
+"Google Maps" = "Google Maps";
 
 /* History */
 "History" = "History";
@@ -72,6 +81,9 @@
 /* Location Services need to be enabled */
 "Location Services need to be enabled" = "Location Services need to be enabled in order for deciBEL to display your current location. Please enable them in the Settings app using Privacy -> Location Services -> Yes";
 
+/* Maps */
+"Maps" = "Maps";
+
 /* Measurement done */
 "Measurement done" = "Measurement done. Tap %@ to restart.";
 
@@ -107,3 +119,6 @@
 
 /* You must enable microphone access */
 "You must enable microphone access" = "You must enable microphone access in order to use deciBEL.";
+
+/* WhatMapsApp */
+"WhatMapsApp" = "What maps app do you want to use to open this location?";

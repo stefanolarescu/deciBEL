@@ -11,6 +11,7 @@ import Foundation
 struct GeneralStrings {
     
     static let Add = NSLocalizedString("Add", comment: "Add")
+    static let Cancel = NSLocalizedString("Cancel", comment: "Cancel")
     static let Continue = NSLocalizedString("Continue", comment: "Continue")
     static let Decibel = NSLocalizedString("Decibel", comment: "Decibel")
     static let Fail = NSLocalizedString("Fail", comment: "Fail")

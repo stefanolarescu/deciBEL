@@ -120,6 +120,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: recordingCellIdentifier, for: indexPath) as! RecordingTableViewCell
+        cell.delegate = self
         
         let index = groupedRecordings.index(groupedRecordings.startIndex, offsetBy: indexPath.section)
         if let recording = groupedRecordings[groupedRecordings.keys[index]]?[indexPath.row] {
@@ -155,5 +156,11 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
                 groupedRecordings[month] = [recording]
             }
         }
+    }
+}
+
+extension HistoryViewController: RecordingTableViewCellDelegate {
+    func showAlert(_ alert: UIAlertController) {
+        present(alert, animated: true)
     }
 }

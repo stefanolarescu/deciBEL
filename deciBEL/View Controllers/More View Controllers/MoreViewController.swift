@@ -10,6 +10,10 @@ import UIKit
 
 class MoreViewController: UIViewController {
     
+    // MARK: - OUTLETS
+    
+    
+    // MARK: - INIT METHOD
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
@@ -20,6 +24,7 @@ class MoreViewController: UIViewController {
         )
     }
     
+    // MARK: - LIFE CYCLE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
     }

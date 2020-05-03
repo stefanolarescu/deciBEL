@@ -660,6 +660,8 @@ class RecordViewController: UIViewController {
         saveViewController.latitude = lastCenteredLocation.latitude
         saveViewController.longitude = lastCenteredLocation.longitude
         
+        self.definesPresentationContext = true
+        
         present(saveViewController, animated: true)
     }
 }
