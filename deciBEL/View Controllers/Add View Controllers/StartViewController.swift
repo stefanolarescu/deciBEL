@@ -43,8 +43,8 @@ class StartViewController: UIViewController {
         
         grayMaskView?.drawShape(dropRadius: 55)
         
-        outerCircleView?.backgroundColor = .outerCircleBlue()
-        innerCircleView?.backgroundColor = .innerCircleBlue()
+        outerCircleView?.backgroundColor = UIColor(named: "Blue")?.withAlphaComponent(0.3)
+        innerCircleView?.backgroundColor = UIColor(named: "Blue")
         
         activityIndicatorView?.isHidden = true
         activityIndicatorView?.stopAnimating()

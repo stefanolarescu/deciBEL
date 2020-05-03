@@ -25,8 +25,8 @@ struct AudioStrings {
     static let Level12 = NSLocalizedString("Level12", comment: "Level12")
     static let MicrophoneAccessDisabled = NSLocalizedString("Access to microphone is disabled", comment: "Access to microphone is disabled")
     static let MicrophoneAccessAlertMessage = NSLocalizedString("You must enable microphone access", comment: "You must enable microphone access")
+    static let NoRecordingsYet = NSLocalizedString("No Recordings Yet", comment: "No Recordings Yet")
     static let Record = NSLocalizedString("Record", comment: "Record")
     static let RecordingAlertMessage = NSLocalizedString("Do you want to continue the recording", comment: "Do you want to continue the recording")
     static let ResumeRecording = NSLocalizedString("Resume recording", comment: "Resume recording")
-    
 }

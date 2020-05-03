@@ -12,3 +12,8 @@ enum Zoom {
     case zoomIn
     case zoomOut
 }
+
+enum MapsApp {
+    case maps
+    case googleMaps
+}

@@ -47,7 +47,7 @@ class GrayMaskView: UIView {
         self.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
         let maskLayer = CAShapeLayer()
         maskLayer.path = createBezierPath(dropRadius: dropRadius).cgPath
-        maskLayer.fillColor = UIColor.maskGray().cgColor
+        maskLayer.fillColor = UIColor(named: "Dark Gray")?.cgColor
         self.layer.addSublayer(maskLayer)
     }
 

@@ -626,6 +626,10 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="N4p-Up-9Z0">
+                                                        <rect key="frame" x="50" y="4.5" width="20" height="20"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    </activityIndicatorView>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
@@ -675,19 +679,19 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Xa-dR-daL" userLabel="Close View">
-                                <rect key="frame" x="250.5" y="242.5" width="28" height="28"/>
+                                <rect key="frame" x="262.5" y="226.5" width="32" height="32"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="multiply" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="97M-pl-Nnn" userLabel="Close Image View">
-                                        <rect key="frame" x="3.5" y="6.5" width="21" height="14.5"/>
+                                        <rect key="frame" x="4" y="7" width="24" height="17.5"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="28" id="H4M-YV-4MM"/>
+                                    <constraint firstAttribute="width" constant="32" id="H4M-YV-4MM"/>
                                     <constraint firstItem="97M-pl-Nnn" firstAttribute="height" secondItem="0Xa-dR-daL" secondAttribute="height" multiplier="0.75" id="Wvx-PC-3R5"/>
                                     <constraint firstItem="97M-pl-Nnn" firstAttribute="width" secondItem="0Xa-dR-daL" secondAttribute="width" multiplier="0.75" id="g7s-d7-hcr"/>
-                                    <constraint firstAttribute="height" constant="28" id="kw5-x1-kP7"/>
+                                    <constraint firstAttribute="height" constant="32" id="kw5-x1-kP7"/>
                                     <constraint firstItem="97M-pl-Nnn" firstAttribute="centerY" secondItem="0Xa-dR-daL" secondAttribute="centerY" id="lPr-hm-wpp"/>
                                     <constraint firstItem="97M-pl-Nnn" firstAttribute="centerX" secondItem="0Xa-dR-daL" secondAttribute="centerX" id="nUL-7X-jZf"/>
                                 </constraints>
@@ -704,9 +708,9 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="4Iq-hf-bfV" secondAttribute="bottom" id="4yQ-Lk-10t"/>
                             <constraint firstAttribute="trailing" secondItem="4Iq-hf-bfV" secondAttribute="trailing" id="8UM-QM-CsZ"/>
-                            <constraint firstItem="0Xa-dR-daL" firstAttribute="top" secondItem="tSX-P5-Mx2" secondAttribute="top" id="A5i-EG-D67"/>
+                            <constraint firstItem="0Xa-dR-daL" firstAttribute="top" secondItem="tSX-P5-Mx2" secondAttribute="top" constant="-16" id="A5i-EG-D67"/>
                             <constraint firstItem="4Iq-hf-bfV" firstAttribute="top" secondItem="szu-z1-ewe" secondAttribute="top" id="DRf-eD-oI3"/>
-                            <constraint firstItem="0Xa-dR-daL" firstAttribute="trailing" secondItem="tSX-P5-Mx2" secondAttribute="trailing" id="PTx-Hf-0fu"/>
+                            <constraint firstItem="0Xa-dR-daL" firstAttribute="trailing" secondItem="tSX-P5-Mx2" secondAttribute="trailing" constant="16" id="PTx-Hf-0fu"/>
                             <constraint firstItem="Kb4-ZP-aQV" firstAttribute="top" secondItem="tSX-P5-Mx2" secondAttribute="bottom" constant="6" id="YM7-RV-qEN"/>
                             <constraint firstItem="tSX-P5-Mx2" firstAttribute="centerY" secondItem="szu-z1-ewe" secondAttribute="centerY" id="m9I-1d-5A8"/>
                             <constraint firstItem="Kb4-ZP-aQV" firstAttribute="centerX" secondItem="szu-z1-ewe" secondAttribute="centerX" id="rxn-Ta-AWP"/>
@@ -715,12 +719,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="N4p-Up-9Z0" id="mvj-U1-hDW"/>
                         <outlet property="blurContainer" destination="4Iq-hf-bfV" id="4xK-mI-lM2"/>
                         <outlet property="decibelsAverageLabel" destination="GDo-YJ-6Af" id="SGY-Mb-nUW"/>
                         <outlet property="decibelsLabel" destination="Imq-1p-mei" id="1Hl-hN-j2y"/>
                         <outlet property="saveHighlightView" destination="imi-Dg-kEW" id="HRU-fO-XQy"/>
                         <outlet property="saveLabel" destination="yBc-uw-deG" id="M5P-mz-mk6"/>
-                        <outlet property="tapGestureView" destination="Kb4-ZP-aQV" id="zJy-zG-Ude"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xby-ob-3LK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

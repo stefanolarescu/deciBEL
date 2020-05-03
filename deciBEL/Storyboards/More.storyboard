@@ -14,7 +14,7 @@
                     <view key="view" contentMode="scaleToFill" id="MQ5-v3-WOo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="jYY-pW-HAc"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="_More" image="ellipsis.circle.fill" catalog="system" selectedImage="ellipsis.circle.fill" id="mlM-oc-o1d"/>

@@ -123,6 +123,36 @@ func showAlertForContinuingRecording(callback: ((Bool) -> Void)?) -> UIAlertCont
     return alertController
 }
 
+func showAlertForOpeningMapsApp(callback: @escaping (MapsApp) -> Void) -> UIAlertController {
+    let alertController = UIAlertController(
+        title: LocationStrings.ChooseMapsApp,
+        message: LocationStrings.WhatMapsApp,
+        preferredStyle: .alert
+    )
+    let googleMapsAction = UIAlertAction(
+        title: LocationStrings.GoogleMaps,
+        style: .default
+    ) { _ in
+        callback(.googleMaps)
+    }
+    let appleMapsAction = UIAlertAction(
+        title: LocationStrings.Maps,
+        style: .default
+    ) { _ in
+        callback(.maps)
+    }
+    let cancelAction = UIAlertAction(
+        title: GeneralStrings.Cancel,
+        style: .cancel
+    )
+    
+    alertController.addAction(appleMapsAction)
+    alertController.addAction(googleMapsAction)
+    alertController.addAction(cancelAction)
+    
+    return alertController
+}
+
 // MARK: - LOCATION
 var locationServicesAreEnabled: Bool {
     return CLLocationManager.locationServicesEnabled()
@@ -133,4 +163,10 @@ func round(_ value: Double, toNearest: Double, decimals: Int) -> Double {
     let factor = pow(10, Double(decimals))
     let rounded = round(value / toNearest) * toNearest
     return Double(Int(rounded * factor)) / factor
+}
+
+// MARK: - DATE
+func systemUses24HourFormat() -> Bool {
+    let dateFormat = DateFormatter.dateFormat(fromTemplate: "j", options: 0, locale: Locale.current)!
+    return dateFormat.firstIndex(of: "a") == nil
 }

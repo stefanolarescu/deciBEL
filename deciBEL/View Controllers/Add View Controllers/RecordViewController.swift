@@ -91,7 +91,7 @@ class RecordViewController: UIViewController {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(checkState),
-            name: UIApplication.didBecomeActiveNotification,
+            name: UIApplication.willEnterForegroundNotification,
             object: nil
         )
         NotificationCenter.default.addObserver(
@@ -133,7 +133,7 @@ class RecordViewController: UIViewController {
         
         NotificationCenter.default.removeObserver(
             self,
-            name: UIApplication.didBecomeActiveNotification,
+            name: UIApplication.willEnterForegroundNotification,
             object: nil
         )
         
@@ -268,7 +268,9 @@ class RecordViewController: UIViewController {
         case .undetermined:
             audioSession.requestRecordPermission { granted in
                 if granted {
-                    self.checkRecording()
+                    DispatchQueue.main.async {
+                        self.resetCountdownTimer()
+                    }
                 } else {
                     self.stopRecording()
                     DispatchQueue.main.async {
@@ -326,6 +328,10 @@ class RecordViewController: UIViewController {
         
     @objc private func updateDecibels() {
         if let amplitude = audioKitManager.tracker?.amplitude {
+            guard amplitude != 0 else {
+                return
+            }
+            
             let decibels = round(20 * log10(amplitude) + 94, toNearest: 0.2, decimals: 1)
             
             if decibels >= 0, decibels <= Double(MAX_DECIBELS) {
@@ -650,6 +656,11 @@ class RecordViewController: UIViewController {
         let count = decibels.count
         let decibelsAverage = Int(round(decibels.reduce(0.0, +) / Double(count)))
         saveViewController.averageDecibels = decibelsAverage
+        saveViewController.date = Date()
+        saveViewController.latitude = lastCenteredLocation.latitude
+        saveViewController.longitude = lastCenteredLocation.longitude
+        
+        self.definesPresentationContext = true
         
         present(saveViewController, animated: true)
     }

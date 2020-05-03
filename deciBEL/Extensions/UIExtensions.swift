@@ -8,31 +8,6 @@
 
 import UIKit
 
-// MARK: - UICOLOR
-extension UIColor {
-    
-    convenience init(red: Int, green: Int, blue: Int) {
-        assert(red >= 0 && red <= 255, "Invalid red component")
-        assert(green >= 0 && green <= 255, "Invalid green component")
-        assert(blue >= 0 && blue <= 255, "Invalid blue component")
-        
-        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
-    }
-    
-    class func outerCircleBlue() -> UIColor {
-        return UIColor(red: 0, green: 124, blue: 232).withAlphaComponent(0.3)
-    }
-    
-    class func innerCircleBlue() -> UIColor {
-        return UIColor(red: 0, green: 124, blue: 232)
-    }
-    
-    class func maskGray() -> UIColor {
-        return UIColor(red: 56, green: 55, blue: 56)
-    }
-    
-}
-
 // MARK: - UIVIEW
 extension UIView {
     
@@ -67,7 +42,7 @@ extension UIView {
             delay: delay,
             options: [.curveEaseInOut, .allowUserInteraction],
             animations: {
-                self.backgroundColor = .systemBlue
+                self.backgroundColor = UIColor(named: "Blue")
                 self.backgroundColor = UIColor(named: "Map Controls Background")
             }
         )
