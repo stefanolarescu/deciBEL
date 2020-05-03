@@ -14,7 +14,6 @@
 		660DD940241E392100BCC81B /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660DD93F241E392100BCC81B /* Utilities.swift */; };
 		660DD942241E636B00BCC81B /* LocationStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660DD941241E636B00BCC81B /* LocationStrings.swift */; };
 		660DD96E241E743600BCC81B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 660DD970241E743600BCC81B /* InfoPlist.strings */; };
-		660DD97E241E8AE000BCC81B /* SegueIStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660DD97D241E8AE000BCC81B /* SegueIStrings.swift */; };
 		660DD983241EB7F400BCC81B /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660DD982241EB7F400BCC81B /* Enums.swift */; };
 		6642574E241458340093834B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6642574D241458340093834B /* AppDelegate.swift */; };
 		66425750241458340093834B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6642574F241458340093834B /* SceneDelegate.swift */; };
@@ -38,6 +37,8 @@
 		6681D39B245DFD2700342B25 /* Recording+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6681D399245DFD2700342B25 /* Recording+CoreDataClass.swift */; };
 		6681D39C245DFD2700342B25 /* Recording+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6681D39A245DFD2700342B25 /* Recording+CoreDataProperties.swift */; };
 		6681D3A0245E15B800342B25 /* RecordingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6681D39F245E15B800342B25 /* RecordingTableViewCell.swift */; };
+		668787DB245F3DB000D8A724 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668787DA245F3DB000D8A724 /* AboutViewController.swift */; };
+		668787DD245F3DC400D8A724 /* LegalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668787DC245F3DC400D8A724 /* LegalViewController.swift */; };
 		66AD45FF244C5B5B00400E57 /* AudioKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AD45FE244C5B5B00400E57 /* AudioKitManager.swift */; };
 		66AD4601244C6C0000400E57 /* AudioStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AD4600244C6C0000400E57 /* AudioStrings.swift */; };
 		66AD4603244C9CAE00400E57 /* RulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AD4602244C9CAE00400E57 /* RulerView.swift */; };
@@ -57,7 +58,6 @@
 		660DD941241E636B00BCC81B /* LocationStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationStrings.swift; sourceTree = "<group>"; };
 		660DD971241E743900BCC81B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		660DD972241E744900BCC81B /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		660DD97D241E8AE000BCC81B /* SegueIStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueIStrings.swift; sourceTree = "<group>"; };
 		660DD982241EB7F400BCC81B /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		6642574A241458340093834B /* deciBEL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = deciBEL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6642574D241458340093834B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +83,8 @@
 		6681D399245DFD2700342B25 /* Recording+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recording+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		6681D39A245DFD2700342B25 /* Recording+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recording+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		6681D39F245E15B800342B25 /* RecordingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingTableViewCell.swift; sourceTree = "<group>"; };
+		668787DA245F3DB000D8A724 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		668787DC245F3DC400D8A724 /* LegalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalViewController.swift; sourceTree = "<group>"; };
 		66AD45FB244C565C00400E57 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "deciBEL/Supporting Files/Info.plist"; sourceTree = SOURCE_ROOT; };
 		66AD45FE244C5B5B00400E57 /* AudioKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioKitManager.swift; sourceTree = "<group>"; };
 		66AD4600244C6C0000400E57 /* AudioStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioStrings.swift; sourceTree = "<group>"; };
@@ -141,6 +143,8 @@
 		660DD92D241D5E2A00BCC81B /* More View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				668787DA245F3DB000D8A724 /* AboutViewController.swift */,
+				668787DC245F3DC400D8A724 /* LegalViewController.swift */,
 				664257852415761F0093834B /* MoreViewController.swift */,
 			);
 			path = "More View Controllers";
@@ -270,7 +274,6 @@
 				66AD4600244C6C0000400E57 /* AudioStrings.swift */,
 				66425775241503150093834B /* GeneralStrings.swift */,
 				660DD941241E636B00BCC81B /* LocationStrings.swift */,
-				660DD97D241E8AE000BCC81B /* SegueIStrings.swift */,
 				6661361C24523E960060C1E1 /* TimeStrings.swift */,
 			);
 			path = Strings;
@@ -434,6 +437,7 @@
 				66425758241458340093834B /* deciBEL.xcdatamodeld in Sources */,
 				6681D394245D93E900342B25 /* SaveViewController.swift in Sources */,
 				66FC16E1244CC3310086100D /* Constants.swift in Sources */,
+				668787DD245F3DC400D8A724 /* LegalViewController.swift in Sources */,
 				6642574E241458340093834B /* AppDelegate.swift in Sources */,
 				66425750241458340093834B /* SceneDelegate.swift in Sources */,
 				660DD940241E392100BCC81B /* Utilities.swift in Sources */,
@@ -441,6 +445,7 @@
 				660DD933241D5E6700BCC81B /* StartViewController.swift in Sources */,
 				66425776241503150093834B /* GeneralStrings.swift in Sources */,
 				660DD934241D5E6700BCC81B /* RecordViewController.swift in Sources */,
+				668787DB245F3DB000D8A724 /* AboutViewController.swift in Sources */,
 				66AD4603244C9CAE00400E57 /* RulerView.swift in Sources */,
 				6681D39C245DFD2700342B25 /* Recording+CoreDataProperties.swift in Sources */,
 				66FC16E3244CD27B0086100D /* NumbersView.swift in Sources */,
@@ -448,7 +453,6 @@
 				664257862415761F0093834B /* MoreViewController.swift in Sources */,
 				660DD942241E636B00BCC81B /* LocationStrings.swift in Sources */,
 				6681D3A0245E15B800342B25 /* RecordingTableViewCell.swift in Sources */,
-				660DD97E241E8AE000BCC81B /* SegueIStrings.swift in Sources */,
 				66AD4601244C6C0000400E57 /* AudioStrings.swift in Sources */,
 				66425784241576090093834B /* HistoryViewController.swift in Sources */,
 				6681D398245DFAEF00342B25 /* CoreDataModel.swift in Sources */,

@@ -11,7 +11,12 @@ import UIKit
 class MoreViewController: UIViewController {
     
     // MARK: - OUTLETS
+    @IBOutlet weak var aboutButton: UIButton?
+    @IBOutlet weak var legalButton: UIButton?
     
+    // MARK: - PROPERTIES
+    let showAboutSegueIdentifier = "showAbout"
+    let showLegalSegueIdentifier = "showLegal"
     
     // MARK: - INIT METHOD
     required init?(coder aDecoder: NSCoder) {
@@ -25,19 +30,28 @@ class MoreViewController: UIViewController {
     }
     
     // MARK: - LIFE CYCLE METHODS
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        title = GeneralStrings.More
+        
+        aboutButton?.setTitle(GeneralStrings.About, for: .normal)
+        legalButton?.setTitle(GeneralStrings.Legal, for: .normal)
     }
-    */
-
+    
+    // MARK: - OTHER METHODS
+    
+    // MARK: - Segue Methods
+    @IBAction func aboutButtonAction(_ sender: UIButton) {
+        performSegue(withIdentifier: showAboutSegueIdentifier, sender: self)
+    }
+    
+    @IBAction func legalButtonAction(_ sender: UIButton) {
+        performSegue(withIdentifier: showLegalSegueIdentifier, sender: self)
+    }
 }

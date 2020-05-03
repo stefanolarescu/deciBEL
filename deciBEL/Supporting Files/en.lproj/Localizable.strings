@@ -6,6 +6,9 @@
   Copyright © 2020 Stefan Olarescu. All rights reserved.
 */
 
+/* About */
+"About" = "About";
+
 /* Access to microphone is disabled */
 "Access to microphone is disabled" = "Access to microphone is disabled";
 
@@ -38,6 +41,9 @@
 
 /* History */
 "History" = "History";
+
+/* Legal */
+"Legal" = "Legal";
 
 /* Level1 */
 "Level1" = "Almost quiet, breathing";

@@ -19,6 +19,9 @@ class StartViewController: UIViewController {
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView?
     @IBOutlet weak var highlightView: UIView?
     
+    // MARK: - PROPERTIES
+    let showRecordSegueIdentifier = "showRecord"
+    
     // MARK: - INIT METHOD
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -93,6 +96,6 @@ class StartViewController: UIViewController {
     
     // MARK: - SEGUE HANDLER
     @IBAction func tapGestureViewHandler(_ sender: UITapGestureRecognizer) {
-        performSegue(withIdentifier: SegueStrings.Record, sender: self)
+        performSegue(withIdentifier: showRecordSegueIdentifier, sender: self)
     }
 }
