@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  deciBEL
+
+  Created by Stefan Olarescu on 15/03/2020.
+  Copyright © 2020 Stefan Olarescu. All rights reserved.
+*/
+
+"NSLocationWhenInUseUsageDescription" = "deciBEL are nevoie de Serviciile de localizare pentru afișarea locației curente.";
+"NSMicrophoneUsageDescription" = "deciBEL are nevoie de microfon pentru înregistrarea zogomotului.";

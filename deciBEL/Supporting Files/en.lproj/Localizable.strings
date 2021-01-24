@@ -6,14 +6,125 @@
   Copyright © 2020 Stefan Olarescu. All rights reserved.
 */
 
+/* About */
+"About" = "About";
+
+/* Access to microphone is disabled */
+"Access to microphone is disabled" = "Access to microphone is disabled";
+
 /* Add */
 "Add" = "Add";
+
+/* Cancel */
+"Cancel" = "Cancel";
+
+/* Choose Maps App */
+"Choose Maps App" = "Choose Maps App";
+
+/* Continue */
+"Continue" = "Continue";
+
+/* dB(A) */
+"dB(A)" = "dB(A)";
 
 /* Decibel */
 "Decibel" = "deciBEL";
 
+/* Do you want to continue the recording */
+"Do you want to continue the recording" = "Do you want to continue the recording from where you left off or restart?";
+
+/* Fail */
+"Fail" = "Fail";
+
+/* Google Maps */
+"Google Maps" = "Google Maps";
+
 /* History */
 "History" = "History";
 
+/* Legal */
+"Legal" = "Legal";
+
+/* Level1 */
+"Level1" = "Almost quiet, breathing";
+
+/* Level2 */
+"Level2" = "Rustling leaves, ticking watch";
+
+/* Level3 */
+"Level3" = "Whisper, quiet rural area";
+
+/* Level4 */
+"Level4" = "Quiet library, bird calls";
+
+/* Level5 */
+"Level5" = "Quiet office, moderate rainfall";
+
+/* Level6 */
+"Level6" = "Normal conversation at 1 meter";
+
+/* Level7 */
+"Level7" = "Busy traffic, vacuum cleaner";
+
+/* Level8 */
+"Level8" = "Loud music, alarm clocks";
+
+/* Level9 */
+"Level9" = "Diesel truck, power mower";
+
+/* Level10 */
+"Level10" = "Motorcycle, blow dryer";
+
+/* Level11 */
+"Level11" = "Concerts, screaming child";
+
+/* Level12 */
+"Level12" = "Threshold of pain, thunder";
+
+/* Location Services disabled */
+"Location Services disabled" = "Location Services disabled";
+
+/* Location Services need to be enabled */
+"Location Services need to be enabled" = "Location Services need to be enabled in order for deciBEL to display your current location. Please enable them in the Settings app using Privacy -> Location Services -> Yes";
+
+/* Maps */
+"Maps" = "Maps";
+
+/* Measurement done */
+"Measurement done" = "Measurement done. Tap %@ to restart.";
+
+/* Measuring */
+"Measuring" = "Measuring...";
+
 /* More */
 "More" = "More";
+
+/* No Recordings Yet */
+"No Recordings Yet" = "No Recordings Yet";
+
+/* Okay */
+"Okay" = "Okay";
+
+/* Record */
+"Record" = "Record";
+
+/* Restart */
+"Restart" = "Restart";
+
+/* Resume recording */
+"Resume recording" = "Resume recording";
+
+/* Save */
+"Save" = "Save";
+
+/* Settings */
+"Settings" = "Settings";
+
+/* Success */
+"Success" = "Success";
+
+/* You must enable microphone access */
+"You must enable microphone access" = "You must enable microphone access in order to use deciBEL.";
+
+/* WhatMapsApp */
+"WhatMapsApp" = "What maps app do you want to use to open this location?";
