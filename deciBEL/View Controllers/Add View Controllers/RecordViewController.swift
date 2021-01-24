@@ -327,7 +327,7 @@ class RecordViewController: UIViewController {
     }
         
     @objc private func updateDecibels() {
-        if let amplitude = audioKitManager.amplitude {
+        if let amplitude = audioKitManager.tracker?.amplitude {
             guard amplitude != 0 else {
                 return
             }
@@ -659,7 +659,7 @@ class RecordViewController: UIViewController {
     }
     
     private func presentResultViewController() {
-        let saveViewController = storyboard?.instantiateViewController(identifier: saveViewControllerIdentifier) as! SaveViewController
+        let saveViewController = storyboard?.instantiateViewController(withIdentifier: saveViewControllerIdentifier) as! SaveViewController
         saveViewController.modalPresentationStyle = .overCurrentContext
         saveViewController.delegate = self
         
