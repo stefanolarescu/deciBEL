@@ -78,24 +78,66 @@ class SaveViewController: UIViewController {
         let recording = Recording(context: coreDataModel.container.viewContext)
         configureRecording(recording)
         coreDataModel.saveContext() { error in
-            activityIndicator?.stopAnimating()
-            activityIndicator?.isHidden = true
-            saveLabel?.isHidden = false
-            view.isUserInteractionEnabled = false
-            
             if error != nil {
                 saveLabel?.text = GeneralStrings.Fail
                 DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
                     self.dismiss(animated: true)
                 }
             } else {
-                saveLabel?.text = GeneralStrings.Success
-                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
-                    self.dismiss(animated: true) {
-                        self.delegate?.segueToHistory()
+                sendDataToServer(recording: recording) { error in
+                    DispatchQueue.main.async {
+                        self.activityIndicator?.stopAnimating()
+                        self.activityIndicator?.isHidden = true
+                        self.saveLabel?.isHidden = false
+                        self.view.isUserInteractionEnabled = false
+                    }
+                    
+                    guard error == nil else {
+                        DispatchQueue.main.async {
+                            self.saveLabel?.text = GeneralStrings.Fail
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+                            self.dismiss(animated: true)
+                        }
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.saveLabel?.text = GeneralStrings.Success
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+                        self.dismiss(animated: true) {
+                            self.delegate?.segueToHistory()
+                        }
                     }
                 }
             }
+        }
+    }
+    
+    private func sendDataToServer(recording: Recording, completionHandler: @escaping (_ error: Error?) -> Void) {
+        let json: [String: Any] = [
+            "value": recording.decibels,
+            "coords": [
+                "long": recording.longitude,
+                "lat": recording.latitude
+            ]
+        ]
+
+        let jsonData = try? JSONSerialization.data(withJSONObject: json, options: [.prettyPrinted])
+
+        if let url = URL(string: "http://localhost:3000/decibels") {
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+            request.httpBody = jsonData
+
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                completionHandler(error)
+            }
+
+            task.resume()
         }
     }
     
