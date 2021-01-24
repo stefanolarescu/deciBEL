@@ -327,13 +327,17 @@ class RecordViewController: UIViewController {
     }
         
     @objc private func updateDecibels() {
-        if let amplitude = audioKitManager.tracker?.amplitude {
+        if let amplitude = audioKitManager.amplitude {
+            print(amplitude)
+            
             guard amplitude != 0 else {
                 return
             }
             
-            let decibels = round(20 * log10(amplitude) + 94, toNearest: 0.2, decimals: 1)
-            
+            let doubleAmplitude = Double(amplitude)
+
+            let decibels = roundDecibels(20 * log10(doubleAmplitude) + 74, toNearest: 0.2, decimals: 1)
+
             if decibels >= 0, decibels <= Double(MAX_DECIBELS) {
                 self.decibels.append(decibels)
                 if timeLeft != 0 {
@@ -387,7 +391,7 @@ class RecordViewController: UIViewController {
             return 0
         }
         
-        var level = Int(round(decibels, toNearest: 10, decimals: 1)) / 10
+        var level = Int(roundDecibels(decibels, toNearest: 10, decimals: 1)) / 10
         if level == 0 {
             level += 1
         } else if level == 13 {
@@ -456,7 +460,7 @@ class RecordViewController: UIViewController {
     }
     
     private func getIndexOfCurrentLevel(decibels: Double) -> Int {
-        var level = Int(round(decibels, toNearest: 10, decimals: 1)) / 10
+        var level = Int(roundDecibels(decibels, toNearest: 10, decimals: 1)) / 10
         if level == 0 {
             level += 1
         } else if level == 13 {

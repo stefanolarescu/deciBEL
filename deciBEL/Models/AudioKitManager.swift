@@ -13,28 +13,47 @@ class AudioKitManager {
     
     static let shared = AudioKitManager()
     
-    var tracker: AKAmplitudeTracker?
+    let engine = AudioEngine()
+    var mic: AudioEngine.InputNode
+    var tappableNode1: Mixer
+    var tappableNode2: Mixer
+    var tappableNode3: Mixer
+    var tracker: PitchTap!
+    var silence: Fader
+    
+    var pitch: AUValue = 0.0
+    var amplitude: AUValue?
     
     private init() {
-        let microphone = AKMicrophone()
-        tracker = AKAmplitudeTracker(microphone)
-        let silence = AKBooster(tracker, gain: 0)
-        AKManager.output = silence
+        guard let input = engine.input else {
+            fatalError()
+        }
+
+        mic = input
+        tappableNode1 = Mixer(mic)
+        tappableNode2 = Mixer(tappableNode1)
+        tappableNode3 = Mixer(tappableNode2)
+        silence = Fader(tappableNode3, gain: 0)
+        engine.output = silence
+
+        tracker = PitchTap(mic) { pitch, amp in
+            DispatchQueue.main.async {
+                self.pitch = pitch[0]
+                self.amplitude = amp[0]
+            }
+        }
     }
     
     func startAudioKit() {
         do {
-            try AKManager.start()
+            try engine.start()
+            tracker.start()
         } catch {
             // TODO: Implement
         }
     }
     
     func stopAudioKit() {
-        do {
-            try AKManager.stop()
-        } catch {
-            // TODO: Implement
-        }
+        engine.stop()
     }
 }

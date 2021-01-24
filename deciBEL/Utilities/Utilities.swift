@@ -159,7 +159,7 @@ var locationServicesAreEnabled: Bool {
 }
 
 // MARK: - MATHS
-func round(_ value: Double, toNearest: Double, decimals: Int) -> Double {
+func roundDecibels(_ value: Double, toNearest: Double, decimals: Int) -> Double {
     let factor = pow(10, Double(decimals))
     let rounded = round(value / toNearest) * toNearest
     return Double(Int(rounded * factor)) / factor
