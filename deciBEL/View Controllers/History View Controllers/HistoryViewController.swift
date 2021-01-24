@@ -31,11 +31,15 @@ class HistoryViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        tabBarItem = UITabBarItem(
-            title: GeneralStrings.History,
-            image: UIImage(systemName: "clock.fill"),
-            selectedImage: UIImage(systemName: "clock.fill")
-        )
+        if #available(iOS 13.0, *) {
+            tabBarItem = UITabBarItem(
+                title: GeneralStrings.History,
+                image: UIImage(systemName: "clock.fill"),
+                selectedImage: UIImage(systemName: "clock.fill")
+            )
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     // MARK: - LIFE CYCLE METHODS

@@ -26,11 +26,15 @@ class StartViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        tabBarItem = UITabBarItem(
-            title: GeneralStrings.Add,
-            image: UIImage(systemName: "plus.circle.fill"),
-            selectedImage: UIImage(systemName: "plus.circle.fill")
-        )
+        if #available(iOS 13.0, *) {
+            tabBarItem = UITabBarItem(
+                title: GeneralStrings.Add,
+                image: UIImage(systemName: "plus.circle.fill"),
+                selectedImage: UIImage(systemName: "plus.circle.fill")
+            )
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     // MARK: - LIFE CYCLE METHODS

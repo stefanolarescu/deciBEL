@@ -22,11 +22,15 @@ class MoreViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        tabBarItem = UITabBarItem(
-            title: GeneralStrings.More,
-            image: UIImage(systemName: "ellipsis.circle.fill"),
-            selectedImage: UIImage(systemName: "ellipsis.circle.fill")
-        )
+        if #available(iOS 13.0, *) {
+            tabBarItem = UITabBarItem(
+                title: GeneralStrings.More,
+                image: UIImage(systemName: "ellipsis.circle.fill"),
+                selectedImage: UIImage(systemName: "ellipsis.circle.fill")
+            )
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     // MARK: - LIFE CYCLE METHODS
