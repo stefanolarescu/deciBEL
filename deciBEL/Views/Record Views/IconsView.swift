@@ -17,7 +17,7 @@ class IconsView: UIView {
         "Diesel Truck",
         "Loud Music",
         "Traffic",
-        "Normal Conversation",
+        "Normal conversation",
         "Rain",
         "Bird Song",
         "Whisper",
