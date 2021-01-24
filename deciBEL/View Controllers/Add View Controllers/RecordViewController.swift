@@ -328,8 +328,6 @@ class RecordViewController: UIViewController {
         
     @objc private func updateDecibels() {
         if let amplitude = audioKitManager.amplitude {
-            print(amplitude)
-            
             guard amplitude != 0 else {
                 return
             }
@@ -527,7 +525,11 @@ class RecordViewController: UIViewController {
             right: horizontalInset
         )
         rulerContentViewWidthConstraint?.constant = CGFloat(MAX_DECIBELS * 5) * RULER_SPACING - view.bounds.width
-        let offset = calculateRulerOffset(decibels: 30)
+        var decibelsAverage = 30
+        if decibels.count > 0 {
+            decibelsAverage = Int(round(decibels.reduce(0.0, +) / Double(decibels.count)))
+        }
+        let offset = calculateLevelsOffset(decibels: Double(decibelsAverage))
         rulerScrollView?.setContentOffset(
             CGPoint(x: offset, y: 0),
             animated: false
@@ -557,7 +559,11 @@ class RecordViewController: UIViewController {
                 right: 0
             )
             levelsContentViewHeightConstraint?.constant = CGFloat(noiseLevels.count - 1) * (ICON_SIZE + ICONS_SPACING) - unwrappedLevelsScrollView.bounds.height
-            let offset = calculateLevelsOffset(decibels: 30)
+            var decibelsAverage = 30
+            if decibels.count > 0 {
+                decibelsAverage = Int(round(decibels.reduce(0.0, +) / Double(decibels.count)))
+            }
+            let offset = calculateLevelsOffset(decibels: Double(decibelsAverage))
             levelsScrollView?.setContentOffset(
                 CGPoint(x: 0, y: offset),
                 animated: false
