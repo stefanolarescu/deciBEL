@@ -19,12 +19,12 @@ class AudioKitManager {
         let microphone = AKMicrophone()
         tracker = AKAmplitudeTracker(microphone)
         let silence = AKBooster(tracker, gain: 0)
-        AudioKit.output = silence
+        AKManager.output = silence
     }
     
     func startAudioKit() {
         do {
-            try AudioKit.start()
+            try AKManager.start()
         } catch {
             // TODO: Implement
         }
@@ -32,7 +32,7 @@ class AudioKitManager {
     
     func stopAudioKit() {
         do {
-            try AudioKit.stop()
+            try AKManager.stop()
         } catch {
             // TODO: Implement
         }
