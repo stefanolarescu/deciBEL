@@ -87,7 +87,7 @@ class MoreViewController: UIViewController {
                 request.httpBody = jsonData
 
                 let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                    print("\(self.requestNumber):\t\(coordinates.0) \(coordinates*-.1)")
+                    print("\(self.requestNumber):\t\(coordinates.0) \(coordinates.1)")
                     self.requestNumber += 1
                     if self.requestNumber < 100000, !self.shouldStopGeneratingData {
                         self.sendDataToServer()
