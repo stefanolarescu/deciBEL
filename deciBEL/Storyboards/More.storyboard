@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cFh-mh-50c">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cFh-mh-50c">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5Y-zQ-aun" userLabel="About Button">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5Y-zQ-aun" userLabel="About Button">
                                 <rect key="frame" x="112.5" y="111" width="150" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -35,7 +37,23 @@
                                     <action selector="aboutButtonAction:" destination="w2U-4U-5fM" eventType="touchUpInside" id="1jK-X3-2MA"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P52-vM-0N9" userLabel="Legal Button">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DD6-qx-OVT" userLabel="Generate Data">
+                                <rect key="frame" x="112.5" y="251" width="150" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <state key="normal" title="Generate Data">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="generateDataButtonAction:" destination="w2U-4U-5fM" eventType="touchUpInside" id="8G9-Bw-uap"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P52-vM-0N9" userLabel="Legal Button">
                                 <rect key="frame" x="112.5" y="181" width="150" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
@@ -52,17 +70,21 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="jYY-pW-HAc"/>
                         <color key="backgroundColor" name="Dark Gray"/>
                         <constraints>
+                            <constraint firstItem="DD6-qx-OVT" firstAttribute="height" secondItem="T5Y-zQ-aun" secondAttribute="height" id="5dA-NW-Tcs"/>
                             <constraint firstItem="T5Y-zQ-aun" firstAttribute="top" secondItem="jYY-pW-HAc" secondAttribute="top" constant="67" id="8au-Xw-Jmr"/>
                             <constraint firstItem="T5Y-zQ-aun" firstAttribute="width" secondItem="MQ5-v3-WOo" secondAttribute="width" multiplier="0.4" id="8pG-kT-K1b"/>
                             <constraint firstItem="P52-vM-0N9" firstAttribute="width" secondItem="T5Y-zQ-aun" secondAttribute="width" id="GHp-1X-gz1"/>
+                            <constraint firstItem="DD6-qx-OVT" firstAttribute="centerX" secondItem="jYY-pW-HAc" secondAttribute="centerX" id="Kea-t8-X5X"/>
                             <constraint firstItem="T5Y-zQ-aun" firstAttribute="centerX" secondItem="jYY-pW-HAc" secondAttribute="centerX" id="Pov-xH-cPv"/>
                             <constraint firstItem="P52-vM-0N9" firstAttribute="height" secondItem="T5Y-zQ-aun" secondAttribute="height" id="Rbs-qU-Vo7"/>
+                            <constraint firstItem="DD6-qx-OVT" firstAttribute="top" secondItem="P52-vM-0N9" secondAttribute="bottom" constant="30" id="Srg-P5-OBo"/>
                             <constraint firstItem="P52-vM-0N9" firstAttribute="top" secondItem="T5Y-zQ-aun" secondAttribute="bottom" constant="30" id="d1V-Rn-n6S"/>
                             <constraint firstItem="P52-vM-0N9" firstAttribute="centerX" secondItem="jYY-pW-HAc" secondAttribute="centerX" id="pvW-jX-aPC"/>
+                            <constraint firstItem="DD6-qx-OVT" firstAttribute="width" secondItem="T5Y-zQ-aun" secondAttribute="width" id="zbd-Ag-Niq"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="jYY-pW-HAc"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="_More" image="ellipsis.circle.fill" catalog="system" selectedImage="ellipsis.circle.fill" id="mlM-oc-o1d"/>
                     <navigationItem key="navigationItem" id="ahX-p5-pT3"/>
@@ -85,8 +107,8 @@
                     <view key="view" contentMode="scaleToFill" id="a9X-qh-ohh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="t6O-c2-VbN"/>
+                        <color key="backgroundColor" systemColor="systemYellowColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="Jav-1L-6yN"/>
                 </viewController>
@@ -101,8 +123,8 @@
                     <view key="view" contentMode="scaleToFill" id="y9p-HH-q6t">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="jJN-84-L2s"/>
+                        <color key="backgroundColor" systemColor="systemRedColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="CK6-u3-df0"/>
                 </viewController>
@@ -134,5 +156,11 @@
         <namedColor name="Dark Gray">
             <color red="0.2196078431372549" green="0.21568627450980393" blue="0.2196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

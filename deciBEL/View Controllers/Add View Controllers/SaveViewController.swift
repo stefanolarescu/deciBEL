@@ -58,7 +58,6 @@ class SaveViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         activityIndicator?.stopAnimating()
         view.isUserInteractionEnabled = true
-//        dismiss(animated: false)
     }
     
     // MARK: - OTHER METHODS
@@ -117,16 +116,14 @@ class SaveViewController: UIViewController {
     
     private func sendDataToServer(recording: Recording, completionHandler: @escaping (_ error: Error?) -> Void) {
         let json: [String: Any] = [
-            "value": recording.decibels,
-            "coords": [
-                "long": recording.longitude,
-                "lat": recording.latitude
-            ]
+            "name": "Stefan",
+            "location": "\(recording.longitude) \(recording.latitude)",
+            "decibelLevel": recording.decibels
         ]
 
         let jsonData = try? JSONSerialization.data(withJSONObject: json, options: [.prettyPrinted])
 
-        if let url = URL(string: "http://localhost:3000/decibels") {
+        if let url = URL(string: "http://localhost:9999") {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
